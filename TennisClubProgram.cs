@@ -6,26 +6,19 @@ using System.Collections.Generic;
 
 namespace Lab1
 {
-    class Program
+    class TennisClubProgram
     {
         static void Main(string[] args)
         {
             DaoObject dao = new DaoObject();
-            ChildProc childProc = new ChildProc(dao);
-            GroupProc groupProc = new GroupProc(dao);
-            Program program = new Program();
+            TennisClubProgram program = new TennisClubProgram();
+            ChildPipeline childLine = new ChildPipeline(dao, 5, 3);
             program.InitTestData()
-                .ForEach(it => program.AddChild(groupProc, childProc, it));
+                .ForEach(it => childLine.AddChild(it));
 
         }
 
-        private void AddChild(GroupProc groupProc, ChildProc childProc, Child child)
-        {
-            if(childProc.IsChild(child))
-            {
-                groupProc.AddChildToGroup(child);
-            }
-        }
+        
 
         private List<Child> InitTestData()
         {

@@ -7,12 +7,16 @@ using System.Text;
 
 namespace Lab1.logic
 {
-    public class GroupProc
+    public class GroupProc : IGroupProc
     {
         private DaoObject _dao;
-        public GroupProc(DaoObject dao)
+        private Int32 _maxChildren;
+        private Int32 _maxAgeInterval;
+        public GroupProc(DaoObject dao, Int32 maxAmountChildrenGroup, Int32 maxAgeIntervalGroup)
         {
             this._dao = dao;
+            this._maxChildren = maxAmountChildrenGroup;
+            this._maxAgeInterval = maxAgeIntervalGroup;
         }
 
         public void AddChildToGroup(Child child)
@@ -20,8 +24,8 @@ namespace Lab1.logic
             Group group = _dao.GroupDao.GetAll()
                 .Find(it => it.GameLevel == child.GameLevel
                    && it.LessonsDay == child.PreferableDay
-                   && IsCapacityAllow(it, 5)
-                   && WillAgeAllow(it, child.Age, 3));
+                   && IsCapacityAllowAddChild(it, _maxChildren)
+                   && WillAgeAllowAddChild(it, child.Age, _maxAgeInterval));
 
             if(group == null)
             {
@@ -33,13 +37,12 @@ namespace Lab1.logic
         }
 
         
-        private bool IsCapacityAllow(Group group, int maxCapacity)
+        private bool IsCapacityAllowAddChild(Group group, int maxCapacity)
         {
-            return GetAllChildren(group).Count() <= maxCapacity
-                ;
+            return GetAllChildren(group).Count() <= maxCapacity;
         }
 
-        private bool WillAgeAllow(Group group, int age, int maxAgeInterval)
+        private bool WillAgeAllowAddChild(Group group, int age, int maxAgeInterval)
         {
             int min = MinAge(group);
             int max = MaxAge(group);
