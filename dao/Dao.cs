@@ -13,17 +13,6 @@ namespace Lab1.dao
             _entities.Add(entity);
         }
 
-        /*public void Delete(T entity)
-        {
-            _entities.Remove(entity);
-        }
-
-        public void Update(T entity)
-        {
-            Delete(entity);
-            Create(entity);
-        }*/
-
         public T Get(Guid id)
         {
             return _entities.Find((T entity) => entity.Id.Equals(id));
@@ -34,4 +23,14 @@ namespace Lab1.dao
             return _entities;
         }
     }
+    /*public void Delete(T entity)
+        {
+            _entities.Remove(entity);
+        }
+
+        public void Update(T entity)
+        {
+            Delete(entity);
+            Create(entity);
+        }*/
 }

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Lab1.logic
 {
-    class ChildProc
+    class ChildProc : IChildProc
     {
         private DaoObject _dao;
         public ChildProc(DaoObject dao)
