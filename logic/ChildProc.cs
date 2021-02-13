@@ -8,10 +8,10 @@ namespace Lab1.logic
 {
     class ChildProc : IChildProc
     {
-        private DaoObject _dao;
+        private readonly DaoObject dao;
         public ChildProc(DaoObject dao)
         {
-            this._dao = dao;
+            this.dao = dao;
         }
 
         public bool IsChild(Child child)

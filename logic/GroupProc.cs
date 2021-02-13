@@ -9,31 +9,31 @@ namespace Lab1.logic
 {
     public class GroupProc : IGroupProc
     {
-        private DaoObject _dao;
-        private Int32 _maxChildren;
-        private Int32 _maxAgeInterval;
+        private readonly DaoObject dao;
+        private readonly Int32 maxChildren;
+        private readonly Int32 maxAgeInterval;
         public GroupProc(DaoObject dao, Int32 maxAmountChildrenGroup, Int32 maxAgeIntervalGroup)
         {
-            this._dao = dao;
-            this._maxChildren = maxAmountChildrenGroup;
-            this._maxAgeInterval = maxAgeIntervalGroup;
+            this.dao = dao;
+            this.maxChildren = maxAmountChildrenGroup;
+            this.maxAgeInterval = maxAgeIntervalGroup;
         }
 
         public void AddChildToGroup(Child child)
         {
-            Group group = _dao.GroupDao.GetAll()
+            Group group = dao.GroupDao.GetAll()
                 .Find(it => it.GameLevel == child.GameLevel
                    && it.LessonsDay == child.PreferableDay
-                   && IsCapacityAllowAddChild(it, _maxChildren)
-                   && WillAgeAllowAddChild(it, child.Age, _maxAgeInterval));
+                   && IsCapacityAllowAddChild(it, maxChildren)
+                   && WillAgeAllowAddChild(it, child.Age, maxAgeInterval));
 
             if(group == null)
             {
                 group = new Group(child.GameLevel, child.PreferableDay);
-                _dao.GroupDao.Create(group);
+                dao.GroupDao.Create(group);
             } 
             child.GroupId = group.Id;
-            _dao.ChildDao.Create(child);
+            dao.ChildDao.Create(child);
         }
 
         
@@ -65,7 +65,7 @@ namespace Lab1.logic
 
         private List<Child> GetAllChildren(Group group)
         {
-            return _dao.ChildDao.GetAll()
+            return dao.ChildDao.GetAll()
                 .FindAll(it => it.GroupId == group.Id);
         }
     }

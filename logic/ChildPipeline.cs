@@ -8,8 +8,8 @@ namespace Lab1.logic
 {
     class ChildPipeline
     {
-        private IChildProc childProc;
-        private IGroupProc groupProc;
+        private readonly IChildProc childProc;
+        private readonly IGroupProc groupProc;
 
         public ChildPipeline(DaoObject dao, Int32 maxAmountChildrenGroup, Int32 maxAgeIntervalGroup)
         {

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Lab1.dao
 {
-    public class Dao<T> : IDao<T> where T : Base
+    public class Dao<T> : IDao<T> where T : IBaseId
     {
         private List<T> _entities;
         public void Create(T entity)
