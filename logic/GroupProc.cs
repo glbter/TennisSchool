@@ -1,9 +1,12 @@
-﻿using Lab1.dao;
+﻿using System.Configuration;
+using System.Collections.Specialized;
+using Lab1.dao;
 using Lab1.model;
 using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Text;
+
 
 namespace Lab1.logic
 {
@@ -12,11 +15,11 @@ namespace Lab1.logic
         private readonly DaoObject dao;
         private readonly Int32 maxChildren;
         private readonly Int32 maxAgeInterval;
-        public GroupProc(DaoObject dao, Int32 maxAmountChildrenGroup, Int32 maxAgeIntervalGroup)
+        public GroupProc(DaoObject dao)
         {
             this.dao = dao;
-            this.maxChildren = maxAmountChildrenGroup;
-            this.maxAgeInterval = maxAgeIntervalGroup;
+            this.maxChildren = Convert.ToInt32(ConfigurationManager.AppSettings.Get("maxAmountOfChildrenInGroup"));
+            this.maxAgeInterval = Convert.ToInt32(ConfigurationManager.AppSettings.Get("maxChildrenAgeIntervalInGroup"));
         }
 
         public void AddChildToGroup(Child child)

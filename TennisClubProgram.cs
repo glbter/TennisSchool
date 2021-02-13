@@ -12,7 +12,7 @@ namespace Lab1
         static void Main(string[] args)
         {
             DaoObject dao = new DaoObject();
-            ChildPipeline childLine = new ChildPipeline(dao, 5, 3);
+            ChildPipeline childLine = new ChildPipeline(dao);
 
             (new TestDataLoader()).InitTestData()
                 .ForEach(it => childLine.AddChild(it));
