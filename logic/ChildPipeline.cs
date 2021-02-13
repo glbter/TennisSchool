@@ -11,9 +11,9 @@ namespace Lab1.logic
         private readonly IChildProc childProc;
         private readonly IGroupProc groupProc;
 
-        public ChildPipeline(DaoObject dao, Int32 maxAmountChildrenGroup, Int32 maxAgeIntervalGroup)
+        public ChildPipeline(DaoObject dao)
         {
-            groupProc = new GroupProc(dao, maxAmountChildrenGroup, maxAgeIntervalGroup);
+            groupProc = new GroupProc(dao);
             childProc = new ChildProc(dao);
         }
 
