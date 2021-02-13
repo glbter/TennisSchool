@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Lab1.model
 {
-    public abstract class Base
+    public interface IBaseId
     {
-        public Guid Id { get; } = new Guid();
+        public Guid Id { get; } 
     }
 }

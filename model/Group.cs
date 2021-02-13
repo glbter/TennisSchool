@@ -4,13 +4,11 @@ using System.Text;
 
 namespace Lab1.model
 {
-    public class Group : Base
+    public class Group : IBaseId
     {
+        public Guid Id { get; } = new Guid();
         public GameLevel GameLevel { get; private set; }
         public DayOfWeek LessonsDay { get; private set; }
-/*        public int MinAge { get; }
-        public int MaxAge { get; }
-        public List<Child> Children { get; }*/
 
         public Group(GameLevel gameLevel, DayOfWeek lessonsDay)
         {
