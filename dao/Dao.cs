@@ -7,30 +7,20 @@ namespace Lab1.dao
 {
     public class Dao<T> : IDao<T> where T : IBaseId
     {
-        private List<T> _entities;
+        protected List<T> entities;
         public void Create(T entity)
         {
-            _entities.Add(entity);
+            entities.Add(entity);
         }
 
         public T Get(Guid id)
         {
-            return _entities.Find((T entity) => entity.Id.Equals(id));
+            return entities.Find((T entity) => entity.Id.Equals(id));
         }
 
         public List<T> GetAll()
         {
-            return _entities;
+            return entities;
         }
     }
-    /*public void Delete(T entity)
-        {
-            _entities.Remove(entity);
-        }
-
-        public void Update(T entity)
-        {
-            Delete(entity);
-            Create(entity);
-        }*/
 }
