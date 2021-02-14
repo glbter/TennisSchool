@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Lab1.logic
 {
-    class ChildProc : IChildProc
+    class ChildProc : IChildProc, IChildProcGrouper
     {
         private readonly DaoObject dao;
         public ChildProc(DaoObject dao)
@@ -17,6 +17,14 @@ namespace Lab1.logic
         public bool IsChild(Child child)
         {
             return child.Age < 18;
+        }
+
+        public CachedGroup SetChildToGroup(Child child, CachedGroup group)
+        {
+            child.GroupId = group.Id;
+            dao.ChildDao.Create(child);
+            group.ChildrenAmount += 1;
+            return group;
         }
     }
 }
