@@ -8,6 +8,6 @@ namespace Lab1.logic
 {
     public interface IChildProcGrouper
     {
-        public CachedGroup SetChildToGroup(Child child, CachedGroup group)
+        public CachedGroup SetChildToGroup(Child child, CachedGroup group);
     }
 }
