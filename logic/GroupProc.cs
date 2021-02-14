@@ -13,63 +13,77 @@ namespace Lab1.logic
     public class GroupProc : IGroupProc
     {
         private readonly DaoObject dao;
-        private readonly Int32 maxChildren;
-        private readonly Int32 maxAgeInterval;
+        private IChildProcGrouper childProc;
+        private readonly int maxChildren;
+        private readonly int maxAgeInterval;
         public GroupProc(DaoObject dao)
         {
             this.dao = dao;
-            this.maxChildren = Convert.ToInt32(ConfigurationManager.AppSettings.Get("maxAmountOfChildrenInGroup"));
-            this.maxAgeInterval = Convert.ToInt32(ConfigurationManager.AppSettings.Get("maxChildrenAgeIntervalInGroup"));
+            this.childProc = new ChildProc(dao);
+            this.maxChildren = Convert.ToInt32(
+                ConfigurationManager.AppSettings.Get("maxAmountOfChildrenInGroup"));
+            this.maxAgeInterval = Convert.ToInt32(
+                ConfigurationManager.AppSettings.Get("maxChildrenAgeIntervalInGroup"));
         }
 
         public void AddChildToGroup(Child child)
         {
-            Group group = dao.GroupDao.GetAll()
-                .Find(it => it.GameLevel == child.GameLevel
-                   && it.LessonsDay == child.PreferableDay
-                   && IsCapacityAllowAddChild(it, maxChildren)
-                   && WillAgeAllowAddChild(it, child.Age, maxAgeInterval));
+            CachedGroup group = dao.CachedGroupDao
+                .GroupsByDayOfWeek(child.PreferableDay)
+                .Find(it => it.Group.GameLevel == child.GameLevel 
+                            && WillAgeAllowAddChild(it, child));
 
             if(group == null)
             {
-                group = new Group(child.GameLevel, child.PreferableDay);
-                dao.GroupDao.Create(group);
+                Group grp = new Group(child.GameLevel, child.PreferableDay);
+                group = new CachedGroup(grp)
+                {
+                    MinAge = child.Age,
+                    MaxAge = child.Age
+                };
+                group = childProc.SetChildToGroup(child, group);
+                dao.CachedGroupDao.Create(group);
             } 
-            child.GroupId = group.Id;
-            dao.ChildDao.Create(child);
+            else
+            {
+                group = ChangeAgeInterval(group, child);
+                group = childProc.SetChildToGroup(child, group);
+
+                if (group.ChildrenAmount != maxChildren)
+                {
+                    // store in 'cache' table
+                    dao.CachedGroupDao.Update(group);
+                }
+                else
+                {
+                    // delete from 'cache', store in ordinary
+                    dao.CachedGroupDao.Delete(group);
+                    dao.GroupDao.Create(group.Group);
+                }
+            }
         }
 
-        
-        private bool IsCapacityAllowAddChild(Group group, int maxCapacity)
+        private bool WillAgeAllowAddChild(CachedGroup group, Child child)
         {
-            return GetAllChildren(group).Count() <= maxCapacity;
-        }
-
-        private bool WillAgeAllowAddChild(Group group, int age, int maxAgeInterval)
-        {
-            int min = MinAge(group);
-            int max = MaxAge(group);
-
-            return (age >= min && age <= max)
-                || age - min <= maxAgeInterval
-                || max - age <= maxAgeInterval;
+            int age = child.Age;
+            return (age >= group.MinAge && age <= group.MaxAge)
+                || age - group.MinAge <= maxAgeInterval
+                || group.MaxAge - age <= maxAgeInterval;
             
         }
-        
-        private int MaxAge(Group group)
-        {
-           return GetAllChildren(group).Max(it => it.Age);
-        }
 
-        private int MinAge(Group group)
+        private CachedGroup ChangeAgeInterval(CachedGroup group, Child child)
         {
-            return GetAllChildren(group).Min(it => it.Age);
-        }
-
-        private List<Child> GetAllChildren(Group group)
-        {
-            return dao.ChildDao.GetAll()
-                .FindAll(it => it.GroupId == group.Id);
+            int chAge = child.Age;
+            if (group.MinAge > chAge)
+            {
+                group.MinAge = chAge;
+            }
+            else if (group.MaxAge < chAge)
+            {
+                group.MaxAge = chAge;
+            }
+            return group;
         }
     }
 }
