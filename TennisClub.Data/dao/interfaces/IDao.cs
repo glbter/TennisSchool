@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Lab1.dao
+namespace TennisClub.Data.dao.interfaces
 {
     public interface IDao<T>
     {

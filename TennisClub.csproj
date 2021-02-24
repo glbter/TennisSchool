@@ -9,4 +9,66 @@
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="TennisClub.AppCore\TennisClub.AppCore.csproj" />
+    <ProjectReference Include="TennisClub.Data\TennisClub.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="TennisClub.AppCore\model\Child.cs">
+      <Link>AppCore\model\Child.cs</Link>
+    </Compile>
+    <Compile Update="TennisClub.AppCore\model\Group.cs">
+      <Link>AppCore\model\Group.cs</Link>
+    </Compile>
+    <Compile Update="TennisClub.AppCore\model\IBaseId.cs">
+      <Link>AppCore\model\IBaseId.cs</Link>
+    </Compile>
+    <Compile Update="TennisClub.AppCore\model\GameLevel.cs">
+      <Link>AppCore\model\GameLevel.cs</Link>
+    </Compile>
+    <Compile Update="TennisClub.AppCore\model\CachedGroup.cs">
+      <Link>AppCore\model\CachedGroup.cs</Link>
+    </Compile>
+    <Compile Update="TennisClub.AppCore\interfaces\IChildProc.cs">
+      <Link>AppCore\interfaces\IChildProc.cs</Link>
+    </Compile>
+    <Compile Update="TennisClub.Data\dao\interfaces\ICachedGroupDao.cs">
+      <Link>TennisCLub.Infrastructure\dao\interfaces\ICachedGroupDao.cs</Link>
+    </Compile>
+    <Compile Update="TennisClub.Data\dao\interfaces\IDao.cs">
+      <Link>TennisCLub.Infrastructure\dao\interfaces\IDao.cs</Link>
+    </Compile>
+    <Compile Update="TennisClub.Data\dao\interfaces\IDaoDelete.cs">
+      <Link>TennisCLub.Infrastructure\dao\interfaces\IDaoDelete.cs</Link>
+    </Compile>
+    <Compile Update="TennisClub.Data\dao\interfaces\IDaoUpdate.cs">
+      <Link>TennisCLub.Infrastructure\dao\interfaces\IDaoUpdate.cs</Link>
+    </Compile>
+    <Compile Update="TennisClub.Data\dao\CachedGroupDao.cs">
+      <Link>TennisCLub.Infrastructure\dao\CachedGroupDao.cs</Link>
+    </Compile>
+    <Compile Update="TennisClub.Data\dao\Dao.cs">
+      <Link>TennisCLub.Infrastructure\dao\Dao.cs</Link>
+    </Compile>
+    <Compile Update="TennisClub.Data\dao\DaoObject.cs">
+      <Link>TennisCLub.Infrastructure\dao\DaoObject.cs</Link>
+    </Compile>
+    <Compile Update="TennisClub.Data\obj\Debug\netcoreapp3.1\TennisClub.Data.AssemblyInfo.cs">
+      <Link>TennisClub.Dataa\obj\Debug\netcoreapp3.1\TennisClub.Data.AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Update="TennisClub.Data\model\ChildInDb.cs">
+      <Link>TennisCLub.Data\model\ChildInDb.cs</Link>
+    </Compile>
+    <Compile Remove="TennisClub.Data\extentions\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="TennisClub.Data\extentions\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="TennisClub.Data\extentions\**" />
+  </ItemGroup>
+
 </Project>

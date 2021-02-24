@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using TennisClub.AppCore.model.interfaces;
 
-namespace Lab1.model
+namespace TennisClub.AppCore.model.impl
 {
-    public class Group : IBaseId
+    public class Group : IGroup
     {
         public Guid Id { get; } = new Guid();
-        public GameLevel GameLevel { get; private set; }
-        public DayOfWeek LessonsDay { get; private set; }
+        public GameLevel GameLevel { get; }
+        public DayOfWeek LessonsDay { get; }
 
         public Group(GameLevel gameLevel, DayOfWeek lessonsDay)
         {

@@ -1,11 +1,11 @@
-﻿using Lab1.model;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using TennisClub.AppCore.model.interfaces;
+using TennisClub.Data.dao.interfaces;
 
-namespace Lab1.dao
+namespace TennisClub.Data.dao
 {
-    public class Dao<T> : IDao<T> where T : IBaseId
+    class Dao<T> : IDao<T> where T : IBaseId
     {
         protected List<T> entities;
         public void Create(T entity)

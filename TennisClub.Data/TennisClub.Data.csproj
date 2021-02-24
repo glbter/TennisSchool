@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\TennisClub.AppCore\TennisClub.AppCore.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="repo\**" />
+      <Compile Remove="extentions\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="repo\**" />
+      <EmbeddedResource Remove="extentions\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="repo\**" />
+      <None Remove="extentions\**" />
+    </ItemGroup>
+
+</Project>

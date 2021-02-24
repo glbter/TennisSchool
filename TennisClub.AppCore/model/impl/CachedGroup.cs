@@ -1,14 +1,12 @@
-﻿using Lab1.model;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
+using TennisClub.AppCore.model.interfaces;
 
-namespace Lab1.dao
+namespace TennisClub.AppCore.model.impl
 {
-    public class CachedGroup : IBaseId
+    public class CachedGroup : ICachedGroup
     {
         public Guid Id { get; }
-        public Group Group { get; }
+        public IGroup Group { get; }
         public int MinAge { get; set; }
         public int MaxAge { get; set; }
         public int ChildrenAmount { get; set; } = 0;

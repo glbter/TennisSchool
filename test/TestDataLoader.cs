@@ -1,9 +1,8 @@
-﻿using Lab1.model;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using AppCore.model;
 
-namespace Lab1.test
+namespace TennisClub.test
 {
     class TestDataLoader
     {

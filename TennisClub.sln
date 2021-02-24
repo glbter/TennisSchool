@@ -5,6 +5,12 @@ VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TennisClub", "TennisClub.csproj", "{ABDC3ECC-8D9D-4C8C-BB83-681A670A7708}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TennisClub.AppCore", "TennisClub.AppCore\TennisClub.AppCore.csproj", "{38A84E85-8248-4D42-A1B4-90BB13E66FD1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TennisClub.Data", "TennisClub.Data\TennisClub.Data.csproj", "{1F5F4506-BADC-4CB6-B281-E265F70E95BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TennisClub.Infrastructure", "..\TennisClub.Infrastructure\TennisClub.Infrastructure.csproj", "{C068AB5F-FF06-4D5D-91EC-2836429F5B5C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +21,18 @@ Global
 		{ABDC3ECC-8D9D-4C8C-BB83-681A670A7708}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ABDC3ECC-8D9D-4C8C-BB83-681A670A7708}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ABDC3ECC-8D9D-4C8C-BB83-681A670A7708}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38A84E85-8248-4D42-A1B4-90BB13E66FD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38A84E85-8248-4D42-A1B4-90BB13E66FD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38A84E85-8248-4D42-A1B4-90BB13E66FD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38A84E85-8248-4D42-A1B4-90BB13E66FD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F5F4506-BADC-4CB6-B281-E265F70E95BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F5F4506-BADC-4CB6-B281-E265F70E95BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F5F4506-BADC-4CB6-B281-E265F70E95BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F5F4506-BADC-4CB6-B281-E265F70E95BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C068AB5F-FF06-4D5D-91EC-2836429F5B5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C068AB5F-FF06-4D5D-91EC-2836429F5B5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C068AB5F-FF06-4D5D-91EC-2836429F5B5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C068AB5F-FF06-4D5D-91EC-2836429F5B5C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

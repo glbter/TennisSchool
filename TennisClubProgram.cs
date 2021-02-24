@@ -1,11 +1,8 @@
-﻿using Lab1.dao;
-using Lab1.logic;
-using Lab1.model;
-using Lab1.test;
-using System;
-using System.Collections.Generic;
+﻿using TennisClub.logic;
+using TennisClub.TennisCLub.Infrastructure;
+using TennisClub.test;
 
-namespace Lab1
+namespace TennisClub
 {
     class TennisClubProgram
     {
