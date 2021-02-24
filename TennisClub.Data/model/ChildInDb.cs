@@ -1,24 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using TennisClub.AppCore.model.impl;
+using TennisClub.AppCore.model.interfaces;
 
-namespace Lab1.model
+namespace TennisClub.Data.model
 {
-    public class Child : IBaseId
+    class ChildInDb : IChild
     {
         public Guid Id { get; } = new Guid();
-        public string FirstName { get; private set; }
-        public string LastName { get; private set; }
+        public string FirstName { get; }
+        public string LastName { get; }
         public Guid GroupId { get; set; }
         public int Age 
         {
             get => (int) birthday.Subtract(new DateTime()).TotalDays / 365; 
         }
         private DateTime birthday;
-        public DayOfWeek PreferableDay { get; private set; }
-        public GameLevel GameLevel { get; private set; }
+        public DayOfWeek PreferableDay { get; }
+        public GameLevel GameLevel { get; }
 
-        public Child(string firstName, string lastName, 
+        public ChildInDb(string firstName, string lastName, 
             GameLevel gameLevel, DayOfWeek preferableDay, DateTime birthday )
         {
             this.FirstName = firstName;
