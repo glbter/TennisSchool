@@ -1,4 +1,6 @@
-﻿namespace TennisClub.AppCore
+﻿using TennisClub.AppCore.model.impl;
+
+namespace TennisClub.AppCore
 {
     interface IChildProc
     {

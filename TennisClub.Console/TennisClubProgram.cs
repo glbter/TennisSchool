@@ -1,8 +1,8 @@
-﻿using TennisClub.logic;
-using TennisClub.TennisCLub.Infrastructure;
-using TennisClub.test;
+﻿using TennisClub.Console.test;
+using TennisClub.Data.dao;
+using TennisClub.Infrastructure.pipelines;
 
-namespace TennisClub
+namespace TennisClub.Console
 {
     class TennisClubProgram
     {
