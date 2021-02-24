@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using AppCore.model;
+using TennisClub.AppCore.model.impl;
 
-namespace TennisClub.test
+namespace TennisClub.Console.test
 {
     class TestDataLoader
     {

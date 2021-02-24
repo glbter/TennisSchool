@@ -3,7 +3,7 @@ using TennisClub.AppCore.model.interfaces;
 
 namespace TennisClub.AppCore.validators
 {
-    public class IsChildAdultValidator : IValidator<IChild>
+    public class IsChildValidator : IValidator<IChild>
     {
         public bool Validate(IChild child)
         {

@@ -7,9 +7,8 @@ namespace TennisClub.Data.dao
 {
     public class DaoObject
     {
-        public IDao<IChild> ChildDao { get; } = (IDao<IChild>) new Dao<Child>();
-        public IDao<IGroup> GroupDao { get; } = (IDao<IGroup>) new Dao<Group>();
-        public ICachedGroupDao<ICachedGroup> CachedGroupDao { get; } = 
-            (ICachedGroupDao<ICachedGroup>) new CachedGroupDao<CachedGroup>();
+        public IDao<Child> ChildDao { get; } = new Dao<Child>();
+        public IDao<Group> GroupDao { get; } = new Dao<Group>();
+        public ICachedGroupDao<CachedGroup> CachedGroupDao { get; } = new CachedGroupDao<CachedGroup>();
     }
 }
