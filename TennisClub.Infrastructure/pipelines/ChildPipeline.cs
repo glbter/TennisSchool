@@ -1,4 +1,5 @@
-﻿using TennisClub.AppCore.interfaces;
+﻿using System;
+using TennisClub.AppCore.interfaces;
 using TennisClub.AppCore.model.impl;
 using TennisClub.AppCore.model.interfaces;
 using TennisClub.AppCore.validators;
@@ -9,23 +10,20 @@ namespace TennisClub.Infrastructure.pipelines
 {
     public class ChildPipeline
     {
-        private readonly IValidator<IChild> isChildValidator;
-        private readonly GroupService groupService;
+        private readonly Predicate<IChild> _isNotAdult;
+        private readonly GroupService _groupService;
 
         public ChildPipeline(DaoObject dao)
         {
-            groupService = new GroupService(dao);
-            isChildValidator = new IsChildValidator();
+            _groupService = new GroupService(dao);
+            _isNotAdult = child => child.Age < 18;
         }
 
         public bool AddChild(Child child)
         {
-            if (isChildValidator.Validate(child))
-            {
-                groupService.AddChildToGroup(child);
-                return true;
-            }
-            return false;
+            if (!_isNotAdult.Invoke(child)) return false;
+            _groupService.AddChildToGroup(child);
+            return true;
         }
     }
 }

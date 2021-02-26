@@ -13,12 +13,11 @@ namespace TennisClub.Infrastructure.services
             this.dao = dao;
         }
 
-        public ICachedGroup SetChildToGroup(IChild child, ICachedGroup group)
+        public void SetChildToGroup(IChild child, ICachedGroup group)
         {
             child.GroupId = group.Id;
             dao.ChildDao.Create((Child)child);
             group.ChildrenAmount += 1;
-            return group;
         }
     }
 }
