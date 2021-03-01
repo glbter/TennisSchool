@@ -1,6 +1,6 @@
 ﻿namespace TennisClub.Data.dao.interfaces
 {
-    public interface IDaoUpdate<T>
+    public interface IDaoUpdate<in T>
     {
         public void Update(T entity);
     }

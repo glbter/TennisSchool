@@ -3,10 +3,10 @@ using TennisClub.AppCore.model.interfaces;
 
 namespace TennisClub.AppCore.model.impl
 {
-    public class CachedGroup : ICachedGroup
+    public class CachedGroup : ICachedGroup<Guid>
     {
         public Guid Id { get; }
-        public IGroup Group { get; }
+        public IGroup<Guid> Group { get; }
         public int MinAge { get; set; }
         public int MaxAge { get; set; }
         public int ChildrenAmount { get; set; }

@@ -2,8 +2,8 @@
 
 namespace TennisClub.AppCore.model.interfaces
 {
-    public interface IBaseId
+    public interface IBaseId<out TK>
     {
-        public Guid Id { get; } 
+        public TK Id { get; } 
     }
 }

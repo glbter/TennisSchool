@@ -4,7 +4,7 @@ using TennisClub.AppCore.model.interfaces;
 
 namespace TennisClub.Data.model
 {
-    class GroupInDb : IGroup
+    class GroupInDb : IGroup<Guid>
     {
         public Guid Id { get; } = new Guid();
         public GameLevel GameLevel { get; }

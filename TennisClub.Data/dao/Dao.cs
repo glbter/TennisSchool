@@ -5,22 +5,22 @@ using TennisClub.Data.dao.interfaces;
 
 namespace TennisClub.Data.dao
 {
-    class Dao<T> : IDao<T> where T : IBaseId
+    class Dao<T, TK> : IDao<T, TK> where T : IBaseId<TK>
     {
-        protected List<T> entities;
+        protected readonly List<T> Entities = new List<T>();
         public void Create(T entity)
         {
-            entities.Add(entity);
+            Entities.Add(entity);
         }
 
-        public T Get(Guid id)
+        public T Get(TK id)
         {
-            return entities.Find((T entity) => entity.Id.Equals(id));
+            return Entities.Find((T entity) => entity.Id.Equals(id));
         }
 
         public List<T> GetAll()
         {
-            return entities;
+            return Entities;
         }
     }
 }
