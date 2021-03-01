@@ -3,7 +3,7 @@ using TennisClub.AppCore.model.interfaces;
 
 namespace TennisClub.AppCore.model.impl
 {
-    public class Child : IChild
+    public class Child : IChild<Guid>
     {
         public Guid Id { get; } = new Guid();
         public string FirstName { get; }

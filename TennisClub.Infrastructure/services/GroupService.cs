@@ -2,38 +2,37 @@
 using System.Configuration;
 using TennisClub.AppCore.interfaces;
 using TennisClub.AppCore.model.impl;
+using TennisClub.AppCore.model.interfaces;
 using TennisClub.AppCore.validators;
 using TennisClub.Data.dao;
-
+using TennisClub.Infrastructure.interfaces;
 
 namespace TennisClub.Infrastructure.services
 {
-    public class GroupService
+    public class GroupService<TK> : IGroupService<TK>
     {
         private readonly DaoObject dao;
-        private readonly IPairValidator<Child, CachedGroup> isAgeAllowAddChildValidator;
-        private readonly ChildService childService;
-        private readonly int maxChildren;
+        private readonly IPairValidator<IChild<TK>, ICachedGroup<TK>> isAgeAllowAddChildValidator;
+        private readonly IChildService<TK> childService;
         private readonly Predicate<CachedGroup> isNewGroup;
         private readonly Predicate<CachedGroup> isFullGroup;
         public GroupService(DaoObject dao)
         {
             this.dao = dao;
-            this.childService = new ChildService(dao);
-            this.maxChildren = Convert.ToInt32(
+            this.childService = new ChildService<TK>(dao);
+            int maxChildren = Convert.ToInt32(
                 ConfigurationManager.AppSettings.Get("maxAmountOfChildrenInGroup"));
-            this.isAgeAllowAddChildValidator = 
-                (IPairValidator<Child, CachedGroup>) new IsAgeAllowAddChildValidator();
+            this.isAgeAllowAddChildValidator = new IsAgeAllowAddChildValidator<TK>();
             this.isFullGroup = (CachedGroup group) => group.ChildrenAmount == maxChildren;
             this.isNewGroup =  (CachedGroup group) => group.ChildrenAmount == 0;
     }
 
-        public void AddChildToGroup(Child child)
+        public void AddChildToGroup(IChild<TK> child)
         {
-            CachedGroup group = (CachedGroup)dao.CachedGroupDao
+            CachedGroup group = dao.CachedGroupDao
                 .GroupsByDayOfWeek(child.PreferableDay)
                 .Find(it => it.Group.GameLevel == child.GameLevel
-                            && isAgeAllowAddChildValidator.Validate(child, (CachedGroup)it));
+                            && isAgeAllowAddChildValidator.Validate(child, (ICachedGroup<TK>) it));
 
             group ??= new CachedGroup(child.GameLevel, child.PreferableDay)
                 {
@@ -42,10 +41,10 @@ namespace TennisClub.Infrastructure.services
                 };
             this.ChangeAgeInterval(group, child);
             this.AddGroupToDb(group, dao);
-            childService.SetChildToGroup(child, group);
+            childService.SetChildToGroup(child, (ICachedGroup<TK>) group);
         }
 
-        private void ChangeAgeInterval(CachedGroup group, Child child)
+        private void ChangeAgeInterval(CachedGroup group, IChild<TK> child)
         {
             int chAge = child.Age;
             if (group.MinAge > chAge)

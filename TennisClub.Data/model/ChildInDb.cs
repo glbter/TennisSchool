@@ -4,7 +4,7 @@ using TennisClub.AppCore.model.interfaces;
 
 namespace TennisClub.Data.model
 {
-    class ChildInDb : IChild
+    class ChildInDb : IChild<Guid>
     {
         public Guid Id { get; } = new Guid();
         public string FirstName { get; }

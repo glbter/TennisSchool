@@ -6,12 +6,12 @@ using TennisClub.AppCore.model.interfaces;
 
 namespace TennisClub.Data.dao
 {
-    class CachedGroupDao<T> : Dao<T>, ICachedGroupDao<T>
-        where T : ICachedGroup
+    class CachedGroupDao<T, TK> : Dao<T, TK>, ICachedGroupDao<T, TK>
+        where T : ICachedGroup<TK>
     {
         public void Delete(T group)
         {
-            entities.RemoveAll(it => group.Id == it.Id);
+            Entities.RemoveAll(it => group.Id.Equals(it.Id));
         }
 
         public void Update(T group)

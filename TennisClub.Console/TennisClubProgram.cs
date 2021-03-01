@@ -1,6 +1,8 @@
-﻿using TennisClub.Console.test;
+﻿using System;
+using TennisClub.Console.test;
 using TennisClub.Data.dao;
 using TennisClub.Infrastructure.pipelines;
+using TennisClub.Infrastructure.interfaces;
 
 namespace TennisClub.Console
 {
@@ -9,7 +11,7 @@ namespace TennisClub.Console
         static void Main(string[] args)
         {
             DaoObject dao = new DaoObject();
-            ChildPipeline childLine = new ChildPipeline(dao);
+            IChildPipeline<Guid> childLine = new ChildPipeline<Guid>(dao);
 
             (new TestDataLoader()).InitTestData()
                 .ForEach(it => childLine.AddChild(it));

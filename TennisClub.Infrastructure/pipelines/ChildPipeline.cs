@@ -4,25 +4,26 @@ using TennisClub.AppCore.model.impl;
 using TennisClub.AppCore.model.interfaces;
 using TennisClub.AppCore.validators;
 using TennisClub.Data.dao;
+using TennisClub.Infrastructure.interfaces;
 using TennisClub.Infrastructure.services;
 
 namespace TennisClub.Infrastructure.pipelines
 {
-    public class ChildPipeline
+    public class ChildPipeline<TK> : IChildPipeline<TK>
     {
-        private readonly Predicate<IChild> _isNotAdult;
-        private readonly GroupService _groupService;
+        private readonly Predicate<IChild<TK>> isNotAdult;
+        private readonly GroupService<TK> groupService;
 
         public ChildPipeline(DaoObject dao)
         {
-            _groupService = new GroupService(dao);
-            _isNotAdult = child => child.Age < 18;
+            groupService = new GroupService<TK>(dao);
+            isNotAdult = child => child.Age < 18;
         }
 
-        public bool AddChild(Child child)
+        public bool AddChild(IChild<TK> child)
         {
-            if (!_isNotAdult.Invoke(child)) return false;
-            _groupService.AddChildToGroup(child);
+            if (!isNotAdult.Invoke(child)) return false;
+            groupService.AddChildToGroup(child);
             return true;
         }
     }

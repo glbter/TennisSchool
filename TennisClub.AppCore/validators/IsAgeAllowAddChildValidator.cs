@@ -5,7 +5,7 @@ using TennisClub.AppCore.model.interfaces;
 
 namespace TennisClub.AppCore.validators
 {
-    public class IsAgeAllowAddChildValidator : IPairValidator<IChild, ICachedGroup>
+    public class IsAgeAllowAddChildValidator<TK> : IPairValidator<IChild<TK>, ICachedGroup<TK>>
     {
         private readonly int maxAgeInterval;
         public IsAgeAllowAddChildValidator()
@@ -14,7 +14,7 @@ namespace TennisClub.AppCore.validators
                     ConfigurationManager.AppSettings.Get("maxChildrenAgeIntervalInGroup"));
         }
 
-        public bool Validate(IChild child, ICachedGroup group)
+        public bool Validate(IChild<TK> child, ICachedGroup<TK> group)
         {
             int age = child.Age;
             return (age >= group.MinAge && age <= group.MaxAge)
