@@ -19,9 +19,9 @@ namespace TennisClub.Infrastructure.services
         public GroupService(DaoObject dao)
         {
             this.dao = dao;
-            this.childService = new ChildService<TK>(dao);
+            this.childService = new ChildService<TK>(dao); 
             int maxChildren = Convert.ToInt32(
-                ConfigurationManager.AppSettings.Get("maxAmountOfChildrenInGroup"));
+                ConfigurationManager.AppSettings["maxAmountOfChildrenInGroup"] ?? "5");
             this.isAgeAllowAddChildValidator = new IsAgeAllowAddChildValidator<TK>();
             this.isFullGroup = (CachedGroup group) => group.ChildrenAmount == maxChildren;
             this.isNewGroup =  (CachedGroup group) => group.ChildrenAmount == 0;
