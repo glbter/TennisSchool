@@ -10,8 +10,8 @@ namespace TennisClub.AppCore.validators
         private readonly int maxAgeInterval;
         public IsAgeAllowAddChildValidator()
         {
-            this.maxAgeInterval = 3; //Convert.ToInt32(
-            //ConfigurationManager.AppSettings.Get("maxChildrenAgeIntervalInGroup"));
+            this.maxAgeInterval = Convert.ToInt32(
+            ConfigurationManager.AppSettings.Get("maxChildrenAgeIntervalInGroup") ?? "3");
         }
 
         public bool Validate(IChild<TK> child, ICachedGroup<TK> group)
