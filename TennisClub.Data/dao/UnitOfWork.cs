@@ -6,7 +6,7 @@ using TennisClub.Data.model;
 
 namespace TennisClub.Data.dao
 {
-    public class DaoObject
+    public class UnitOfWork
     {
         public IDao<Child, Guid> ChildDao { get; } = new Dao<Child, Guid>();
         public IDao<Group, Guid> GroupDao { get; } = new Dao<Group, Guid>();

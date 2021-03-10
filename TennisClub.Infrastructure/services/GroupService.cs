@@ -11,12 +11,12 @@ namespace TennisClub.Infrastructure.services
 {
     public class GroupService<TK> : IGroupService<TK>
     {
-        private readonly DaoObject dao;
+        private readonly UnitOfWork dao;
         private readonly IPairValidator<IChild<TK>, ICachedGroup<TK>> isAgeAllowAddChildValidator;
         private readonly IChildService<TK> childService;
         private readonly Predicate<CachedGroup> isNewGroup;
         private readonly Predicate<CachedGroup> isFullGroup;
-        public GroupService(DaoObject dao)
+        public GroupService(UnitOfWork dao)
         {
             this.dao = dao;
             this.childService = new ChildService<TK>(dao); 
@@ -57,7 +57,7 @@ namespace TennisClub.Infrastructure.services
             }
         }
 
-        private void AddGroupToDb(CachedGroup group, DaoObject dao)
+        private void AddGroupToDb(CachedGroup group, UnitOfWork dao)
         {
             if (isNewGroup.Invoke(group)) 
                 dao.CachedGroupDao.Create(group);

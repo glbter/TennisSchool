@@ -12,7 +12,7 @@ namespace TennisClub.Console
     {
         static void Main(string[] args)
         {
-            DaoObject dao = new DaoObject();
+            UnitOfWork dao = new UnitOfWork();
             IChildPipeline<Guid> childLine = new ChildPipeline<Guid>(dao);
 
             (new TestDataLoader()).InitTestData()
@@ -21,9 +21,9 @@ namespace TennisClub.Console
             DaoPrinter printer = new DaoPrinter();
             //dao.ChildDao.GetAll().ForEach(PrintChild);
             System.Console.WriteLine("groups");
-            dao.GroupDao.GetAll().ForEach(printer.PrintGroup);
+            dao.GroupDao.FindAll().ForEach(printer.PrintGroup);
             System.Console.WriteLine("cached groups");
-            dao.CachedGroupDao.GetAll().ForEach(printer.PrintCachedGroup);
+            dao.CachedGroupDao.FindAll().ForEach(printer.PrintCachedGroup);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace TennisClub.Infrastructure.pipelines
         private readonly Predicate<IChild<TK>> isNotAdult;
         private readonly GroupService<TK> groupService;
 
-        public ChildPipeline(DaoObject dao)
+        public ChildPipeline(UnitOfWork dao)
         {
             groupService = new GroupService<TK>(dao);
             isNotAdult = child => child.Age < 18;

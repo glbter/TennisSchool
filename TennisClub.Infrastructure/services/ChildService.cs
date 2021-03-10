@@ -7,8 +7,8 @@ namespace TennisClub.Infrastructure.services
 {
     public class ChildService<TK> : IChildService<TK>
     {
-        private readonly DaoObject dao;
-        public ChildService(DaoObject dao)
+        private readonly UnitOfWork dao;
+        public ChildService(UnitOfWork dao)
         {
             this.dao = dao;
         }
