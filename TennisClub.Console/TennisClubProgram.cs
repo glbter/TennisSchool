@@ -12,7 +12,8 @@ namespace TennisClub.Console
     {
         static void Main(string[] args)
         {
-            UnitOfWork unitOfWork = new UnitOfWork();
+            var connectionString = "Host=localhost;Port=5432;Database=tennis-club;Username=postgres;Password=123";
+            UnitOfWork unitOfWork = new UnitOfWork(connectionString);
             IChildPipeline childLine = new ChildPipeline(unitOfWork);
         
             (new TestDataLoader()).InitTestData()

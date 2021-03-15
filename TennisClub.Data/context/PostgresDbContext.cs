@@ -9,9 +9,11 @@ namespace TennisClub.Data.context
     {
         public DbSet<ChildInDb> ChildDbSet { get; private set; }
         public DbSet<GroupInDb> GroupDbSet { get; private set; }
+        private readonly string _connectionString;
         
-        public PostgresDbContext(DbContextOptions<PostgresDbContext> options) : base(options)
+        public PostgresDbContext(string connectionString, DbContextOptions<PostgresDbContext> options) : base(options)
         {
+            _connectionString = connectionString;
             Database.EnsureCreated();
         }
 
@@ -46,7 +48,7 @@ namespace TennisClub.Data.context
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=tennis-club;Username=postgres;Password=123");
+            optionsBuilder.UseNpgsql(_connectionString);
         }
     }
 }
