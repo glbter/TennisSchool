@@ -5,11 +5,12 @@ using TennisClub.AppCore.model.impl;
 using TennisClub.AppCore.model.interfaces;
 using TennisClub.AppCore.validators;
 using TennisClub.Data.dao;
+using TennisClub.Data.model;
 using TennisClub.Infrastructure.interfaces;
 
 namespace TennisClub.Infrastructure.services
 {
-    public class GroupService<TK> : IGroupService<TK>
+    public class GroupService : IGroupService
     {
         private readonly UnitOfWork dao;
         private readonly IPairValidator<IChild<TK>, ICachedGroup<TK>> isAgeAllowAddChildValidator;
@@ -57,7 +58,7 @@ namespace TennisClub.Infrastructure.services
             }
         }
 
-        private void AddGroupToDb(CachedGroup group, UnitOfWork dao)
+        public void AddChildToGroup(Child child)
         {
             if (isNewGroup.Invoke(group)) 
                 dao.CachedGroupDao.Create(group);

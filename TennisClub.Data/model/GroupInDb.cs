@@ -1,19 +1,26 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using TennisClub.AppCore.model.impl;
 using TennisClub.AppCore.model.interfaces;
 
 namespace TennisClub.Data.model
 {
-    class GroupInDb : IGroup<Guid>
+    public class GroupInDb
     {
-        public Guid Id { get; } = new Guid();
+        [Key]
+        public Guid Id { get; }
+        [Required]
         public GameLevel GameLevel { get; }
+        [Required]
         public DayOfWeek LessonsDay { get; }
 
-        public GroupInDb(GameLevel gameLevel, DayOfWeek lessonsDay)
+        public GroupInDb(GameLevel gameLevel, DayOfWeek lessonsDay, Guid id)
         {
+            this.Id = id;
             this.GameLevel = gameLevel;
             this.LessonsDay = lessonsDay;
         }
+
+        public GroupInDb() { }
     }
 }

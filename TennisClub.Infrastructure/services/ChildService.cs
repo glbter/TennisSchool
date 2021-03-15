@@ -5,7 +5,7 @@ using TennisClub.Infrastructure.interfaces;
 
 namespace TennisClub.Infrastructure.services
 {
-    public class ChildService<TK> : IChildService<TK>
+    public class ChildService : IChildService<Guid>
     {
         private readonly UnitOfWork dao;
         public ChildService(UnitOfWork dao)
@@ -13,7 +13,7 @@ namespace TennisClub.Infrastructure.services
             this.dao = dao;
         }
 
-        public void SetChildToGroup(IChild<TK> child, ICachedGroup<TK> group)
+        public void SetChildToGroup(Child child, Group group)
         {
             child.GroupId = group.Id;
             dao.ChildDao.Create((Child)child);
