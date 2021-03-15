@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
   </ItemGroup>
 
@@ -33,11 +34,11 @@
     <Compile Update="TennisClub.AppCore\interfaces\IChildProc.cs">
       <Link>AppCore\interfaces\IChildProc.cs</Link>
     </Compile>
-    <Compile Update="TennisClub.Data\dao\interfaces\ICachedGroupDao.cs">
-      <Link>TennisCLub.Infrastructure\dao\interfaces\ICachedGroupDao.cs</Link>
+    <Compile Update="TennisClub.Data\dao\interfaces\ICachedGroupRepository.cs">
+      <Link>TennisCLub.Infrastructure\dao\interfaces\ICachedGroupRepository.cs</Link>
     </Compile>
-    <Compile Update="TennisClub.Data\dao\interfaces\IDao.cs">
-      <Link>TennisCLub.Infrastructure\dao\interfaces\IDao.cs</Link>
+    <Compile Update="TennisClub.Data\dao\interfaces\IRepository.cs">
+      <Link>TennisCLub.Infrastructure\dao\interfaces\IRepository.cs</Link>
     </Compile>
     <Compile Update="TennisClub.Data\dao\interfaces\IDaoDelete.cs">
       <Link>TennisCLub.Infrastructure\dao\interfaces\IDaoDelete.cs</Link>
@@ -48,8 +49,8 @@
     <Compile Update="TennisClub.Data\dao\CachedGroupDao.cs">
       <Link>TennisCLub.Infrastructure\dao\CachedGroupDao.cs</Link>
     </Compile>
-    <Compile Update="TennisClub.Data\dao\Dao.cs">
-      <Link>TennisCLub.Infrastructure\dao\Dao.cs</Link>
+    <Compile Update="TennisClub.Data\dao\GenericRepository.cs">
+      <Link>TennisCLub.Infrastructure\dao\GenericRepository.cs</Link>
     </Compile>
     <Compile Update="TennisClub.Data\dao\UnitOfWork.cs">
       <Link>TennisCLub.Infrastructure\dao\UnitOfWork.cs</Link>

@@ -12,18 +12,16 @@ namespace TennisClub.Console
     {
         static void Main(string[] args)
         {
-            UnitOfWork dao = new UnitOfWork();
-            IChildPipeline<Guid> childLine = new ChildPipeline<Guid>(dao);
-
+            UnitOfWork unitOfWork = new UnitOfWork();
+            IChildPipeline childLine = new ChildPipeline(unitOfWork);
+        
             (new TestDataLoader()).InitTestData()
                 .ForEach(it => childLine.AddChild(it));
-
+        
             DaoPrinter printer = new DaoPrinter();
-            //dao.ChildDao.GetAll().ForEach(PrintChild);
             System.Console.WriteLine("groups");
-            dao.GroupDao.FindAll().ForEach(printer.PrintGroup);
             System.Console.WriteLine("cached groups");
-            dao.CachedGroupDao.FindAll().ForEach(printer.PrintCachedGroup);
+            unitOfWork.Dispose();
         }
     }
 }
