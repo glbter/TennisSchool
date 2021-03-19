@@ -33,26 +33,24 @@ namespace TennisClub.Data.dao
         {
             DateTime today = DateTime.Now;
 
-            var group =  _dbContext.GroupDbSet
-                .Select(group => new {
+            var group = _dbContext.GroupDbSet
+                .Select(group => new
+                {
                     Group = group,
                     Count = _dbContext.ChildDbSet.Count(
                         ch => ch.GroupId == group.Id),
-                    MinAge = _dbContext.ChildDbSet
+                    Children = _dbContext.ChildDbSet
                         .Where(ch => ch.GroupId == group.Id)
-                        .Select(ch => ch.Birthday - today)
-                        .Min(),
-                    MaxAge = _dbContext.ChildDbSet
-                        .Where(ch => ch.GroupId == group.Id)
-                        .Select(ch =>  ch.Birthday - today)
-                        .Max()
+                        .Select(ch => ch.Birthday)
+                        .ToList()
                 })
-                .Where(it => it.Group.LessonsDay == day 
+                .Where(it => it.Group.LessonsDay == day
                              && it.Group.GameLevel == gameLevel)
+                .ToList()
                 .FirstOrDefault(it => amountRuleChecker(it.Count)
                                       && ageRuleChecker(
-                                          (int) it.MinAge.TotalHours * 365,
-                                          (int) it.MaxAge.TotalHours * 365)
+                                          (int) (today - it.Children.Min()).TotalHours / 24 / 365,
+                                          (int) (today - it.Children.Max()).TotalHours / 24 / 365)
                 )
                 ?.Group;
             return group;
