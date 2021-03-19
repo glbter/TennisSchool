@@ -8,19 +8,19 @@ namespace TennisClub.Data.model
     public class ChildInDb
     {
         [Key]
-        public Guid Id { get; }
+        public Guid Id { get; set; }
         [Required]
-        public string FirstName { get; }
+        public string FirstName { get; set; }
         [Required]
-        public string LastName { get; }
+        public string LastName { get; set; }
         [Required]
         public Guid GroupId { get; set; }
         [Required]
-        public DateTime Birthday { get; }
+        public DateTime Birthday { get; set; }
         [Required]
-        public DayOfWeek PreferableDay { get; }
+        public DayOfWeek PreferableDay { get; set; }
         [Required]
-        public GameLevel GameLevel { get; }
+        public GameLevel GameLevel { get; set; }
 
         public ChildInDb(string firstName, string lastName, 
             GameLevel gameLevel, DayOfWeek preferableDay, DateTime birthday, Guid groupId, Guid id)
