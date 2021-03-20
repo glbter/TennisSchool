@@ -9,18 +9,18 @@ using TennisClub.Infrastructure.services;
 
 namespace TennisClub.Infrastructure.pipelines
 {
-    public class ChildPipeline<TK> : IChildPipeline<TK>
+    public class ChildPipeline : IChildPipeline
     {
-        private readonly Predicate<IChild<TK>> isNotAdult;
-        private readonly GroupService<TK> groupService;
+        private readonly Predicate<Child> isNotAdult;
+        private readonly GroupService groupService;
 
-        public ChildPipeline(DaoObject dao)
+        public ChildPipeline(UnitOfWork dao)
         {
-            groupService = new GroupService<TK>(dao);
+            groupService = new GroupService(dao);
             isNotAdult = child => child.Age < 18;
         }
 
-        public bool AddChild(IChild<TK> child)
+        public bool AddChild(Child child)
         {
             if (!isNotAdult.Invoke(child)) return false;
             groupService.AddChildToGroup(child);

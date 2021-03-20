@@ -1,31 +1,39 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using TennisClub.AppCore.model.impl;
 using TennisClub.AppCore.model.interfaces;
 
 namespace TennisClub.Data.model
 {
-    class ChildInDb : IChild<Guid>
+    public class ChildInDb
     {
-        public Guid Id { get; } = new Guid();
-        public string FirstName { get; }
-        public string LastName { get; }
+        [Key]
+        public Guid Id { get; set; }
+        [Required]
+        public string FirstName { get; set; }
+        [Required]
+        public string LastName { get; set; }
+        [Required]
         public Guid GroupId { get; set; }
-        public int Age 
-        {
-            get => (int) birthday.Subtract(new DateTime()).TotalDays / 365; 
-        }
-        private DateTime birthday;
-        public DayOfWeek PreferableDay { get; }
-        public GameLevel GameLevel { get; }
+        [Required]
+        public DateTime Birthday { get; set; }
+        [Required]
+        public DayOfWeek PreferableDay { get; set; }
+        [Required]
+        public GameLevel GameLevel { get; set; }
 
         public ChildInDb(string firstName, string lastName, 
-            GameLevel gameLevel, DayOfWeek preferableDay, DateTime birthday )
+            GameLevel gameLevel, DayOfWeek preferableDay, DateTime birthday, Guid groupId, Guid id)
         {
+            this.Id = (id == Guid.Empty) ? Guid.NewGuid() : id;
             this.FirstName = firstName;
             this.LastName = lastName;
             this.GameLevel = gameLevel;
             this.PreferableDay = preferableDay;
-            this.birthday = birthday;
+            this.Birthday = birthday;
+            this.GroupId = groupId;
         }
+        
+        public ChildInDb(){}
     }
 }

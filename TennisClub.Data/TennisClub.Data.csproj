@@ -12,6 +12,7 @@
     <ItemGroup>
       <Compile Remove="repo\**" />
       <Compile Remove="extentions\**" />
+      <Compile Remove="dao\CachedGroupDao.cs" />
     </ItemGroup>
 
     <ItemGroup>
@@ -22,6 +23,11 @@
     <ItemGroup>
       <None Remove="repo\**" />
       <None Remove="extentions\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.4" />
+      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.2" />
     </ItemGroup>
 
 </Project>

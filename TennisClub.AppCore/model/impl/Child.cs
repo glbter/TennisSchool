@@ -10,21 +10,21 @@ namespace TennisClub.AppCore.model.impl
         public string FirstName { get; }
         public string LastName { get; }
         public Guid GroupId { get; set; }
-        public int Age => DateTime.Today.Subtract(birthday).Days / 365;
+        public int Age => DateTime.Today.Subtract(Birthday).Days / 365;
 
-        private DateTime birthday;
+        public DateTime Birthday { get; }
         public DayOfWeek PreferableDay { get; }
         public GameLevel GameLevel { get; }
 
         public Child(string firstName, string lastName, 
-            GameLevel gameLevel, DayOfWeek preferableDay, DateTime birthday, Guid id = new Guid() )
+            GameLevel gameLevel, DayOfWeek preferableDay, DateTime birthday, Guid id = new Guid())
         {
             this.Id = (id == Guid.Empty) ? Guid.NewGuid() : id;
             this.FirstName = firstName;
             this.LastName = lastName;
             this.GameLevel = gameLevel;
             this.PreferableDay = preferableDay;
-            this.birthday = birthday;
+            this.Birthday = birthday;
         }
     }
 }
