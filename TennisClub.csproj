@@ -62,6 +62,12 @@
       <Link>TennisCLub.Data\model\ChildInDb.cs</Link>
     </Compile>
     <Compile Remove="TennisClub.Data\extentions\**" />
+    <Compile Remove="TennisClub.AppCore\interfaces\IPairValidator.cs" />
+    <Compile Remove="TennisClub.AppCore\model\impl\CachedGroup.cs" />
+    <Compile Remove="TennisClub.AppCore\validators\IsChildValidator.cs" />
+    <Compile Remove="TennisClub.AppCore\model\interfaces\IChild.cs" />
+    <Compile Remove="TennisClub.AppCore\validators\IsAgeAllowAddChildRuleChecker.cs" />
+    <Compile Remove="TennisClub.AppCore\model\interfaces\ICachedGroup.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -70,6 +76,10 @@
 
   <ItemGroup>
     <None Remove="TennisClub.Data\extentions\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="TennisClub.AppCore\interfaces" />
   </ItemGroup>
 
 </Project>

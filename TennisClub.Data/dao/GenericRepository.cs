@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+using System.Data.Entity;
 using TennisClub.AppCore.model.interfaces;
+using TennisClub.Data.context;
 using TennisClub.Data.dao.interfaces;
 
 namespace TennisClub.Data.dao
@@ -9,42 +10,22 @@ namespace TennisClub.Data.dao
     {
         private readonly DbContext _dbContext;
 
-        protected GenericRepository(DbContext dbContext)
+        protected GenericRepository(PostgresDbContext dbContext)
         {
             _dbContext = dbContext;
         }
-        
-        public void Create(TI entity)
-        {
-            _dbContext.Add(entity);
-        }
 
-        public void Update(TI entity)
-        {
-            _dbContext.Update(entity);
-        }
-
-        public void Delete(TI entity)
-        {
-            _dbContext.Remove(entity);
-        }
-
-        public void Delete(TK id)
-        {
-            _dbContext.Remove(new Entity(id));
-        }
-
-        public TO FindById(TK id)
-        {
-            return _dbContext.Find<TO>(id);
-        }
-
-         public abstract IList<TO> FindAll();
+        public abstract void Create(TI entity);
+        public abstract void Update(TI entity);
+        public abstract void Delete(TI entity);
+        public abstract void Delete(TK id);
+        public abstract TO FindById(TK id);
+        public abstract IList<TO> FindAll();
          
-         private class Entity: IBaseId<TK>
-         {
-             public TK Id { get; }
-             public Entity(TK id) { Id = id; }
-         }
+        protected class Entity: IBaseId<TK>
+        {
+         public TK Id { get; }
+         public Entity(TK id) { Id = id; }
+        }
     }
 }

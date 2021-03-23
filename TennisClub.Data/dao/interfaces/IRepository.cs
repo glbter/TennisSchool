@@ -8,12 +8,12 @@ namespace TennisClub.Data.dao.interfaces
 {
     public interface IRepository<in TI, TO, in TK> where TO : class
     {
-        public void Create(TI entity);
-        public void Update(TI entity);
-        public void Delete(TI entity);
-        public void Delete(TK id);
-        public TO FindById(TK id);
-        public IList<TO> FindAll();
+        void Create(TI entity);
+        void Update(TI entity);
+        void Delete(TI entity);
+        void Delete(TK id);
+        TO FindById(TK id);
+        IList<TO> FindAll();
 
     }
 }

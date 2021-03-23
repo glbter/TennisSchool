@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace TennisClub.Infrastructure.mappers
+﻿namespace TennisClub.Infrastructure.mappers
 {
     public interface IMapper<in TI, out TO>
     {
-        public TO Map(TI entity);
+        TO Map(TI entity);
     }
 }

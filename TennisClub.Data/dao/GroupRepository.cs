@@ -33,7 +33,7 @@ namespace TennisClub.Data.dao
         {
             DateTime today = DateTime.Now;
 
-            var group = _dbContext.GroupDbSet
+            var found_group = _dbContext.GroupDbSet
                 .Select(group => new
                 {
                     Group = group,
@@ -53,7 +53,7 @@ namespace TennisClub.Data.dao
                                           (int) (today - it.Children.Max()).TotalHours / 24 / 365)
                 )
                 ?.Group;
-            return group;
+            return found_group;
         }
         
         public IList<GroupInDb> FindAllByDayAndGameLevel(DayOfWeek day, GameLevel gameLevel)
@@ -77,5 +77,33 @@ namespace TennisClub.Data.dao
                 .Where(it => it.GameLevel == gameLevel)
                 .ToList();
         }
+        
+        
+        public override void Create(GroupInDb entity)
+        {
+            _dbContext.GroupDbSet.Add(entity);
+        }
+
+        public override void Update(GroupInDb entity)
+        {
+            _dbContext.GroupDbSet.Remove(entity);
+            _dbContext.GroupDbSet.Add(entity);
+        }
+
+        public override void Delete(GroupInDb entity)
+        {
+            _dbContext.GroupDbSet.Remove(entity);
+        }
+
+        public override void Delete(Guid id)
+        {
+            _dbContext.GroupDbSet.Remove(new GroupInDb(){ Id = id});
+        }
+
+        public override GroupInDb FindById(Guid id)
+        {
+            return _dbContext.GroupDbSet.Find(id);
+        }
+        
     }
 }

@@ -7,7 +7,7 @@ namespace TennisClub.Data.dao.interfaces
     {
         IChildRepository ChildRepository { get; }
         IGroupRepository GroupRepository { get; }
-        public void SaveChanges();
-        public void Dispose();
+        void SaveChanges();
+        void Dispose();
     }
 }

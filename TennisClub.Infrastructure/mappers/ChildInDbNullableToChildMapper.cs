@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using TennisClub.AppCore.model.impl;
+﻿using TennisClub.AppCore.model.impl;
 using TennisClub.Data.model;
 
 namespace TennisClub.Infrastructure.mappers

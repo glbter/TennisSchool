@@ -1,25 +1,16 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using TennisClub.AppCore.model.impl;
-using TennisClub.AppCore.model.interfaces;
 
 namespace TennisClub.Data.model
 {
     public class ChildInDb
     {
-        [Key]
         public Guid Id { get; set; }
-        [Required]
         public string FirstName { get; set; }
-        [Required]
         public string LastName { get; set; }
-        [Required]
         public Guid GroupId { get; set; }
-        [Required]
         public DateTime Birthday { get; set; }
-        [Required]
         public DayOfWeek PreferableDay { get; set; }
-        [Required]
         public GameLevel GameLevel { get; set; }
 
         public ChildInDb(string firstName, string lastName, 

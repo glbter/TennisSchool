@@ -19,13 +19,13 @@ namespace TennisClub.WpfDesktop
         public ObservableCollection<Child> Children { get; private set; }
         private Child _selectedChild { get; set; }
 
-        private readonly ChildPipeline _childPipeline { get; }
+        private readonly ChildFacade _childPipeline;
         private readonly IMapper<Child, ChildWpf> _toUiChildMapper;
         private readonly IMapper<ChildWpf, Child> _fromUiChildMapper;
 
         MainWindowViewModel()
         {
-            _childPipeline = new ChildPipeline();
+            //_childPipeline = new ChildFacade();
             _fromUiChildMapper = new FromUiChildMapper();
             _toUiChildMapper = new ToUiChildMapper();
         }
