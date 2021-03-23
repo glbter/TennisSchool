@@ -1,8 +1,6 @@
 ﻿using System;
 using TennisClub.AppCore.model.impl;
-using TennisClub.AppCore.model.interfaces;
 using TennisClub.Data.dao;
-using TennisClub.Data.dao.interfaces;
 using TennisClub.Data.model;
 using TennisClub.Infrastructure.interfaces;
 using TennisClub.Infrastructure.mappers;
