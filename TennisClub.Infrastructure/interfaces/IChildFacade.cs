@@ -6,7 +6,7 @@ using TennisClub.AppCore.model.interfaces;
 
 namespace TennisClub.Infrastructure.interfaces
 {
-    public interface IChildPipeline
+    public interface IChildFacade
     {
         public bool AddChild(Child child);
     }

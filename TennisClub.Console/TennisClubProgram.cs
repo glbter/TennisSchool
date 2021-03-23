@@ -14,7 +14,7 @@ namespace TennisClub.Console
         {
             var connectionString = "Host=localhost;Port=5432;Database=tennis-club;Username=postgres;Password=123";
             UnitOfWork unitOfWork = new UnitOfWork(connectionString);
-            IChildPipeline childLine = new ChildPipeline(unitOfWork);
+            IChildFacade childLine = new ChildFacade(unitOfWork);
         
             (new TestDataLoader()).InitTestData()
                 .ForEach(it => childLine.AddChild(it));
