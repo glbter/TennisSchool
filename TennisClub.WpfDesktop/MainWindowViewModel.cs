@@ -8,7 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using TennisClub.WpfDesktop.model;
 using System.Windows.Input;
-
+using TennisClub.AppCore.model.impl;
+using TennisClub.Infrastructure.pipelines;
+using TennisClub.WpfDesktop.mappers;
 
 namespace TennisClub.WpfDesktop
 {
@@ -16,21 +18,30 @@ namespace TennisClub.WpfDesktop
     {
         public ObservableCollection<Child> Children { get; private set; }
         private Child _selectedChild { get; set; }
+
+        private readonly ChildPipeline _childPipeline { get; }
+        private readonly IMapper<Child, ChildWpf> _toUiChildMapper;
+        private readonly IMapper<ChildWpf, Child> _fromUiChildMapper;
+
         MainWindowViewModel()
         {
-
+            _childPipeline = new ChildPipeline();
+            _fromUiChildMapper = new FromUiChildMapper();
+            _toUiChildMapper = new ToUiChildMapper();
         }
 
         private ICommand _addCommand;
         public ICommand AddCommand
         {
-            get => _addCommand ??= new RelayCommand<Child>(obj => 
+            get => _addCommand ??= new RelayCommand<ChildWpf>(obj => 
                 {
-                   //do something  
+                    if (obj == null) return;
+                    _childPipeline.AddChild(
+                        _fromUiChildMapper.Map(obj));
                 });
         }
 
-        public Child SelectedChild
+        /*public Child SelectedChild
         {
             get => _selectedChild;
             set
@@ -38,7 +49,7 @@ namespace TennisClub.WpfDesktop
                 _selectedChild = value;
                 OnPropertyChanged("SelectedChild");
             }
-        }
+        }*/
 
 
 

@@ -35,7 +35,7 @@ namespace TennisClub.WpfDesktop
                 DayOfWeekCbx.SelectedItem = elems.GetValue(0);
             }
             var mapper = new ChildMapper();
-            this.childLw.ItemsSource = mapper.Map();
+            this.childLw.ItemsSource = mapper.Children();
         }
     }
 
