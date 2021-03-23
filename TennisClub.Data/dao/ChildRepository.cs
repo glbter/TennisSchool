@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
 using TennisClub.Data.model;
 using TennisClub.Data.dao.interfaces;
 using TennisClub.Data.context;

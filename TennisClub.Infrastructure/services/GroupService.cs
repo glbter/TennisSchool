@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Configuration;
-using TennisClub.AppCore.interfaces;
 using TennisClub.AppCore.model.impl;
-using TennisClub.AppCore.model.interfaces;
 using TennisClub.AppCore.validators;
 using TennisClub.Data.dao;
 using TennisClub.Data.model;
@@ -40,7 +38,7 @@ namespace TennisClub.Infrastructure.services
                     child.PreferableDay,
                     child.GameLevel,
                     amount => amount < maxChildren,
-                    ageRuleChecker.CreateRuleCheckerDelegate((Child) child)));
+                    ageRuleChecker.CreateRuleCheckerDelegate(child)));
             if (group == null)
             {
                 group = new Group(child.GameLevel, child.PreferableDay);
