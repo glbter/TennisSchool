@@ -71,6 +71,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="mappers\FromUiChildMapper.cs" />
+    <Compile Include="mappers\FromUiGroupMapper.cs" />
+    <Compile Include="mappers\IMapper.cs" />
+    <Compile Include="mappers\ToUiGroupMapper.cs" />
+    <Compile Include="mappers\ToUiChildMapper.cs" />
+    <Compile Include="model\ChildWpf.cs" />
+    <Compile Include="model\GroupWpf.cs" />
     <Compile Include="RelayCommand.cs" />
     <Page Include="MainWindowView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -87,10 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainWindowViewModel.cs" />
-    <Compile Include="mappers\ChildMapper.cs" />
-    <Compile Include="model\Child.cs" />
-    <Compile Include="model\GameLevel.cs" />
-    <Compile Include="model\IBaseId.cs" />
+    <Compile Include="mappers\ChildMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -127,6 +131,16 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TennisClub.AppCore\TennisClub.AppCore.csproj">
+      <Project>{38a84e85-8248-4d42-a1b4-90bb13e66fd1}</Project>
+      <Name>TennisClub.AppCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TennisClub.Infrastructure\TennisClub.Infrastructure.csproj">
+      <Project>{4ad27af7-0792-4e66-a9cf-3b7367f360f9}</Project>
+      <Name>TennisClub.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

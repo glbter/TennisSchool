@@ -5,9 +5,9 @@ namespace TennisClub.AppCore.model.impl
 {
     public class Group : IGroup<Guid>
     {
-        public Guid Id { get; }
-        public GameLevel GameLevel { get; }
-        public DayOfWeek LessonsDay { get; }
+        public Guid Id { get; set; }
+        public GameLevel GameLevel { get; set; }
+        public DayOfWeek LessonsDay { get; set; }
 
         public Group(GameLevel gameLevel, DayOfWeek lessonsDay, Guid id = new Guid())
         {
@@ -15,5 +15,7 @@ namespace TennisClub.AppCore.model.impl
             this.GameLevel = gameLevel;
             this.LessonsDay = lessonsDay;
         }
+        
+        public Group(){ }
     }
 }
