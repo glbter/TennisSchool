@@ -3,7 +3,7 @@ using TennisClub.AppCore.model.interfaces;
 
 namespace TennisClub.AppCore.model.impl
 {
-    public class Group : IGroup<Guid>
+    public class Group : IBaseId<Guid>
     {
         public Guid Id { get; }
         public GameLevel GameLevel { get; }

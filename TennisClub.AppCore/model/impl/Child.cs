@@ -4,7 +4,7 @@ using TennisClub.AppCore.model.interfaces;
 
 namespace TennisClub.AppCore.model.impl
 {
-    public class Child : IChild<Guid>
+    public class Child : IBaseId<Guid>
     {
         public Guid Id { get; }
         public string FirstName { get; }

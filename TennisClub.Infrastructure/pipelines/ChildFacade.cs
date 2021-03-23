@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using TennisClub.AppCore.interfaces;
 using TennisClub.AppCore.model.impl;
-using TennisClub.AppCore.model.interfaces;
-using TennisClub.AppCore.validators;
 using TennisClub.Data.dao;
 using TennisClub.Infrastructure.interfaces;
 using TennisClub.Infrastructure.mappers;
