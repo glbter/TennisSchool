@@ -6,9 +6,9 @@ namespace TennisClub.AppCore.model.impl
 {
     public class Child : IChild<Guid>
     {
-        public Guid Id { get; }
-        public string FirstName { get; }
-        public string LastName { get; }
+        public Guid Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public Guid GroupId { get; set; }
         public int Age => DateTime.Today.Subtract(Birthday).Days / 365;
 
@@ -26,5 +26,7 @@ namespace TennisClub.AppCore.model.impl
             this.PreferableDay = preferableDay;
             this.Birthday = birthday;
         }
+
+        public Child() { }
     }
 }

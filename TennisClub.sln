@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TennisClub.Console", "Tenni
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TennisClub.Infrastructure", "TennisClub.Infrastructure\TennisClub.Infrastructure.csproj", "{4AD27AF7-0792-4E66-A9CF-3B7367F360F9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TennisClub.WpfDesktop", "TennisClub.WpfDesktop\TennisClub.WpfDesktop.csproj", "{E4A7742A-E1A6-4F26-9A08-DC02DB57DFB8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{4AD27AF7-0792-4E66-A9CF-3B7367F360F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4AD27AF7-0792-4E66-A9CF-3B7367F360F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4AD27AF7-0792-4E66-A9CF-3B7367F360F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4A7742A-E1A6-4F26-9A08-DC02DB57DFB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4A7742A-E1A6-4F26-9A08-DC02DB57DFB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4A7742A-E1A6-4F26-9A08-DC02DB57DFB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4A7742A-E1A6-4F26-9A08-DC02DB57DFB8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
