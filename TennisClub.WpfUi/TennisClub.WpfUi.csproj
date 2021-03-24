@@ -4,32 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E4A7742A-E1A6-4F26-9A08-DC02DB57DFB8}</ProjectGuid>
+    <ProjectGuid>{B452B3C5-2B9B-4EA9-A1DB-D3D0717954DD}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>TennisClub.WpfDesktop</RootNamespace>
-    <AssemblyName>TennisClub.WpfDesktop</AssemblyName>
+    <RootNamespace>TennisClub.WpfUi</RootNamespace>
+    <AssemblyName>TennisClub.WpfUi</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <LangVersion>8</LangVersion>
-    <PublishUrl>publish\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -71,15 +55,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="mappers\ChildMock.cs" />
     <Compile Include="mappers\FromUiChildMapper.cs" />
     <Compile Include="mappers\FromUiGroupMapper.cs" />
     <Compile Include="mappers\IMapper.cs" />
-    <Compile Include="mappers\ToUiGroupMapper.cs" />
     <Compile Include="mappers\ToUiChildMapper.cs" />
+    <Compile Include="mappers\ToUiGroupMapper.cs" />
     <Compile Include="model\ChildWpf.cs" />
     <Compile Include="model\GroupWpf.cs" />
     <Compile Include="RelayCommand.cs" />
-    <Page Include="MainWindowView.xaml">
+    <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -87,14 +72,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindowView.xaml.cs">
-      <DependentUpon>MainWindowView.xaml</DependentUpon>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainWindowViewModel.cs" />
-    <Compile Include="mappers\ChildMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -121,21 +105,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
-      <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 и x64%29</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\TennisClub.AppCore\TennisClub.AppCore.csproj">
       <Project>{38a84e85-8248-4d42-a1b4-90bb13e66fd1}</Project>
       <Name>TennisClub.AppCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TennisClub.Data\TennisClub.Data.csproj">
+      <Project>{1f5f4506-badc-4cb6-b281-e265f70e95bf}</Project>
+      <Name>TennisClub.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\TennisClub.Infrastructure\TennisClub.Infrastructure.csproj">
       <Project>{4ad27af7-0792-4e66-a9cf-3b7367f360f9}</Project>

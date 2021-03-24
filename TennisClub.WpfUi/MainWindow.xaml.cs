@@ -12,10 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TennisClub.AppCore.model.impl;
-using TennisClub.WpfDesktop.mappers;
 
-namespace TennisClub.WpfDesktop
+namespace TennisClub.WpfUi
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
@@ -25,19 +23,6 @@ namespace TennisClub.WpfDesktop
         public MainWindow()
         {
             InitializeComponent();
-            {
-                Array elems = Enum.GetValues(typeof(DayOfWeek));
-                DayOfWeekCbx.ItemsSource = elems;
-                DayOfWeekCbx.SelectedItem = elems.GetValue(0);
-
-                elems = Enum.GetValues(typeof(GameLevel));
-                GameLevelCbx.ItemsSource = elems;
-                DayOfWeekCbx.SelectedItem = elems.GetValue(0);
-            }
-            var mapper = new ChildMapper();
-            this.childLw.ItemsSource = mapper.Children();
         }
     }
-
-  
 }

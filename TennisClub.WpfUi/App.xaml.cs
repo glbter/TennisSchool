@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace TennisClub.WpfDesktop
+namespace TennisClub.WpfUi
 {
     /// <summary>
     /// Логика взаимодействия для App.xaml
