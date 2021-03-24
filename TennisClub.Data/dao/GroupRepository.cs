@@ -34,7 +34,7 @@ namespace TennisClub.Data.dao
             DateTime today = DateTime.Now;
 
             var found_group = _dbContext.GroupDbSet
-                .Select(group => new
+                .Select(group =>  new
                 {
                     Group = group,
                     Count = _dbContext.ChildDbSet.Count(
