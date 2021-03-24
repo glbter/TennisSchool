@@ -1,4 +1,5 @@
-﻿using TennisClub.Data.dao.interfaces;
+﻿using System.Data.Common;
+using TennisClub.Data.dao.interfaces;
 using TennisClub.Data.context;
 
 namespace TennisClub.Data.dao
@@ -9,10 +10,12 @@ namespace TennisClub.Data.dao
         public IGroupRepository GroupRepository { get; }
         private readonly PostgresDbContext _dbContext;
 
-        public UnitOfWork(string connectionString)
+        public UnitOfWork(string connectionString, ProviderDb provider)
         {
             
-            _dbContext = new PostgresDbContext(connectionString);
+            var conn = DbProviderFactories.GetFactory(provider.ToString()).CreateConnection(); 
+            conn.ConnectionString = connectionString;
+            _dbContext = new PostgresDbContext(conn);
             
             //_dbContext = new InMemoryDbContext(options);
             ChildRepository = new ChildRepository(_dbContext);

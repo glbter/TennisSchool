@@ -1,14 +1,17 @@
-﻿using System.Data.Entity;
+﻿using System.Data.Common;
+using System.Data.Entity;
 using TennisClub.Data.model;
 
 namespace TennisClub.Data.context
 {
     public class PostgresDbContext : DbContext
     {
-        public DbSet<ChildInDb> ChildDbSet { get; private set; }
-        public DbSet<GroupInDb> GroupDbSet { get; private set; }
-        
-        public PostgresDbContext(string connectionString) : base(nameOrConnectionString: connectionString) { }
+        public DbSet<ChildInDb> ChildDbSet { get; set; }
+        public DbSet<GroupInDb> GroupDbSet { get; set; }
+
+        public PostgresDbContext(DbConnection connection) : base(connection, true)
+        {; 
+        }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
