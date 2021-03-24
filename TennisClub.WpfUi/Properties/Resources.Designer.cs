@@ -9,7 +9,7 @@
 //------------------------------------------------------------------------------
 
 
-namespace TennisClub.WpfDesktop.Properties
+namespace TennisClub.WpfUi.Properties
 {
     /// <summary>
     ///   Класс ресурсов со строгим типом для поиска локализованных строк и пр.
@@ -43,7 +43,7 @@ namespace TennisClub.WpfDesktop.Properties
             {
                 if ((resourceMan == null))
                 {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TennisClub.WpfDesktop.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TennisClub.WpfUi.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

@@ -6,13 +6,13 @@ using System.Runtime.CompilerServices;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TennisClub.WpfDesktop.model;
+using TennisClub.WpfUi.model;
 using System.Windows.Input;
 using TennisClub.AppCore.model.impl;
 using TennisClub.Infrastructure.pipelines;
-using TennisClub.WpfDesktop.mappers;
+using TennisClub.WpfUi.mappers;
 
-namespace TennisClub.WpfDesktop
+namespace TennisClub.WpfUi
 {
     class MainWindowViewModel : INotifyPropertyChanged
     {
@@ -33,12 +33,18 @@ namespace TennisClub.WpfDesktop
         private ICommand _addCommand;
         public ICommand AddCommand
         {
-            get => _addCommand ??= new RelayCommand<ChildWpf>(obj => 
+            get {
+                if (_addCommand == null)
                 {
-                    if (obj == null) return;
-                    _childPipeline.AddChild(
-                        _fromUiChildMapper.Map(obj));
-                });
+                    _addCommand = new RelayCommand<ChildWpf>(obj =>
+                        {
+                            if (obj == null) return;
+                            _childPipeline.AddChild(
+                                _fromUiChildMapper.Map(obj));
+                        });
+                }
+                return _addCommand;
+            }
         }
 
         /*public Child SelectedChild

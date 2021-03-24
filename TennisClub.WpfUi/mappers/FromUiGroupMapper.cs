@@ -1,7 +1,7 @@
 ﻿using TennisClub.AppCore.model.impl;
-using TennisClub.WpfDesktop.model;
+using TennisClub.WpfUi.model;
 
-namespace TennisClub.WpfDesktop.mappers
+namespace TennisClub.WpfUi.mappers
 {
     public class FromUiGroupMapper : IMapper<GroupWpf, Group>
     {

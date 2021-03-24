@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TennisClub.AppCore.model.impl;
-using TennisClub.WpfDesktop.model;
+using TennisClub.WpfUi.model;
 
-namespace TennisClub.WpfDesktop.mappers
+namespace TennisClub.WpfUi.mappers
 {
     class ChildMapper
     {
