@@ -7,6 +7,26 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        
+        <Label x:Name="FirstNameLb" Content="First name" HorizontalAlignment="Right" Margin="0,47,678,0" Width="94" Height="25" VerticalAlignment="Top"/>
+        <TextBox x:Name="FirstNameTbx" HorizontalAlignment="Left" Height="23" Margin="20,77,0,0" TextWrapping="Wrap" Text="John" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="LastNameLb" Content="Last name" HorizontalAlignment="Left" Margin="167,46,0,0" VerticalAlignment="Top" Width="94" RenderTransformOrigin="0.521,1.731"/>
+        <TextBox x:Name="LastNameTbx" HorizontalAlignment="Left" Height="23" Margin="167,77,0,0" TextWrapping="Wrap" Text="Doe" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="DayOfWeekCbx" HorizontalAlignment="Left" Margin="20,147,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="DayOfWeekLb" Content="Day of week" HorizontalAlignment="Left" Margin="20,116,0,0" VerticalAlignment="Top" Width="94"/>
+        <DatePicker x:Name="BirthdayDatePicker" HorizontalAlignment="Left" Margin="20,205,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name ="AddChildBtn" Content="Add child" HorizontalAlignment="Left" Margin="167,206,0,0" VerticalAlignment="Top" Width="119" Height="23"/>
+        <ComboBox x:Name="GameLevelCbx" HorizontalAlignment="Left" Margin="166,146,0,0" VerticalAlignment="Top" Width="120"/>
+        <ListView x:Name="childLw" HorizontalAlignment="Left" Height="232" Margin="342,46,0,0" VerticalAlignment="Top" Width="206">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}" Width="80"/>
+                    <GridViewColumn Header="Last name" DisplayMemberBinding="{Binding Path=LastName}" Width="120"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label x:Name="GameLevelLb" Content="Game level" HorizontalAlignment="Left" Margin="166,115,0,0" VerticalAlignment="Top" Width="94" RenderTransformOrigin="0.5,0.5"/>
+        <Label x:Name="BirthdayLb" Content="Birthday" HorizontalAlignment="Left" Margin="20,174,0,0" VerticalAlignment="Top" Width="94" RenderTransformOrigin="0.245,4"/>
 
     </Grid>
 </Window>
