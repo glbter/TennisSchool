@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using TennisClub.AppCore.model.impl;
 using TennisClub.AppCore.validators;
 using TennisClub.Data.dao;
@@ -12,16 +13,16 @@ namespace TennisClub.Infrastructure.services
     public class GroupService : IGroupService
     {
         private readonly UnitOfWork unitOfWork;
-        private readonly IChildService<Guid> childService;
+        private readonly IChildService childService;
         private readonly IMapper<Group, GroupInDb> groupMapperToDb;
         private readonly IMapper<GroupInDb, Group> groupMapperFromDb;
         private readonly ChildAgeRuleChecker ageRuleChecker;
         private readonly int maxChildren;
         
-        public GroupService(UnitOfWork unitOfWork)
+        public GroupService(IServiceProvider serviceProvider)
         {
-            this.unitOfWork = unitOfWork;
-            this.childService = new ChildService(unitOfWork);
+            this.unitOfWork = serviceProvider.GetRequiredService<UnitOfWork>();
+            this.childService = serviceProvider.GetRequiredService<IChildService>();
             
             this.groupMapperToDb = new GroupToGroupInDbMapper();
             this.groupMapperFromDb = new GroupInDbNullableToGroupMapper();

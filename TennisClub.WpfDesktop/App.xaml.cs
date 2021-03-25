@@ -9,6 +9,7 @@ using TennisClub.Data.dao;
 using TennisClub.Infrastructure.interfaces;
 using TennisClub.Infrastructure.pipelines;
 using Microsoft.Extensions.DependencyInjection;
+using TennisClub.Infrastructure.services;
 
 namespace TennisClub.WpfDesktop
 {
@@ -22,16 +23,9 @@ namespace TennisClub.WpfDesktop
         
         private void OnStartup(object sender, StartupEventArgs startupEventArgs)
         {
-            
             var connectionString = "Host=localhost;Port=5432;Database=tennis-club;Username=postgres;Password=123";
-            UnitOfWork unitOfWork = new UnitOfWork(connectionString);
-            IChildFacade childLine = new ChildFacade(unitOfWork);
-
-            // _unitOfWork = new UnitOfWork(connectionString);
-            // MainWindowViewModel viewModel = new MainWindowViewModel(_unitOfWork);
             var serviceCollection = new ServiceCollection();
             ConfigureServices(serviceCollection, connectionString);
-            
             ServiceProvider = serviceCollection.BuildServiceProvider();
             
             MainWindowViewModel viewModel = new MainWindowViewModel(this.ServiceProvider);
@@ -42,17 +36,22 @@ namespace TennisClub.WpfDesktop
         
         protected override void OnExit(ExitEventArgs e)
         {
-            // _unitOfWork.Dispose();
-           ServiceProvider.GetRequiredService<UnitOfWork>().Dispose();
+            ServiceProvider.GetRequiredService<UnitOfWork>().Dispose();
         }
         
         private void ConfigureServices(IServiceCollection services, string connectionString)
         {
             services.AddSingleton<UnitOfWork>(s => new UnitOfWork(connectionString));
-            services.AddScoped<ChildFacade>(s => new ChildFacade(
+            
+            services.AddScoped<IChildFacade, ChildFacade>(s => new ChildFacade(s));
+            
+            services.AddScoped<IGroupFacade, GroupFacade>(s => new GroupFacade(
                 s.GetRequiredService<UnitOfWork>()));
-            services.AddScoped<GroupFacade>(s => new GroupFacade(
+            
+            services.AddTransient<IChildService, ChildService>(s => new ChildService(
                 s.GetRequiredService<UnitOfWork>()));
+            
+            services.AddTransient<IGroupService, GroupService>(s => new GroupService(s));
         }
     }
 }

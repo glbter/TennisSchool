@@ -8,7 +8,7 @@ using TennisClub.Infrastructure.mappers;
 
 namespace TennisClub.Infrastructure.services
 {
-    public class ChildService : IChildService<Guid>
+    public class ChildService : IChildService
     {
         private readonly UnitOfWork unitOfWork;
         private readonly IMapper<Child, ChildInDb> childMapperToDb;

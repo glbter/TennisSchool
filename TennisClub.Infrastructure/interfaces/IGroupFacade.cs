@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using TennisClub.AppCore.model.impl;
-using TennisClub.AppCore.model.interfaces;
 
 namespace TennisClub.Infrastructure.interfaces
 {
-    public interface IGroupService
+    public interface IGroupFacade
     {
-        public void AddChildToGroup(Child child);
+        public Group FindGroup(Guid id);
+        public List<Group> GetAll();
     }
 }

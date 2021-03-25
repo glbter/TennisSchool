@@ -8,6 +8,7 @@ using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
 using TennisClub.AppCore.model.impl;
 using TennisClub.Data.dao;
+using TennisClub.Infrastructure.interfaces;
 using TennisClub.Infrastructure.pipelines;
 using TennisClub.WpfDesktop.mapppers;
 using TennisClub.WpfDesktop.model;
@@ -25,14 +26,14 @@ namespace TennisClub.WpfDesktop
         public ObservableCollection<DayOfWeek> DaysOfWeek { get; private set; }
         public ObservableCollection<GameLevel> GameLevels { get; private set; }
 
-        private readonly ChildFacade _childFacade;
+        private readonly IChildFacade _childFacade;
         private readonly IMapper<Child, ChildWpf> _toUiChildMapper;
         private readonly IMapper<ChildWpf, Child> _fromUiChildMapper;
 
         public MainWindowViewModel(IServiceProvider serviceProvider)
         {
             _newChild = new ChildWpf("", "", GameLevel.Beginner, DayOfWeek.Sunday, DateTime.Today);
-            _childFacade = serviceProvider.GetRequiredService<ChildFacade>();
+            _childFacade = serviceProvider.GetRequiredService<IChildFacade>();
             serviceProvider.GetService<UnitOfWork>();
             _fromUiChildMapper = new FromUiChildMapper();
             _toUiChildMapper = new ToUiChildMapper();

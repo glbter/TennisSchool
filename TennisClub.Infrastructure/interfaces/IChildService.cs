@@ -6,7 +6,7 @@ using TennisClub.AppCore.model.impl;
 
 namespace TennisClub.Infrastructure.interfaces
 {
-    interface IChildService<TK>
+    public interface IChildService
     {
         public void SetChildToGroup(Child child, Group group);
     }
