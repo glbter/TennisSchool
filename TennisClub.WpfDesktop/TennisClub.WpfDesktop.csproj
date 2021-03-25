@@ -8,7 +8,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\TennisClub.csproj" />
+      <ProjectReference Include="..\TennisClub.Infrastructure\TennisClub.Infrastructure.csproj" />
+	  <ProjectReference Include="..\TennisClub.Data\TennisClub.Data.csproj" />
+	  <ProjectReference Include="..\TennisClub.AppCore\TennisClub.AppCore.csproj" />
     </ItemGroup>
 
 </Project>
