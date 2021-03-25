@@ -1,31 +1,55 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using Microsoft.Extensions.DependencyInjection;
 using TennisClub.AppCore.model.impl;
+using TennisClub.Data.dao;
 using TennisClub.Infrastructure.pipelines;
 using TennisClub.WpfDesktop.mapppers;
 using TennisClub.WpfDesktop.model;
 
 namespace TennisClub.WpfDesktop
 {
-    class MainWindowViewModel : INotifyPropertyChanged
+    public class MainWindowViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<Child> Children { get; private set; }
-        private Child _selectedChild { get; set; }
+         
+        private ChildWpf _newChild;
+        
+        private ICommand _addCommand;
+        
+        public ObservableCollection<ChildWpf> Children { get; private set; }
+        public ObservableCollection<DayOfWeek> DaysOfWeek { get; private set; }
+        public ObservableCollection<GameLevel> GameLevels { get; private set; }
 
-        private readonly ChildFacade _childPipeline;
+        private readonly ChildFacade _childFacade;
         private readonly IMapper<Child, ChildWpf> _toUiChildMapper;
         private readonly IMapper<ChildWpf, Child> _fromUiChildMapper;
 
-        MainWindowViewModel()
+        public MainWindowViewModel(IServiceProvider serviceProvider)
         {
-            //_childPipeline = new ChildFacade();
+            _newChild = new ChildWpf("", "", GameLevel.Beginner, DayOfWeek.Sunday, DateTime.Today);
+            _childFacade = serviceProvider.GetRequiredService<ChildFacade>();
+            serviceProvider.GetService<UnitOfWork>();
             _fromUiChildMapper = new FromUiChildMapper();
             _toUiChildMapper = new ToUiChildMapper();
-        }
+            
+            
+            Children = new ObservableCollection<ChildWpf>(
+                _childFacade.GetAll()
+                    .Select(_toUiChildMapper.Map)
+                    .ToList());
 
-        private ICommand _addCommand;
+            DaysOfWeek = new ObservableCollection<DayOfWeek>(
+                Enum.GetValues(typeof(DayOfWeek)).OfType<DayOfWeek>());
+
+            GameLevels = new ObservableCollection<GameLevel>(
+                Enum.GetValues(typeof(GameLevel)).OfType<GameLevel>());
+        }
+        
         public ICommand AddCommand
         {
             get {
@@ -34,25 +58,35 @@ namespace TennisClub.WpfDesktop
                     _addCommand = new RelayCommand<ChildWpf>(obj =>
                     {
                         if (obj == null) return;
-                        _childPipeline.AddChild(
+                        bool isAdded = _childFacade.AddChild(
                             _fromUiChildMapper.Map(obj));
-                    });
+                        if (isAdded) Children.Add(NewChild);
+                        NewChild = new ChildWpf("", "", GameLevel.Beginner, DayOfWeek.Sunday, DateTime.Today);
+                    }
+                    // obj => notEmptyStr(obj?.Name) 
+                    //        && notEmptyStr(obj?.LastName)
+                    //        && obj.Birthday != null
+                    );
                 }
                 return _addCommand;
             }
         }
 
-        /*public Child SelectedChild
+        
+        public ChildWpf NewChild
         {
-            get => _selectedChild;
+            get => _newChild;
             set
             {
-                _selectedChild = value;
-                OnPropertyChanged("SelectedChild");
+                _newChild = value;
+                OnPropertyChanged("NewChild");
             }
-        }*/
+        }
 
-
+        private bool notEmptyStr(string str)
+        {
+            return str != String.Empty;
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
