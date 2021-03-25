@@ -8,12 +8,12 @@ namespace TennisClub.WpfDesktop.mapppers
         public ChildWpf Map(Child entity)
         {
             return new ChildWpf(
-                entity.Id,
                 entity.FirstName,
                 entity.LastName,
                 entity.GameLevel,
                 entity.PreferableDay,
-                entity.Age);
+                entity.Birthday,
+                entity.Id);
         }
     }
 }
