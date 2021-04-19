@@ -13,12 +13,15 @@ namespace TennisClub.Data.model
         public GameLevel GameLevel { get; set; }
         [Required]
         public DayOfWeek LessonsDay { get; set; }
+        [Required]
+        public int ChildrenAmount { get; set; }
 
         public GroupInDb(GameLevel gameLevel, DayOfWeek lessonsDay, Guid id)
         {
             this.Id = id;
             this.GameLevel = gameLevel;
             this.LessonsDay = lessonsDay;
+            this.ChildrenAmount = 0;
         }
 
         public GroupInDb() { }

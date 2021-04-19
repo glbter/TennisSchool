@@ -12,19 +12,17 @@ namespace TennisClub.Data.dao
     {
         public IChildRepository ChildRepository { get; }
         public IGroupRepository GroupRepository { get; }
+        public IChildChosenDaysRepository ChildChosenDaysRepository { get; }
         private readonly PostgresDbContext _dbContext;
 
         public UnitOfWork(string connectionString)
         {
-            // var options = new DbContextOptionsBuilder<InMemoryDbContext>()
-            //     .UseInMemoryDatabase(databaseName: "InMemory")
-            //     .Options;
             var options = new DbContextOptionsBuilder<PostgresDbContext>().UseNpgsql().Options;
             _dbContext = new PostgresDbContext(connectionString, options);
             
-            //_dbContext = new InMemoryDbContext(options);
             ChildRepository = new ChildRepository(_dbContext);
             GroupRepository = new GroupRepository(_dbContext);
+            ChildChosenDaysRepository = new ChildChosenDaysRepository(_dbContext);
         }
 
         public void SaveChanges()

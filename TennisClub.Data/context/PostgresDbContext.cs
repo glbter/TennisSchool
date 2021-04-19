@@ -9,6 +9,7 @@ namespace TennisClub.Data.context
     {
         public DbSet<ChildInDb> ChildDbSet { get; private set; }
         public DbSet<GroupInDb> GroupDbSet { get; private set; }
+        public DbSet<ChildChosenDaysEntity> ChildChosenDaysDbSet { get; private set; }
         private readonly string _connectionString;
         
         public PostgresDbContext(string connectionString, DbContextOptions<PostgresDbContext> options) : base(options)
@@ -25,7 +26,7 @@ namespace TennisClub.Data.context
                 .HasKey(t => t.Id);
             
             modelBuilder.Entity<ChildInDb>()    
-                .Property(it => it.PreferableDay)
+                .Property(it => it.LessonsDay)
                 .HasConversion<string>();
                 
             modelBuilder.Entity<ChildInDb>()    

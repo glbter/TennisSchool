@@ -8,8 +8,8 @@ namespace TennisClub.Data.dao.interfaces
 {
     public interface IGroupRepository : IRepository<GroupInDb, GroupInDb, Guid>
     {
-        public GroupInDb FindVacantGroup(DayOfWeek day, GameLevel gameLevel,
-            Func<int, bool> amountRuleChecker, Func<int, int, bool> ageRuleChecker);
+        public List<GroupInDb> FindVacantGroups(List<DayOfWeek> days, GameLevel gameLevel,
+            int lessThan, Func<int, int, bool> ageRuleChecker);
 
         public IList<GroupInDb> FindAllByDayAndGameLevel(DayOfWeek day, GameLevel gameLevel);
 
