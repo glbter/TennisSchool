@@ -19,6 +19,8 @@ namespace TennisClub.WpfDesktop
     {
          
         private ChildWpf _newChild;
+        private ChildWpf _prevChild;
+        private bool _prevAdded;
         
         private ICommand _addCommand;
         
@@ -27,8 +29,9 @@ namespace TennisClub.WpfDesktop
         public ObservableCollection<GameLevel> GameLevels { get; private set; }
 
         private readonly IChildFacade _childFacade;
-        private readonly IMapper<Child, ChildWpf> _toUiChildMapper;
         private readonly IMapper<ChildWpf, Child> _fromUiChildMapper;
+        private readonly IMapper<GroupWpf, Group> _fromUiGroupMapper;
+        private readonly IMapper<Group, GroupWpf> _toUiGroupMapper;
 
         public MainWindowViewModel(IServiceProvider serviceProvider)
         {
@@ -36,13 +39,15 @@ namespace TennisClub.WpfDesktop
             _childFacade = serviceProvider.GetRequiredService<IChildFacade>();
             serviceProvider.GetService<UnitOfWork>();
             _fromUiChildMapper = new FromUiChildMapper();
-            _toUiChildMapper = new ToUiChildMapper();
+            _fromUiGroupMapper = new FromUiGroupMapper();
+            _toUiGroupMapper = new ToUiGroupMapper();
+            IMapper<Child, ChildWpf> toUiChildMapper = new ToUiChildMapper();
             
             
-            Children = new ObservableCollection<ChildWpf>(
-                _childFacade.GetAll()
-                    .Select(_toUiChildMapper.Map)
-                    .ToList());
+            // Children = new ObservableCollection<ChildWpf>(
+            //     _childFacade.GetAll()
+            //         .Select(toUiChildMapper.Map)
+            //         .ToList());
 
             DaysOfWeek = new ObservableCollection<DayOfWeek>(
                 Enum.GetValues(typeof(DayOfWeek)).OfType<DayOfWeek>());
@@ -59,9 +64,12 @@ namespace TennisClub.WpfDesktop
                     _addCommand = new RelayCommand<ChildWpf>(obj =>
                     {
                         if (obj == null) return;
-                        bool isAdded = _childFacade.AddChild(
-                            _fromUiChildMapper.Map(obj));
-                        if (isAdded) Children.Add(NewChild);
+                        List<GroupWpf> groups = _childFacade.AddChild(
+                            _fromUiChildMapper.Map(obj))
+                            .Select(_toUiGroupMapper.Map)
+                            .ToList();
+                        if (groups.Count == 1) Children.Add(NewChild);
+                        _prevChild = _newChild;
                         NewChild = new ChildWpf("", "", GameLevel.Beginner, DayOfWeek.Sunday, DateTime.Today);
                     }
                     // obj => notEmptyStr(obj?.Name) 

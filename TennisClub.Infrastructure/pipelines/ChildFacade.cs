@@ -26,15 +26,13 @@ namespace TennisClub.Infrastructure.pipelines
             _fromDbNullableToChildMapper = new ChildInDbNullableToChildMapper();
         }
 
-        public bool AddChild(Child child)
+        public List<Group> AddChild(Child child)
         {
             if (child?.FirstName == string.Empty || child?.LastName == string.Empty)
-                return false;
-            if (!_isNotAdult.Invoke(child)) return false;
+                return null;
+            if (!_isNotAdult.Invoke(child)) return null;
             
-            //_groupService.AddChildToGroup(child);
-            _groupService.TryAddChildToGroup(child);
-            return true;
+            return  _groupService.TryAddChildToGroup(child);
         }
         
         public bool AddChildWithChosenGroup(Child child, Group group)
