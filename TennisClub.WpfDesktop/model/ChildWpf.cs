@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TennisClub.AppCore.model.impl;
 
 namespace TennisClub.WpfDesktop.model
@@ -12,6 +13,7 @@ namespace TennisClub.WpfDesktop.model
         public DateTime Birthday { get; set; }
         public DayOfWeek LessonsDay { get; set; }
         public GameLevel GameLevel { get; set; }
+        public List<DayOfWeek> PreferableDays { get; set; }
         
         public ChildWpf(string name, string lastName, GameLevel gameLevel, DayOfWeek lessonsDay, DateTime birthday = new DateTime(), Guid id = new Guid())
         {

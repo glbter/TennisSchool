@@ -7,7 +7,7 @@ namespace TennisClub.WpfDesktop.mapppers
     {
         public Child Map(ChildWpf entity)
         {
-            return new Child()
+            var child = new Child()
             {
                 FirstName = entity.Name,
                 LastName = entity.LastName,
@@ -16,7 +16,8 @@ namespace TennisClub.WpfDesktop.mapppers
                 LessonsDay = entity.LessonsDay,
                 Birthday = entity.Birthday
             };
-
+            child.PreferableDays = entity.PreferableDays;
+            return child;
         }
     }
 }
