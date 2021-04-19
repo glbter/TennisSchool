@@ -13,11 +13,9 @@ namespace TennisClub.Data.dao
     public class GroupRepository : GenericRepository<GroupInDb, GroupInDb, Guid>, IGroupRepository
     {
         private readonly PostgresDbContext _dbContext;
-        private readonly DateToYearsMapper _dateMapper;
         public GroupRepository(PostgresDbContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
-            _dateMapper = new DateToYearsMapper();
         }
 
         public override IList<GroupInDb> FindAll()
@@ -25,35 +23,37 @@ namespace TennisClub.Data.dao
             return _dbContext.GroupDbSet.ToList();
         }
 
-        public GroupInDb FindVacantGroup(
-            DayOfWeek day, 
+        public List<GroupInDb> FindVacantGroups(
+            List<DayOfWeek> days, 
             GameLevel gameLevel, 
-            Func<int, bool> amountRuleChecker, 
+            int childrenAmount, 
             Func<int, int, bool> ageRuleChecker)
         {
             DateTime today = DateTime.Now;
 
-            var group = _dbContext.GroupDbSet
+            var groups = _dbContext.GroupDbSet
                 .Select(group => new
                 {
                     Group = group,
-                    Count = _dbContext.ChildDbSet.Count(
-                        ch => ch.GroupId == group.Id),
                     Children = _dbContext.ChildDbSet
                         .Where(ch => ch.GroupId == group.Id)
                         .Select(ch => ch.Birthday)
                         .ToList()
                 })
-                .Where(it => it.Group.LessonsDay == day
-                             && it.Group.GameLevel == gameLevel)
+                .Where(it => it.Group.ChildrenAmount < childrenAmount)
+                .Where(it =>it.Group.GameLevel == gameLevel)
+                .Where(it => days.Contains(it.Group.LessonsDay))
                 .ToList()
-                .FirstOrDefault(it => amountRuleChecker(it.Count)
-                                      && ageRuleChecker(
+                .Where(it => ageRuleChecker(
                                           (int) (today - it.Children.Min()).TotalHours / 24 / 365,
                                           (int) (today - it.Children.Max()).TotalHours / 24 / 365)
                 )
-                ?.Group;
-            return group;
+                .Select(it => it.Group)
+                .ToList();
+            groups.Sort((x, y) => x.ChildrenAmount.CompareTo(y.ChildrenAmount));
+            groups = groups.Distinct(new GroupComparer())
+                .ToList();
+            return groups;
         }
         
         public IList<GroupInDb> FindAllByDayAndGameLevel(DayOfWeek day, GameLevel gameLevel)
@@ -76,6 +76,20 @@ namespace TennisClub.Data.dao
             return _dbContext.GroupDbSet
                 .Where(it => it.GameLevel == gameLevel)
                 .ToList();
+        }
+
+        private class GroupComparer : IEqualityComparer<GroupInDb>
+        {
+            public bool Equals(GroupInDb x, GroupInDb y)
+            { 
+                // bool equalAge = x.ChildrenAmount.CompareTo(y.ChildrenAmount);
+                return x.LessonsDay == y.LessonsDay;
+            }
+
+            public int GetHashCode(GroupInDb obj)
+            {
+                return obj.Id.GetHashCode();
+            }
         }
     }
 }
