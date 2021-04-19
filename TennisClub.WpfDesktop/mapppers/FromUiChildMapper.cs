@@ -13,7 +13,7 @@ namespace TennisClub.WpfDesktop.mapppers
                 LastName = entity.LastName,
                 GameLevel = entity.GameLevel,
                 Id = entity.Id,
-                PreferableDay = entity.LessonsDay,
+                LessonsDay = entity.LessonsDay,
                 Birthday = entity.Birthday
             };
 
