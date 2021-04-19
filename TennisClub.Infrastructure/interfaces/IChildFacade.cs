@@ -9,6 +9,7 @@ namespace TennisClub.Infrastructure.interfaces
     public interface IChildFacade
     {
         public bool AddChild(Child child);
+        public bool AddChildWithChosenGroup(Child child, Group group);
         public Child FindChild(Guid id);
         public List<Child> GetAll();
     }

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using TennisClub.AppCore.model.impl;
 using TennisClub.AppCore.validators;
@@ -32,22 +34,45 @@ namespace TennisClub.Infrastructure.services
                 ConfigurationManager.AppSettings["maxAmountOfChildrenInGroup"] ?? "5");
         }
 
-        public void AddChildToGroup(Child child)
+        public List<Group> TryAddChildToGroup(Child child)
         {
-            Group group = groupMapperFromDb.Map(
-                unitOfWork.GroupRepository.FindVacantGroup(
-                    child.PreferableDay,
-                    child.GameLevel,
-                    amount => amount < maxChildren,
-                    ageRuleChecker.CreateRuleCheckerDelegate(child)));
-            if (group == null)
+            List<Group> groups = FindVaccantGroups(child);
+            if (groups.Count <= 1)
             {
-                group = new Group(child.GameLevel, child.PreferableDay);
-                unitOfWork.GroupRepository.Create(
-                    groupMapperToDb.Map(group));
+                Group group = groups.FirstOrDefault() 
+                              ?? CreateGroup(child.GameLevel, child.LessonsDay);
+                
+                AddChildToGroup(child, group);
+                groups = new List<Group> {group};
             }
+            return groups;
+        }
+
+        public void AddChildToGroup(Child child, Group group)
+        {
             childService.SetChildToGroup(child, group);
             unitOfWork.SaveChanges();
+        }
+
+        private List<Group> FindVaccantGroups(Child child)
+        {
+            List<Group> groups = unitOfWork.GroupRepository
+                .FindVacantGroups(
+                    child.PreferableDays,
+                    child.GameLevel,
+                    maxChildren,
+                    ageRuleChecker.CreateRuleCheckerDelegate(child))
+                .Select(groupMapperFromDb.Map)
+                .ToList();
+            return groups;
+        }
+
+        private Group CreateGroup(GameLevel gameLevel, DayOfWeek dayOfWeek)
+        {
+            Group group = new Group(gameLevel, dayOfWeek);
+            unitOfWork.GroupRepository.Create(
+                groupMapperToDb.Map(group));
+            return group;
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using TennisClub.AppCore.model.impl;
 using TennisClub.Data.dao;
+using TennisClub.Data.model;
 using TennisClub.Infrastructure.interfaces;
 using TennisClub.Infrastructure.mappers;
 using TennisClub.Infrastructure.services;
@@ -15,7 +16,7 @@ namespace TennisClub.Infrastructure.pipelines
         private readonly Predicate<Child> _isNotAdult;
         private readonly IGroupService _groupService;
         private readonly UnitOfWork _unitOfWork;
-        private readonly ChildInDbNullableToChildMapper _fromDbNullableToChildMapper;
+        private readonly IMapper<ChildInDb, Child> _fromDbNullableToChildMapper;
 
         public ChildFacade(IServiceProvider serviceProvider)
         {
@@ -27,11 +28,20 @@ namespace TennisClub.Infrastructure.pipelines
 
         public bool AddChild(Child child)
         {
-            if (child?.FirstName == String.Empty || child?.LastName == String.Empty)
+            if (child?.FirstName == string.Empty || child?.LastName == string.Empty)
                 return false;
             if (!_isNotAdult.Invoke(child)) return false;
             
-            _groupService.AddChildToGroup(child);
+            //_groupService.AddChildToGroup(child);
+            _groupService.TryAddChildToGroup(child);
+            return true;
+        }
+        
+        public bool AddChildWithChosenGroup(Child child, Group group)
+        {
+            if (child == null ||group == null)
+                return false;
+            _groupService.AddChildToGroup(child, group);
             return true;
         }
 

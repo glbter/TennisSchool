@@ -9,5 +9,6 @@ namespace TennisClub.Infrastructure.interfaces
     public interface IChildService
     {
         public void SetChildToGroup(Child child, Group group);
+        public void AddChild(Child child);
     }
 }

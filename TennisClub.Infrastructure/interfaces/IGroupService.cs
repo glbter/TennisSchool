@@ -8,6 +8,7 @@ namespace TennisClub.Infrastructure.interfaces
 {
     public interface IGroupService
     {
-        public void AddChildToGroup(Child child);
+        public void AddChildToGroup(Child child, Group group);
+        public List<Group> TryAddChildToGroup(Child child);
     }
 }
