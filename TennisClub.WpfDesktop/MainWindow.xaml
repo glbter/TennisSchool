@@ -44,19 +44,19 @@
                         Width="120"/>
 
         <ComboBox x:Name="DayOfWeekCbx" 
-                         SelectedItem="{Binding Path=NewChild.LessonsDay }"
+                         SelectedItem="{Binding Path=ChosenDay }"
                          ItemsSource="{Binding DaysOfWeek }"
                          HorizontalAlignment="Left" 
-                         Margin="20,14,0,0" 
+                         Margin="18,79,0,0" 
                          VerticalAlignment="Top" 
                          Width="120" Grid.Row="1"/>
 
         <Label x:Name="DayOfWeekLb" 
                       Content="Day of week" 
                       HorizontalAlignment="Left" 
-                      Margin="20,116,0,0" 
+                      Margin="20,48,0,0" 
                       VerticalAlignment="Top" 
-                      Width="94" Grid.RowSpan="2"/>
+                      Width="94" Grid.Row="1"/>
 
         <ComboBox x:Name="GameLevelCbx" 
                          SelectedItem="{Binding NewChild.GameLevel }"
@@ -77,15 +77,15 @@
         <Label x:Name="BirthdayLb"
                       Content="Birthday" 
                       HorizontalAlignment="Left"
-                      Margin="20,41,0,0" 
+                      Margin="20,115,0,0" 
                       VerticalAlignment="Top" 
                       Width="94" 
-                      RenderTransformOrigin="0.245,4" Grid.Row="1"/>
+                      RenderTransformOrigin="0.245,4" Grid.RowSpan="2"/>
 
         <DatePicker x:Name="BirthdayDatePicker" 
                            SelectedDate="{Binding NewChild.Birthday}"
                            HorizontalAlignment="Left" 
-                           Margin="20,72,0,0" 
+                           Margin="20,12,0,0" 
                            VerticalAlignment="Top"
                            Width="120" Grid.Row="1"/>
 
@@ -98,26 +98,74 @@
                        VerticalAlignment="Top" 
                        Width="119" Height="23" Grid.Row="1"/>
 
-        <ListView x:Name="childLw" 
-                     ItemsSource="{Binding Children}"
+        <Label x:Name="GroupChoserLb" 
+            Content="Choose day" 
+            HorizontalAlignment="Left" 
+            Margin="423,88,0,0"
+            Width="94" Height="26" 
+            VerticalAlignment="Top"/>
+        <Button x:Name ="ChooseGroupBtn" 
+            Command="{Binding ChooseGroupCommand}"
+            CommandParameter="{Binding ChosenGroup}"
+            Content="Chose group" 
+            HorizontalAlignment="Left" 
+            Margin="423,73,0,0" 
+            VerticalAlignment="Top" 
+            Width="119" Height="23" Grid.Row="1"/>
+        <ComboBox x:Name="GroupsToChooseCbx"
+            SelectedItem="{Binding ChosenGroup}"
+            ItemsSource="{Binding GroupsToChoose}"
+            DisplayMemberPath="LessonsDay"
+            HorizontalAlignment="Left"
+            Margin="423,14,0,0"
+            VerticalAlignment="Top"
+            Width="120" Grid.Row="1"/>
+        <Button x:Name ="AddDayToListBtn" 
+            Command="{Binding AddDayToListCommand}"
+            CommandParameter="{Binding ChosenDay}"
+            Content="Add day" 
+            HorizontalAlignment="Left" 
+            Margin="19,115,0,0" 
+            VerticalAlignment="Top" 
+            Width="119" Height="23" Grid.Row="1"/>
+
+        <ListView x:Name="chosenDaysList"
+                     ItemsSource="{Binding ChosenDays}"
                      HorizontalAlignment="Left"
-                     Height="241"
-                     Margin="342,30,0,0" 
+                     Height="111"
+                     Margin="308,5,0,0"
                      VerticalAlignment="Top"
-                     Width="206" Grid.RowSpan="2">
+                     Width="90" Grid.Row="1">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn 
-                                    Header="Name" 
-                                    DisplayMemberBinding="{Binding Path=Name}" Width="80"/>
-
-                    <GridViewColumn 
-                                    Header="Last name" 
-                                    DisplayMemberBinding="{Binding Path=LastName}" 
-                                    Width="120"/>
+                    <GridViewColumn
+                                    Header="Days"
+                                    Width="80"/>
                 </GridView>
             </ListView.View>
         </ListView>
+
+
+        <!-- <ListView x:Name="childLw"  -->
+        <!--              ItemsSource="{Binding Children}" -->
+        <!--              HorizontalAlignment="Left" -->
+        <!--              Height="241" -->
+        <!--              Margin="342,30,0,0"  -->
+        <!--              VerticalAlignment="Top" -->
+        <!--              Width="206" Grid.RowSpan="2"> -->
+        <!--     <ListView.View> -->
+        <!--         <GridView> -->
+        <!--             <GridViewColumn  -->
+        <!--                             Header="Name"  -->
+        <!--                             DisplayMemberBinding="{Binding Path=Name}" Width="80"/> -->
+        <!-- -->
+        <!--             <GridViewColumn  -->
+        <!--                             Header="Last name"  -->
+        <!--                             DisplayMemberBinding="{Binding Path=LastName}"  -->
+        <!--                             Width="120"/> -->
+        <!--         </GridView> -->
+        <!--     </ListView.View> -->
+        <!-- </ListView> -->
 
     </Grid>
 </Window>
