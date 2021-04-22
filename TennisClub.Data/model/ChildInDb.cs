@@ -18,18 +18,18 @@ namespace TennisClub.Data.model
         [Required]
         public DateTime Birthday { get; set; }
         [Required]
-        public DayOfWeek LessonsDay { get; set; }
+        public DayOfWeek PreferableDay { get; set; }
         [Required]
         public GameLevel GameLevel { get; set; }
 
         public ChildInDb(string firstName, string lastName, 
-            GameLevel gameLevel, DayOfWeek lessonsDay, DateTime birthday, Guid groupId, Guid id)
+            GameLevel gameLevel, DayOfWeek preferableDay, DateTime birthday, Guid groupId, Guid id)
         {
             this.Id = (id == Guid.Empty) ? Guid.NewGuid() : id;
             this.FirstName = firstName;
             this.LastName = lastName;
             this.GameLevel = gameLevel;
-            this.LessonsDay = lessonsDay;
+            this.PreferableDay = preferableDay;
             this.Birthday = birthday;
             this.GroupId = groupId;
         }

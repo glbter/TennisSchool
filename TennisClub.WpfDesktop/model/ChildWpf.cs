@@ -23,6 +23,7 @@ namespace TennisClub.WpfDesktop.model
             this.GameLevel = gameLevel;
             this.LessonsDay = lessonsDay;
             this.Birthday = birthday;
+            PreferableDays = new List<DayOfWeek>();
         }
     }
 }

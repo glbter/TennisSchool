@@ -70,7 +70,16 @@ namespace TennisClub.Data.dao
                 .Where(it => it.LessonsDay == day)
                 .ToList();
         }
-        
+
+        public new void Update(GroupInDb entity)
+        {
+            var grp = _dbContext.Find<GroupInDb>(entity.Id);
+            grp.ChildrenAmount = entity.ChildrenAmount;
+            grp.GameLevel = entity.GameLevel;
+            grp.LessonsDay = entity.LessonsDay;
+            _dbContext.GroupDbSet.Update(grp);
+        }
+
         public IList<GroupInDb> FindAllByGameLevel(GameLevel gameLevel)
         {
             return _dbContext.GroupDbSet

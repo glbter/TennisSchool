@@ -14,7 +14,7 @@ namespace TennisClub.Infrastructure.mappers
                 firstName: entity.FirstName,
                 lastName: entity.LastName,
                 gameLevel: entity.GameLevel,
-                lessonsDay: entity.LessonsDay,
+                preferableDay: entity.LessonsDay,
                 birthday: entity.Birthday);
         }
     }
