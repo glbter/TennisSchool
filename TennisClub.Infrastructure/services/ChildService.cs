@@ -26,10 +26,7 @@ namespace TennisClub.Infrastructure.services
         {
             child.GroupId = group.Id;
             AddChild(child);
-            group.ChildrenAmount += 1;
-            unitOfWork.GroupRepository
-                .Update(
-                groupMapperToDb.Map(group));
+            incrementGroup(group.Id);
         }
 
         public void AddChild(Child child)
@@ -43,6 +40,12 @@ namespace TennisClub.Infrastructure.services
                 .BulkInsert(days);
         }
 
+        private void incrementGroup(Guid groupId)
+        {
+            var grp = unitOfWork.GroupRepository.FindById(groupId);
+            grp.ChildrenAmount += 1;
+            unitOfWork.GroupRepository.Update(grp);
+        }
         private ChildChosenDaysEntity ToChildDay(Child child, DayOfWeek day)
         {
             return new ChildChosenDaysEntity(child.Id, day);
