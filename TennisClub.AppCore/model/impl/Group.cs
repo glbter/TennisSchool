@@ -8,6 +8,7 @@ namespace TennisClub.AppCore.model.impl
         public Guid Id { get; }
         public GameLevel GameLevel { get; }
         public DayOfWeek LessonsDay { get; set; }
+        public int ChildrenAmount { get; set; }
 
         public Group(GameLevel gameLevel, DayOfWeek lessonsDay, Guid id = new Guid())
         {

@@ -7,10 +7,12 @@ namespace TennisClub.Infrastructure.mappers
     {
         public GroupInDb Map(Group entity)
         {
-            return new GroupInDb(
+            var group = new GroupInDb(
                 id: entity.Id,
                 gameLevel: entity.GameLevel,
                 lessonsDay: entity.LessonsDay);
+            group.ChildrenAmount = entity.ChildrenAmount;
+            return group;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks.Dataflow;
 using TennisClub.AppCore.model.impl;
 using TennisClub.Data.dao;
 using TennisClub.Data.model;
@@ -13,16 +14,22 @@ namespace TennisClub.Infrastructure.services
     {
         private readonly UnitOfWork unitOfWork;
         private readonly IMapper<Child, ChildInDb> childMapperToDb;
+        private readonly IMapper<Group, GroupInDb> groupMapperToDb;
         public ChildService(UnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
             this.childMapperToDb = new ChildToChildInDbMapper();
+            this.groupMapperToDb = new GroupToGroupInDbMapper();
         }
 
         public void SetChildToGroup(Child child, Group group)
         {
             child.GroupId = group.Id;
             AddChild(child);
+            group.ChildrenAmount += 1;
+            unitOfWork.GroupRepository
+                .Update(
+                groupMapperToDb.Map(group));
         }
 
         public void AddChild(Child child)
