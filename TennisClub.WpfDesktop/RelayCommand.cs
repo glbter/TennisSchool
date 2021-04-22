@@ -17,7 +17,9 @@ namespace TennisClub.WpfDesktop
 
         public bool CanExecute(object parameter)
         {
-            return _canExecute == null || _canExecute((T) parameter);
+            if (_canExecute == null) return true;
+            if (parameter != null) return _canExecute.Invoke((T) parameter);
+            return true;
         }
 
         public void Execute(object parameter)
