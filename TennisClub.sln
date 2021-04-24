@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TennisClub", "TennisClub.csproj", "{ABDC3ECC-8D9D-4C8C-BB83-681A670A7708}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TennisClub.AppCore", "TennisClub.AppCore\TennisClub.AppCore.csproj", "{38A84E85-8248-4D42-A1B4-90BB13E66FD1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TennisClub.Data", "TennisClub.Data\TennisClub.Data.csproj", "{1F5F4506-BADC-4CB6-B281-E265F70E95BF}"
@@ -19,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{ABDC3ECC-8D9D-4C8C-BB83-681A670A7708}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ABDC3ECC-8D9D-4C8C-BB83-681A670A7708}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ABDC3ECC-8D9D-4C8C-BB83-681A670A7708}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ABDC3ECC-8D9D-4C8C-BB83-681A670A7708}.Release|Any CPU.Build.0 = Release|Any CPU
 		{38A84E85-8248-4D42-A1B4-90BB13E66FD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{38A84E85-8248-4D42-A1B4-90BB13E66FD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38A84E85-8248-4D42-A1B4-90BB13E66FD1}.Release|Any CPU.ActiveCfg = Release|Any CPU

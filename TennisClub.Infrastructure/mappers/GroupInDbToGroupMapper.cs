@@ -1,5 +1,4 @@
 ﻿using TennisClub.AppCore.model.impl;
-using TennisClub.Data.mappers;
 using TennisClub.Data.model;
 
 namespace TennisClub.Infrastructure.mappers
