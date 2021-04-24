@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Data;
 using TennisClub.AppCore.model.impl;
 using TennisClub.Data.dao.interfaces;
 using TennisClub.Data.model;
 using TennisClub.Data.context;
-using TennisClub.Data.mappers;
 
 namespace TennisClub.Data.dao
 {
