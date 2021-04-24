@@ -5,7 +5,9 @@ using TennisClub.Data.dao.interfaces;
 
 namespace TennisClub.Data.dao
 {
-    public abstract class GenericRepository<TI, TO, TK>  : IRepository<TI, TO, TK> where TO : class
+    public abstract class GenericRepository<TI, TO, TK> : IRepository<TI, TO, TK>
+        where TO : class, IBaseId<TK> 
+        where TI : IBaseId<TK>
     {
         private readonly DbContext _dbContext;
 
@@ -31,7 +33,7 @@ namespace TennisClub.Data.dao
 
         public void Delete(TK id)
         {
-            _dbContext.Remove(new Entity(id));
+            _dbContext.Remove(id);
         }
 
         public TO FindById(TK id)
@@ -40,11 +42,5 @@ namespace TennisClub.Data.dao
         }
 
          public abstract IList<TO> FindAll();
-         
-         private class Entity: IBaseId<TK>
-         {
-             public TK Id { get; }
-             public Entity(TK id) { Id = id; }
-         }
     }
 }

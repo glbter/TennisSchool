@@ -6,7 +6,9 @@ using TennisClub.AppCore.model.interfaces;
 
 namespace TennisClub.Data.dao.interfaces
 {
-    public interface IRepository<in TI, TO, in TK> where TO : class
+    public interface IRepository<in TI, TO, in TK>         
+        where TO : class, IBaseId<TK> 
+        where TI : IBaseId<TK>
     {
         public void Create(TI entity);
         public void Update(TI entity);
@@ -14,6 +16,5 @@ namespace TennisClub.Data.dao.interfaces
         public void Delete(TK id);
         public TO FindById(TK id);
         public IList<TO> FindAll();
-
     }
 }

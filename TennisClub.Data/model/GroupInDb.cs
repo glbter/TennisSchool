@@ -5,7 +5,7 @@ using TennisClub.AppCore.model.interfaces;
 
 namespace TennisClub.Data.model
 {
-    public class GroupInDb
+    public class GroupInDb : IBaseId<Guid>
     {
         [Key]
         public Guid Id { get; set; }

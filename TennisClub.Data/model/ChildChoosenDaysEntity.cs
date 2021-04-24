@@ -1,9 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using TennisClub.AppCore.model.interfaces;
 
 namespace TennisClub.Data.model
 {
-    public class ChildChosenDaysEntity
+    public class ChildChosenDaysEntity : IBaseId<Guid>
     {
         [Key]
         public Guid Id { get; set; }
