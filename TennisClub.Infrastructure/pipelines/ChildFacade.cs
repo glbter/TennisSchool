@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using TennisClub.AppCore.model.impl;
-using TennisClub.Data.dao;
+using TennisClub.Data.dao.interfaces;
 using TennisClub.Data.model;
 using TennisClub.Infrastructure.interfaces;
 using TennisClub.Infrastructure.mappers;
-using TennisClub.Infrastructure.services;
 
 namespace TennisClub.Infrastructure.pipelines
 {
@@ -15,12 +14,12 @@ namespace TennisClub.Infrastructure.pipelines
     {
         private readonly Predicate<Child> _isNotAdult;
         private readonly IGroupService _groupService;
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper<ChildInDb, Child> _fromDbNullableToChildMapper;
 
         public ChildFacade(IServiceProvider serviceProvider)
         {
-            this._unitOfWork = serviceProvider.GetRequiredService<UnitOfWork>();
+            this._unitOfWork = serviceProvider.GetRequiredService<IUnitOfWork>();
             _groupService = serviceProvider.GetRequiredService<IGroupService>();
             _isNotAdult = child => child.Age < 18;
             _fromDbNullableToChildMapper = new ChildInDbNullableToChildMapper();
@@ -37,7 +36,7 @@ namespace TennisClub.Infrastructure.pipelines
         
         public bool AddChildWithChosenGroup(Child child, Group group)
         {
-            if (child == null ||group == null)
+            if (child == null || group == null)
                 return false;
             _groupService.AddChildToGroup(child, group);
             return true;

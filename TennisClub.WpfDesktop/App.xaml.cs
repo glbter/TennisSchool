@@ -36,7 +36,7 @@ namespace TennisClub.WpfDesktop
         
         protected override void OnExit(ExitEventArgs e)
         {
-            ServiceProvider.GetRequiredService<UnitOfWork>().Dispose();
+            ServiceProvider.GetRequiredService<IUnitOfWork>().Dispose();
         }
         
         private void ConfigureServices(IServiceCollection services, string connectionString)
@@ -46,10 +46,10 @@ namespace TennisClub.WpfDesktop
             services.AddScoped<IChildFacade, ChildFacade>(s => new ChildFacade(s));
             
             services.AddScoped<IGroupFacade, GroupFacade>(s => new GroupFacade(
-                s.GetRequiredService<UnitOfWork>()));
+                s.GetRequiredService<IUnitOfWork>()));
             
             services.AddTransient<IChildService, ChildService>(s => new ChildService(
-                s.GetRequiredService<UnitOfWork>()));
+                s.GetRequiredService<IUnitOfWork>()));
             
             services.AddTransient<IGroupService, GroupService>(s => new GroupService(s));
         }

@@ -5,7 +5,7 @@ using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using TennisClub.AppCore.model.impl;
 using TennisClub.AppCore.validators;
-using TennisClub.Data.dao;
+using TennisClub.Data.dao.interfaces;
 using TennisClub.Data.model;
 using TennisClub.Infrastructure.interfaces;
 using TennisClub.Infrastructure.mappers;
@@ -14,7 +14,7 @@ namespace TennisClub.Infrastructure.services
 {
     public class GroupService : IGroupService
     {
-        private readonly UnitOfWork unitOfWork;
+        private readonly IUnitOfWork unitOfWork;
         private readonly IChildService childService;
         private readonly IMapper<Group, GroupInDb> groupMapperToDb;
         private readonly IMapper<GroupInDb, Group> groupMapperFromDb;
@@ -23,7 +23,7 @@ namespace TennisClub.Infrastructure.services
         
         public GroupService(IServiceProvider serviceProvider)
         {
-            this.unitOfWork = serviceProvider.GetRequiredService<UnitOfWork>();
+            this.unitOfWork = serviceProvider.GetRequiredService<IUnitOfWork>();
             this.childService = serviceProvider.GetRequiredService<IChildService>();
             
             this.groupMapperToDb = new GroupToGroupInDbMapper();
