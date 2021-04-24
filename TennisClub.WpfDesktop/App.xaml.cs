@@ -5,10 +5,13 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Microsoft.EntityFrameworkCore;
 using TennisClub.Data.dao;
 using TennisClub.Infrastructure.interfaces;
 using TennisClub.Infrastructure.pipelines;
 using Microsoft.Extensions.DependencyInjection;
+using TennisClub.Data.context;
+using TennisClub.Data.dao.interfaces;
 using TennisClub.Infrastructure.services;
 
 namespace TennisClub.WpfDesktop
@@ -41,7 +44,25 @@ namespace TennisClub.WpfDesktop
         
         private void ConfigureServices(IServiceCollection services, string connectionString)
         {
-            services.AddSingleton<UnitOfWork>(s => new UnitOfWork(connectionString));
+            
+            
+            services.AddDbContext<PostgresDbContext>(options =>
+                options.UseNpgsql(connectionString));
+            services.AddSingleton<IChildRepository>(s => new ChildRepository(
+                s.GetRequiredService<PostgresDbContext>()));
+            services.AddSingleton<IGroupRepository>(s => new GroupRepository(
+                s.GetRequiredService<PostgresDbContext>()));
+            services.AddSingleton<IChildChosenDaysRepository>(s => new ChildChosenDaysRepository(
+                s.GetRequiredService<PostgresDbContext>()));
+            
+            services.AddSingleton<IUnitOfWork>(s => new UnitOfWork(
+                s.GetRequiredService<PostgresDbContext>())
+            {
+                ChildRepository = s.GetRequiredService<IChildRepository>(),
+                GroupRepository = s.GetRequiredService<IGroupRepository>(),
+                ChildChosenDaysRepository = s.GetRequiredService<IChildChosenDaysRepository>()
+            });
+            
             
             services.AddScoped<IChildFacade, ChildFacade>(s => new ChildFacade(s));
             

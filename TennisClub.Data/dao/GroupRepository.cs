@@ -10,8 +10,8 @@ namespace TennisClub.Data.dao
 {
     public class GroupRepository : GenericRepository<GroupInDb, GroupInDb, Guid>, IGroupRepository
     {
-        private readonly PostgresDbContext _dbContext;
-        public GroupRepository(PostgresDbContext dbContext) : base(dbContext)
+        private readonly TennisClubContext _dbContext;
+        public GroupRepository(TennisClubContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
         }

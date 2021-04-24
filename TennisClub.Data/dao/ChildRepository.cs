@@ -9,9 +9,9 @@ namespace TennisClub.Data.dao
 {
     public class ChildRepository : GenericRepository<ChildInDb, ChildInDb, Guid>, IChildRepository
     {
-        private readonly PostgresDbContext _dbContext;
+        private readonly TennisClubContext _dbContext;
         
-        public ChildRepository(PostgresDbContext dbContext) : base(dbContext)
+        public ChildRepository(TennisClubContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
         }

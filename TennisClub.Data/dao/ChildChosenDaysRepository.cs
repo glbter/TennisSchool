@@ -10,8 +10,8 @@ namespace TennisClub.Data.dao
 {
     public class ChildChosenDaysRepository : GenericRepository<ChildChosenDaysEntity, ChildChosenDaysEntity, Guid>, IChildChosenDaysRepository
     {
-        private readonly PostgresDbContext _dbContext;
-        public ChildChosenDaysRepository(PostgresDbContext dbContext) : base(dbContext)
+        private readonly TennisClubContext _dbContext;
+        public ChildChosenDaysRepository(TennisClubContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
         }

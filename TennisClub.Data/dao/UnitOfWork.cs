@@ -1,24 +1,37 @@
-﻿using Microsoft.EntityFrameworkCore;
-using TennisClub.Data.dao.interfaces;
+﻿using TennisClub.Data.dao.interfaces;
 using TennisClub.Data.context;
 
 namespace TennisClub.Data.dao
 {
     public class UnitOfWork : IUnitOfWork
     {
-        public IChildRepository ChildRepository { get; }
-        public IGroupRepository GroupRepository { get; }
-        public IChildChosenDaysRepository ChildChosenDaysRepository { get; }
-        private readonly PostgresDbContext _dbContext;
-
-        public UnitOfWork(string connectionString)
+        private IChildRepository childRepository;
+        private IGroupRepository groupRepository;
+        private IChildChosenDaysRepository childChosenDaysRepository;
+        private readonly TennisClubContext _dbContext;
+        
+        public IChildRepository ChildRepository
         {
-            var options = new DbContextOptionsBuilder<PostgresDbContext>().UseNpgsql().Options;
-            _dbContext = new PostgresDbContext(connectionString, options);
-            
-            ChildRepository = new ChildRepository(_dbContext);//inject
-            GroupRepository = new GroupRepository(_dbContext);
-            ChildChosenDaysRepository = new ChildChosenDaysRepository(_dbContext);
+            get => childRepository ??= new ChildRepository(_dbContext);
+            set => childRepository ??= value;
+        }
+
+        public IGroupRepository GroupRepository
+        {
+            get => groupRepository ??= new GroupRepository(_dbContext);
+            set => groupRepository ??= value;
+        }
+
+        public IChildChosenDaysRepository ChildChosenDaysRepository
+        {
+            get => childChosenDaysRepository ??= 
+                new ChildChosenDaysRepository(_dbContext);
+            set => childChosenDaysRepository ??= value;
+        }
+
+        public UnitOfWork(TennisClubContext context)
+        {
+            _dbContext = context;
         }
 
         public void SaveChanges()
