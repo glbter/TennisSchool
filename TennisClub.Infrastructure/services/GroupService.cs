@@ -41,14 +41,9 @@ namespace TennisClub.Infrastructure.services
             {
                 Group group = groups.FirstOrDefault() 
                               ?? CreateGroup(child.GameLevel, child.LessonsDay);
-                if (groups.Count == 1) child.LessonsDay = group.LessonsDay;
-                else
-                {
-                    var rand = new Random();
-                    var index = rand.Next(child.PreferableDays.Count);
-                    child.LessonsDay = child.PreferableDays[index];
-                    group.LessonsDay = child.LessonsDay;
-                }
+                
+                if (groups.Count == 0) ChooseDay(child, group);
+
                 AddChildToGroup(child, group);
                 groups = new List<Group> {group};
             }
@@ -81,6 +76,14 @@ namespace TennisClub.Infrastructure.services
             unitOfWork.GroupRepository.Create(
                 groupMapperToDb.Map(group));
             return group;
+        }
+
+        private void ChooseDay(Child child, Group group)
+        {
+            var rand = new Random();
+            var index = rand.Next(child.PreferableDays.Count);
+            child.LessonsDay = child.PreferableDays[index];
+            group.LessonsDay = child.LessonsDay;
         }
     }
 }
