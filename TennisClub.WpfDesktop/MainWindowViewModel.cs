@@ -20,7 +20,6 @@ namespace TennisClub.WpfDesktop
          
         private ChildWpf _newChild;
         private ChildWpf _prevChild;
-        private bool _prevAdded;
         private GroupWpf _chosenGroup;
         private DayOfWeek _chosenDay;
         
@@ -76,14 +75,13 @@ namespace TennisClub.WpfDesktop
                         if (groups.Count == 1)
                         {
                             Children.Add(NewChild);
-                            return;
                         }
                         else
                         {
                             groups.ForEach(GroupsToChoose.Add);
                         }
                         _prevChild = _newChild;
-                        refreshDays();
+                        RefreshDays();
                         NewChild = new ChildWpf("", "", GameLevel.Beginner, DayOfWeek.Sunday, DateTime.Today);
                     }
                     );
@@ -170,7 +168,7 @@ namespace TennisClub.WpfDesktop
             return str != String.Empty;
         }
 
-        private void refreshDays()
+        private void RefreshDays()
         {
             ChosenDays?.ToList().ForEach(DaysOfWeek.Add);
             //ChosenDays?.ToList().ForEach(it => ChosenDays.Remove(it));
