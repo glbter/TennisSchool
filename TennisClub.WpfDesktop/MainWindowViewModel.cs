@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using TennisClub.AppCore.model.impl;
 using TennisClub.Data.dao;
 using TennisClub.Infrastructure.interfaces;
+using TennisClub.Infrastructure.mappers;
 using TennisClub.WpfDesktop.mapppers;
 using TennisClub.WpfDesktop.model;
 

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Configuration;
 using TennisClub.AppCore.model.impl;
-using TennisClub.AppCore.model.interfaces;
 
 namespace TennisClub.AppCore.validators
 {

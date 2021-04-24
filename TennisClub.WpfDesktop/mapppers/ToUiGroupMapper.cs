@@ -1,4 +1,5 @@
 ﻿using TennisClub.AppCore.model.impl;
+using TennisClub.Infrastructure.mappers;
 using TennisClub.WpfDesktop.model;
 
 namespace TennisClub.WpfDesktop.mapppers
