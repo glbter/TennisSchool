@@ -44,26 +44,16 @@ namespace TennisClub.WpfDesktop
         
         private void ConfigureServices(IServiceCollection services, string connectionString)
         {
-            
-            
-            services.AddDbContext<PostgresDbContext>(options =>
-                options.UseNpgsql(connectionString));
-            services.AddSingleton<IChildRepository>(s => new ChildRepository(
-                s.GetRequiredService<PostgresDbContext>()));
-            services.AddSingleton<IGroupRepository>(s => new GroupRepository(
-                s.GetRequiredService<PostgresDbContext>()));
-            services.AddSingleton<IChildChosenDaysRepository>(s => new ChildChosenDaysRepository(
-                s.GetRequiredService<PostgresDbContext>()));
+            var options = new DbContextOptionsBuilder<PostgresDbContext>().UseNpgsql().Options;
+            var dbContext = new PostgresDbContext(connectionString, options);
             
             services.AddSingleton<IUnitOfWork>(s => new UnitOfWork(
-                s.GetRequiredService<PostgresDbContext>())
-            {
-                ChildRepository = s.GetRequiredService<IChildRepository>(),
-                GroupRepository = s.GetRequiredService<IGroupRepository>(),
-                ChildChosenDaysRepository = s.GetRequiredService<IChildChosenDaysRepository>()
-            });
-            
-            
+                dbContext,
+                new ChildRepository(dbContext),
+                new GroupRepository(dbContext),
+                new ChildChosenDaysRepository(dbContext))
+            );
+
             services.AddScoped<IChildFacade, ChildFacade>(s => new ChildFacade(s));
             
             services.AddScoped<IGroupFacade, GroupFacade>(s => new GroupFacade(

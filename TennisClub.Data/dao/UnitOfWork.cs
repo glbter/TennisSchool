@@ -29,9 +29,16 @@ namespace TennisClub.Data.dao
             set => childChosenDaysRepository ??= value;
         }
 
-        public UnitOfWork(TennisClubContext context)
+        public UnitOfWork(
+            TennisClubContext context, 
+            IChildRepository childRepository, 
+            IGroupRepository groupRepository,
+            IChildChosenDaysRepository childChosenDaysRepository)
         {
             _dbContext = context;
+            ChildRepository = childRepository;
+            GroupRepository = groupRepository;
+            ChildChosenDaysRepository = childChosenDaysRepository;
         }
 
         public void SaveChanges()
