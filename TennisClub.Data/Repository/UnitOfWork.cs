@@ -1,7 +1,7 @@
-﻿using TennisClub.Data.dao.interfaces;
-using TennisClub.Data.context;
+﻿using TennisClub.Data.Context;
+using TennisClub.Data.Repository.interfaces;
 
-namespace TennisClub.Data.dao
+namespace TennisClub.Data.Repository
 {
     public class UnitOfWork : IUnitOfWork
     {

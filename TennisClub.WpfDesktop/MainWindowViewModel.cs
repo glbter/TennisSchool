@@ -6,12 +6,12 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
-using TennisClub.AppCore.model.impl;
-using TennisClub.Data.dao;
-using TennisClub.Infrastructure.interfaces;
-using TennisClub.Infrastructure.mappers;
-using TennisClub.WpfDesktop.mapppers;
-using TennisClub.WpfDesktop.model;
+using TennisClub.AppCore.Model.impl;
+using TennisClub.Data.Repository;
+using TennisClub.Infrastructure.Interfaces;
+using TennisClub.Infrastructure.Mappers;
+using TennisClub.WpfDesktop.Mapppers;
+using TennisClub.WpfDesktop.Model;
 
 namespace TennisClub.WpfDesktop
 {

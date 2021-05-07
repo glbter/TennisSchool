@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using TennisClub.AppCore.model.interfaces;
-using TennisClub.Data.dao.interfaces;
+using TennisClub.AppCore.Model.interfaces;
+using TennisClub.Data.Repository.interfaces;
 
-namespace TennisClub.Data.dao
+namespace TennisClub.Data.Repository
 {
     public abstract class GenericRepository<TI, TO, TK> : IRepository<TI, TO, TK>
         where TO : class, IBaseId<TK> 

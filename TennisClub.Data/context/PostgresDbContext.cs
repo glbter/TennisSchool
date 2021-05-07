@@ -1,9 +1,7 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using TennisClub.AppCore.model.impl;
-using TennisClub.Data.model;
+﻿using Microsoft.EntityFrameworkCore;
+using TennisClub.Data.Model;
 
-namespace TennisClub.Data.context
+namespace TennisClub.Data.Context
 {
     public class PostgresDbContext : TennisClubContext
     {

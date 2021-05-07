@@ -1,7 +1,7 @@
 ﻿using System;
-using TennisClub.Data.model;
+using TennisClub.Data.Model;
 
-namespace TennisClub.Data.dao.interfaces
+namespace TennisClub.Data.Repository.interfaces
 {
     public interface IChildRepository : IRepository<ChildInDb, ChildInDb, Guid>
     {

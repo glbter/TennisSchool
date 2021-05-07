@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using TennisClub.AppCore.model.impl;
-using TennisClub.AppCore.model.interfaces;
-using TennisClub.Data.model;
+using TennisClub.AppCore.Model.impl;
+using TennisClub.Data.Model;
 
-namespace TennisClub.Data.dao.interfaces
+namespace TennisClub.Data.Repository.interfaces
 {
     public interface IGroupRepository : IRepository<GroupInDb, GroupInDb, Guid>
     {

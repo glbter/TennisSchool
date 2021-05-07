@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TennisClub.Data.model;
+using TennisClub.Data.Model;
 
-namespace TennisClub.Data.context
+namespace TennisClub.Data.Context
 {
     public abstract class TennisClubContext : DbContext
     {

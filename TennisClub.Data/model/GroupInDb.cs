@@ -1,9 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using TennisClub.AppCore.model.impl;
-using TennisClub.AppCore.model.interfaces;
+using TennisClub.AppCore.Model.impl;
+using TennisClub.AppCore.Model.interfaces;
 
-namespace TennisClub.Data.model
+namespace TennisClub.Data.Model
 {
     public class GroupInDb : IBaseId<Guid>
     {

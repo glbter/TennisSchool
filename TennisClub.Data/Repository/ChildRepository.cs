@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TennisClub.Data.model;
-using TennisClub.Data.dao.interfaces;
-using TennisClub.Data.context;
+using TennisClub.Data.Context;
+using TennisClub.Data.Model;
+using TennisClub.Data.Repository.interfaces;
 
-namespace TennisClub.Data.dao
+namespace TennisClub.Data.Repository
 {
     public class ChildRepository : GenericRepository<ChildInDb, ChildInDb, Guid>, IChildRepository
     {

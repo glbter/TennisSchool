@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using TennisClub.AppCore.model.interfaces;
+﻿using System.Collections.Generic;
+using TennisClub.AppCore.Model.interfaces;
 
-namespace TennisClub.Data.dao.interfaces
+namespace TennisClub.Data.Repository.interfaces
 {
     public interface IRepository<in TI, TO, in TK>         
         where TO : class, IBaseId<TK> 

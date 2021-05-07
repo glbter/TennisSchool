@@ -6,13 +6,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.EntityFrameworkCore;
-using TennisClub.Data.dao;
-using TennisClub.Infrastructure.interfaces;
-using TennisClub.Infrastructure.pipelines;
 using Microsoft.Extensions.DependencyInjection;
-using TennisClub.Data.context;
-using TennisClub.Data.dao.interfaces;
-using TennisClub.Infrastructure.services;
+using TennisClub.Data.Context;
+using TennisClub.Data.Repository;
+using TennisClub.Data.Repository.interfaces;
+using TennisClub.Infrastructure.Interfaces;
+using TennisClub.Infrastructure.Pipelines;
+using TennisClub.Infrastructure.Services;
 
 namespace TennisClub.WpfDesktop
 {
