@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace TennisClub.Infrastructure.mappers
+﻿namespace TennisClub.Infrastructure.Mappers
 {
     public interface IMapper<in TI, out TO>
     {

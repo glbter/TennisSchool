@@ -1,7 +1,7 @@
 ﻿using System;
-using TennisClub.AppCore.model.impl;
+using TennisClub.AppCore.Model.impl;
 
-namespace TennisClub.WpfDesktop.model
+namespace TennisClub.WpfDesktop.Model
 {
     public class GroupWpf
     {

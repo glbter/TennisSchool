@@ -1,7 +1,7 @@
-﻿using TennisClub.AppCore.model.impl;
-using TennisClub.Data.model;
+﻿using TennisClub.AppCore.Model.impl;
+using TennisClub.Data.Model;
 
-namespace TennisClub.Infrastructure.mappers
+namespace TennisClub.Infrastructure.Mappers
 {
     public class GroupToGroupInDbMapper : IMapper<Group, GroupInDb>
     {

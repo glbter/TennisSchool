@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using TennisClub.AppCore.model.impl;
+using TennisClub.AppCore.Model.impl;
 
-namespace TennisClub.Infrastructure.interfaces
+namespace TennisClub.Infrastructure.Interfaces
 {
     public interface IGroupFacade
     {

@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using TennisClub.AppCore.model.impl;
-using TennisClub.Data.model;
+﻿using TennisClub.AppCore.Model.impl;
+using TennisClub.Data.Model;
 
-namespace TennisClub.Infrastructure.mappers
+namespace TennisClub.Infrastructure.Mappers
 {
     public class ChildToChildInDbMapper : IMapper<Child, ChildInDb>
     {

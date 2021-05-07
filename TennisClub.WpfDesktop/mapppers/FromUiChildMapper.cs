@@ -1,8 +1,8 @@
-﻿using TennisClub.AppCore.model.impl;
-using TennisClub.Infrastructure.mappers;
-using TennisClub.WpfDesktop.model;
+﻿using TennisClub.AppCore.Model.impl;
+using TennisClub.Infrastructure.Mappers;
+using TennisClub.WpfDesktop.Model;
 
-namespace TennisClub.WpfDesktop.mapppers
+namespace TennisClub.WpfDesktop.Mapppers
 {
     public class FromUiChildMapper : IMapper<ChildWpf, Child>
     {

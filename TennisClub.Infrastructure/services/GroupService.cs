@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
-using TennisClub.AppCore.model.impl;
-using TennisClub.AppCore.validators;
-using TennisClub.Data.dao.interfaces;
-using TennisClub.Data.model;
-using TennisClub.Infrastructure.interfaces;
-using TennisClub.Infrastructure.mappers;
+using TennisClub.AppCore.Model.impl;
+using TennisClub.AppCore.Validators;
+using TennisClub.Data.Model;
+using TennisClub.Data.Repository.interfaces;
+using TennisClub.Infrastructure.Interfaces;
+using TennisClub.Infrastructure.Mappers;
 
-namespace TennisClub.Infrastructure.services
+namespace TennisClub.Infrastructure.Services
 {
     public class GroupService : IGroupService
     {

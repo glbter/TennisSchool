@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TennisClub.AppCore.model.interfaces
+﻿namespace TennisClub.AppCore.Model.interfaces
 {
     public interface IBaseId<out TK>
     {
