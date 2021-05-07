@@ -8,6 +8,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
+    </ItemGroup>
+
+    <ItemGroup>
       <ProjectReference Include="..\TennisClub.Infrastructure\TennisClub.Infrastructure.csproj" />
 	  <ProjectReference Include="..\TennisClub.Data\TennisClub.Data.csproj" />
 	  <ProjectReference Include="..\TennisClub.AppCore\TennisClub.AppCore.csproj" />
