@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using TennisClub.WpfDesktop.ViewModel;
 
 
 namespace TennisClub.WpfDesktop
@@ -14,7 +15,7 @@ namespace TennisClub.WpfDesktop
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow(MainWindowViewModel viewModel)
+        public MainWindow(MainViewModel viewModel)
         {
             InitializeComponent();
             DataContext = viewModel;

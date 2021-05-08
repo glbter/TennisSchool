@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Windows.Controls;
-using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
 using TennisClub.WpfDesktop.Controls;
 
@@ -10,32 +8,32 @@ namespace TennisClub.WpfDesktop.ViewModel
 {
     public class ViewLocator
     {
-        private static Dictionary<ControlType, Lazy<UserControl>> controls =
+        private static readonly Dictionary<ControlType, Lazy<UserControl>> Controls =
             new Dictionary<ControlType, Lazy<UserControl>>();
 
         public const string ChildCredentialsPage = "ChildCredentialsPage";
+        public const string StartPage = "StartPage";
         
         
         public ViewLocator(IServiceProvider serviceProvider)
         {
-            NavigationService = new NavigationService();
-            //NavigationService navigationService = new NavigationService();
-            //SimpleIoc.Default.Register<INavigationService>(() => navigationService);
+            NavigationService navigationService = new NavigationService();
+            NavigationService = navigationService;
             
-            controls.Add(ControlType.ChildCredentials, new Lazy<UserControl>(() => new ChildCredentials()));
+            Controls.Add(ControlType.ChildCredentials, new Lazy<UserControl>(() => new ChildCredentials()));
             
-            NavigationService.Configure(ChildCredentialsPage, new Uri("../Pages/ChildCredentialsPage.xaml", UriKind.Relative));
+            navigationService.Configure(ChildCredentialsPage, new Uri("../Pages/ChildCredentialsPage.xaml", UriKind.Relative));
+            navigationService.Configure(StartPage, new Uri("../Pages/StartPage.xaml", UriKind.Relative));
 
-            MainViewModel = new MainViewModel(NavigationService, serviceProvider);
-            //SimpleIoc.Default.Register<MainViewModel>(() => MainViewModel);
+            MainViewModel = new MainViewModel(navigationService, serviceProvider);
         }
 
         public MainViewModel MainViewModel { get; }
-        public NavigationService NavigationService { get; }
+        public INavigationService NavigationService { get; }
         public static UserControl GetControl(ControlType controlType)
         {
-            if (controls.ContainsKey(controlType))
-                return controls[controlType].Value;
+            if (Controls.ContainsKey(controlType))
+                return Controls[controlType].Value;
 
             return new UserControl();
         }
@@ -43,6 +41,7 @@ namespace TennisClub.WpfDesktop.ViewModel
     
     public enum ControlType
     {
-        ChildCredentials
+        ChildCredentials,
+        StartPage
     }
 }

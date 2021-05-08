@@ -23,8 +23,7 @@ namespace TennisClub.WpfDesktop
     public partial class App : Application
     {
         public IServiceProvider ServiceProvider { get; private set; }
-        // private UnitOfWork _unitOfWork;
-        
+
         private void OnStartup(object sender, StartupEventArgs startupEventArgs)
         {
             var connectionString = "Host=localhost;Port=5432;Database=tennis-club;Username=postgres;Password=123";
@@ -33,7 +32,9 @@ namespace TennisClub.WpfDesktop
             ServiceProvider = serviceCollection.BuildServiceProvider();
 
             ViewLocator viewLocator = new ViewLocator(ServiceProvider);
-            MainWindowViewModel viewModel = new MainWindowViewModel(ServiceProvider);
+            
+            Application.Current.Resources["ViewLocator"] = viewLocator;
+            
             MainWindow window = new MainWindow(viewLocator.MainViewModel);
             window.Show();
             
