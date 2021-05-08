@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using GalaSoft.MvvmLight.Command;
 using Microsoft.Extensions.DependencyInjection;
 using TennisClub.AppCore.Model.impl;
 using TennisClub.Data.Repository;
@@ -21,9 +22,9 @@ namespace TennisClub.WpfDesktop.ViewModel
         private GroupWpf _chosenGroup;
         private DayOfWeek _chosenDay;
 
-        private GalaSoft.MvvmLight.Command.RelayCommand<ChildWpf> _addChildCommand;
-        private GalaSoft.MvvmLight.Command.RelayCommand<GroupWpf> _chooseGroupCommand;
-        private GalaSoft.MvvmLight.Command.RelayCommand<DayOfWeek> _addDayToListCommand;
+        private RelayCommand<ChildWpf> _addChildCommand;
+        private RelayCommand<GroupWpf> _chooseGroupCommand;
+        private RelayCommand<DayOfWeek> _addDayToListCommand;
         
         public ObservableCollection<ChildWpf> Children { get; }
         public ObservableCollection<DayOfWeek> DaysOfWeek { get; }
@@ -59,26 +60,26 @@ namespace TennisClub.WpfDesktop.ViewModel
         }
 
         
-        public GalaSoft.MvvmLight.Command.RelayCommand<ChildWpf> AddChildCommand
+        public RelayCommand<ChildWpf> AddChildCommand
         {
             get{
-                _addChildCommand ??= new GalaSoft.MvvmLight.Command.RelayCommand<ChildWpf>(AddChild);
+                _addChildCommand ??= new RelayCommand<ChildWpf>(AddChild);
                 return _addChildCommand;
             }
         }
         
-        public GalaSoft.MvvmLight.Command.RelayCommand<GroupWpf> ChooseGroupCommand
+        public RelayCommand<GroupWpf> ChooseGroupCommand
         {
             get{
-                _chooseGroupCommand ??= new GalaSoft.MvvmLight.Command.RelayCommand<GroupWpf>(ChooseGroup);
+                _chooseGroupCommand ??= new RelayCommand<GroupWpf>(ChooseGroup);
                 return _chooseGroupCommand;
             }
         }
 
-        public GalaSoft.MvvmLight.Command.RelayCommand<DayOfWeek> AddDayToListCommand 
+        public RelayCommand<DayOfWeek> AddDayToListCommand 
         {
             get{
-                _addDayToListCommand ??= new GalaSoft.MvvmLight.Command.RelayCommand<DayOfWeek>(AddDayToList);
+                _addDayToListCommand ??= new RelayCommand<DayOfWeek>(AddDayToList);
                 return _addDayToListCommand;
             }
         }
