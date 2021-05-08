@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Windows.Controls;
 using GalaSoft.MvvmLight.Views;
-using TennisClub.WpfDesktop.Controls;
 
 namespace TennisClub.WpfDesktop.ViewModel
 {
@@ -20,7 +19,7 @@ namespace TennisClub.WpfDesktop.ViewModel
             NavigationService navigationService = new NavigationService();
             NavigationService = navigationService;
             
-            Controls.Add(ControlType.ChildCredentials, new Lazy<UserControl>(() => new ChildCredentials()));
+            // Controls.Add(ControlType.ChildCredentials, new Lazy<UserControl>(() => new ChildCredentials()));
             
             navigationService.Configure(ChildCredentialsPage, new Uri("../Pages/ChildCredentialsPage.xaml", UriKind.Relative));
             navigationService.Configure(StartPage, new Uri("../Pages/StartPage.xaml", UriKind.Relative));

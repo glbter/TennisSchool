@@ -9,24 +9,24 @@ namespace TennisClub.WpfDesktop.ViewModel
     {
         private readonly MainViewModel _mainViewModel;
 
-        private RelayCommand<object> _navigateToChildCredentialsCommand;
+        private RelayCommand _navigateToChildCredentialsCommand;
 
         public StartViewModel(MainViewModel mainViewModel)
         {
             _mainViewModel = mainViewModel;
         }
 
-        public RelayCommand<object> NavigateToChildCredentialsCommand
+        public RelayCommand NavigateToChildCredentialsCommand
         {
             get
             {
                 _navigateToChildCredentialsCommand ??= 
-                    new RelayCommand<object>(NavigateToChildCredentials);
+                    new RelayCommand(NavigateToChildCredentials);
                 return _navigateToChildCredentialsCommand;
             }
         }
 
-        private void NavigateToChildCredentials(object obj)
+        private void NavigateToChildCredentials()
         {
             _mainViewModel.Navigation.NavigateTo(ViewLocator.ChildCredentialsPage);
         }

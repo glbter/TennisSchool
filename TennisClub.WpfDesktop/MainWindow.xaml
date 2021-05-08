@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TennisClub.WpfDesktop"
         mc:Ignorable="d"
-        Title="Add child" Height="316" Width="459">
+        Title="Tennis club" Height="316" Width="459">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0,1" StartPoint="1,1">
