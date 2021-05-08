@@ -7,6 +7,7 @@ namespace TennisClub.WpfDesktop.ViewModel
     {
         public INavigationService Navigation;
         private ChildAddViewModel _childAddViewModel;
+        private StartViewModel _startViewModel;
 
         public MainViewModel(INavigationService navigation, IServiceProvider serviceProvider)
         {
@@ -21,6 +22,16 @@ namespace TennisClub.WpfDesktop.ViewModel
             {
                 _childAddViewModel = value;
                 RaisePropertyChanged(nameof(ChildAddViewModel));
+            }
+        }
+
+        public StartViewModel StartViewModel
+        {
+            get => _startViewModel;
+            set
+            {
+                _startViewModel = value;
+                RaisePropertyChanged(nameof(StartViewModel));
             }
         }
     }
