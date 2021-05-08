@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
 using TennisClub.AppCore.Model.impl;
 using TennisClub.Data.Repository;
@@ -15,12 +14,13 @@ namespace TennisClub.WpfDesktop.ViewModel
 {
     public class ChildAddViewModel : BaseViewModel
     {
+        private MainViewModel _mainViewModel;
+        
         private ChildWpf _newChild;
         private ChildWpf _prevChild;
         private GroupWpf _chosenGroup;
         private DayOfWeek _chosenDay;
-        
-        
+
         private GalaSoft.MvvmLight.Command.RelayCommand<ChildWpf> _addChildCommand;
         private GalaSoft.MvvmLight.Command.RelayCommand<GroupWpf> _chooseGroupCommand;
         private GalaSoft.MvvmLight.Command.RelayCommand<DayOfWeek> _addDayToListCommand;
@@ -36,8 +36,9 @@ namespace TennisClub.WpfDesktop.ViewModel
         private readonly IMapper<GroupWpf, Group> _fromUiGroupMapper;
         private readonly IMapper<Group, GroupWpf> _toUiGroupMapper;
 
-        public ChildAddViewModel(IServiceProvider serviceProvider)
+        public ChildAddViewModel(MainViewModel mainViewModel, IServiceProvider serviceProvider)
         {
+            _mainViewModel = mainViewModel;
             _newChild = new ChildWpf("", "", GameLevel.Beginner, DayOfWeek.Sunday, DateTime.Today);
             _childFacade = serviceProvider.GetRequiredService<IChildFacade>();
             serviceProvider.GetService<UnitOfWork>();

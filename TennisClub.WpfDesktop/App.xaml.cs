@@ -13,6 +13,7 @@ using TennisClub.Data.Repository.interfaces;
 using TennisClub.Infrastructure.Interfaces;
 using TennisClub.Infrastructure.Pipelines;
 using TennisClub.Infrastructure.Services;
+using TennisClub.WpfDesktop.ViewModel;
 
 namespace TennisClub.WpfDesktop
 {
@@ -30,9 +31,10 @@ namespace TennisClub.WpfDesktop
             var serviceCollection = new ServiceCollection();
             ConfigureServices(serviceCollection, connectionString);
             ServiceProvider = serviceCollection.BuildServiceProvider();
-            
-            MainWindowViewModel viewModel = new MainWindowViewModel(this.ServiceProvider);
-            MainWindow window = new MainWindow(viewModel);
+
+            ViewLocator viewLocator = new ViewLocator(ServiceProvider);
+            MainWindowViewModel viewModel = new MainWindowViewModel(ServiceProvider);
+            MainWindow window = new MainWindow(viewLocator.MainViewModel);
             window.Show();
             
         }

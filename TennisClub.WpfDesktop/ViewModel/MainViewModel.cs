@@ -1,7 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Views;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace TennisClub.WpfDesktop.ViewModel
 {
@@ -10,9 +8,10 @@ namespace TennisClub.WpfDesktop.ViewModel
         public INavigationService Navigation;
         private ChildAddViewModel _childAddViewModel;
 
-        public MainViewModel(INavigationService navigation)
+        public MainViewModel(INavigationService navigation, IServiceProvider serviceProvider)
         {
             Navigation = navigation;
+            _childAddViewModel = new ChildAddViewModel(this, serviceProvider);
         }
         
         public ChildAddViewModel ChildAddViewModel
@@ -23,5 +22,6 @@ namespace TennisClub.WpfDesktop.ViewModel
                 _childAddViewModel = value;
                 RaisePropertyChanged(nameof(ChildAddViewModel));
             }
+        }
     }
 }

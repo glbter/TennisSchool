@@ -4,6 +4,7 @@ using System.Text;
 using System.Windows.Controls;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
+using TennisClub.WpfDesktop.Controls;
 
 namespace TennisClub.WpfDesktop.ViewModel
 {
@@ -15,21 +16,22 @@ namespace TennisClub.WpfDesktop.ViewModel
         public const string ChildCredentialsPage = "ChildCredentialsPage";
         
         
-        public ViewLocator()
+        public ViewLocator(IServiceProvider serviceProvider)
         {
-            NavigationService navigationService = new NavigationService();
-            SimpleIoc.Default.Register<INavigationService>(() => navigationService);
+            NavigationService = new NavigationService();
+            //NavigationService navigationService = new NavigationService();
+            //SimpleIoc.Default.Register<INavigationService>(() => navigationService);
             
-            // navigationService.Configure
-            // controls.Add(ControlType.Accessories, new Lazy<UserControl>(() => new AccessoriesControl()));
-            // navigationService.Configure(LoginPage, new Uri("../Pages/Auth/LoginPage.xaml", UriKind.Relative));
+            controls.Add(ControlType.ChildCredentials, new Lazy<UserControl>(() => new ChildCredentials()));
             
-            SimpleIoc.Default.Register<MainViewModel>();
+            NavigationService.Configure(ChildCredentialsPage, new Uri("../Pages/ChildCredentialsPage.xaml", UriKind.Relative));
+
+            MainViewModel = new MainViewModel(NavigationService, serviceProvider);
+            //SimpleIoc.Default.Register<MainViewModel>(() => MainViewModel);
         }
 
-        public MainViewModel MainViewModel 
-            => SimpleIoc.Default.GetInstance<MainViewModel>();
-
+        public MainViewModel MainViewModel { get; }
+        public NavigationService NavigationService { get; }
         public static UserControl GetControl(ControlType controlType)
         {
             if (controls.ContainsKey(controlType))

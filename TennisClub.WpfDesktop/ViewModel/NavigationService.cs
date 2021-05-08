@@ -9,7 +9,7 @@ using System.Windows.Media;
 
 namespace TennisClub.WpfDesktop.ViewModel
 {
-    class NavigationService : BaseViewModel, INavigationService
+    public class NavigationService : BaseViewModel, INavigationService
     {
         private string _currentPageKey;
         private readonly Stack<string> _history;
