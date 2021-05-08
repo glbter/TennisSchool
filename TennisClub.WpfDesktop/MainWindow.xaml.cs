@@ -20,5 +20,16 @@ namespace TennisClub.WpfDesktop
             InitializeComponent();
             DataContext = viewModel;
         }
+        
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+
+        private void MainFrame_Loaded(object sender, RoutedEventArgs e)
+        {
+            (DataContext as MainViewModel)?.Navigation
+                .NavigateTo(ViewLocator.StartPage);
+        }
     }
 }
