@@ -1,4 +1,5 @@
-﻿using TennisClub.Data.Context;
+﻿using System;
+using TennisClub.Data.Context;
 using TennisClub.Data.Repository.interfaces;
 
 namespace TennisClub.Data.Repository
@@ -9,6 +10,7 @@ namespace TennisClub.Data.Repository
         private IGroupRepository groupRepository;
         private IChildChosenDaysRepository childChosenDaysRepository;
         private readonly TennisClubContext _dbContext;
+        private bool _disposed;
         
         public IChildRepository ChildRepository
         {
@@ -39,6 +41,7 @@ namespace TennisClub.Data.Repository
             ChildRepository = childRepository;
             GroupRepository = groupRepository;
             ChildChosenDaysRepository = childChosenDaysRepository;
+            _disposed = false;
         }
 
         public void SaveChanges()
@@ -48,7 +51,27 @@ namespace TennisClub.Data.Repository
         
         public void Dispose()
         {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (_disposed) return;
+            
+            if (disposing)
+            {
+                ChildRepository = null;
+                GroupRepository = null;
+                ChildChosenDaysRepository = null;
+            }
             _dbContext.Dispose();
+            _disposed = true;
+        }
+
+        ~UnitOfWork()
+        {
+            Dispose(false);
         }
     }
 }
