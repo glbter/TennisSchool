@@ -149,41 +149,26 @@ namespace TennisClub.WpfDesktop.ViewModel
                     _fromUiChildMapper.Map(child))
                 .Select(_toUiGroupMapper.Map)
                 .ToList();
+            
+            RefreshDays();
             if (groups.Count == 1)
             {
-                SuccessGroupDay = groups.First().LessonsDay;
-                _mainViewModel.Navigation.NavigateTo(
-                    PageType.ChildAddSuccessPage.ToString());
-            }
-            else
-            {
-                groups.ForEach(GroupsToChoose.Add);
-                _mainViewModel.Navigation.NavigateTo(
-                    PageType.ChildChooseGroupPage.ToString());
+                NavigateToSuccessPage(groups.First());
+                return;
             }
 
-            _prevChild = _newChild;
-            RefreshDays();
-            NewChild = new ChildWpf("", "", GameLevel.Beginner, DayOfWeek.Sunday, DateTime.Today);
+            NavigateToChooseGroupPage(groups);
         }
         
         private void ChooseGroup(GroupWpf group)
         {
             if (group == null) return;
+            
             bool added = _childFacade.AddChildWithChosenGroup(
                 _fromUiChildMapper.Map(_prevChild),
                 _fromUiGroupMapper.Map(group));
             
-            if (added)
-            {
-                SuccessGroupDay = group.LessonsDay;
-                _mainViewModel.Navigation.NavigateTo(
-                    PageType.ChildAddSuccessPage.ToString());
-            }
-            
-            _prevChild = _newChild;
-            NewChild = new ChildWpf("", "", GameLevel.Beginner, DayOfWeek.Sunday, DateTime.Today);
-            GroupsToChoose.Clear();
+            if (added) NavigateToSuccessPage(group);
         }
         
         private void AddDayToList(DayOfWeek day)
@@ -199,7 +184,32 @@ namespace TennisClub.WpfDesktop.ViewModel
             DaysOfWeek.Add(day);
             RemovedDay = ChosenDays.FirstOrDefault();
         }
-        
+
+        private void NavigateToSuccessPage(GroupWpf group)
+        {
+            SuccessGroupDay = group.LessonsDay;
+            _mainViewModel.Navigation.NavigateTo(
+                PageType.ChildAddSuccessPage.ToString());
+            
+            ClearChild();
+            GroupsToChoose.Clear();
+        }
+
+        private void NavigateToChooseGroupPage(List<GroupWpf> groups)
+        {
+            groups.ForEach(GroupsToChoose.Add);
+            _mainViewModel.Navigation.NavigateTo(
+                PageType.ChildChooseGroupPage.ToString());
+            
+            ClearChild();
+        }
+
+        private void ClearChild()
+        {
+            _prevChild = _newChild;
+            NewChild = new ChildWpf("", "", GameLevel.Beginner, DayOfWeek.Sunday, DateTime.Today); 
+        }
+
         public ChildWpf NewChild
         {
             get => _newChild;
