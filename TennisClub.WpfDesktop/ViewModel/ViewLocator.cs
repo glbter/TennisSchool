@@ -9,9 +9,6 @@ namespace TennisClub.WpfDesktop.ViewModel
     {
         private static readonly Dictionary<ControlType, Lazy<UserControl>> Controls =
             new Dictionary<ControlType, Lazy<UserControl>>();
-
-        public const string ChildCredentialsPage = "ChildCredentialsPage";
-        public const string StartPage = "StartPage";
         
         
         public ViewLocator(IServiceProvider serviceProvider)
@@ -21,9 +18,13 @@ namespace TennisClub.WpfDesktop.ViewModel
             
             // Controls.Add(ControlType.ChildCredentials, new Lazy<UserControl>(() => new ChildCredentials()));
             
-            navigationService.Configure(ChildCredentialsPage, new Uri("../Pages/ChildCredentialsPage.xaml", UriKind.Relative));
-            navigationService.Configure(StartPage, new Uri("../Pages/StartPage.xaml", UriKind.Relative));
-
+            navigationService.Configure(PageType.ChildCredentialsPage.ToString(), 
+                new Uri("../Pages/ChildCredentialsPage.xaml", UriKind.Relative));
+            navigationService.Configure(PageType.StartPage.ToString(),
+                new Uri("../Pages/StartPage.xaml", UriKind.Relative));
+            navigationService.Configure(PageType.ChildDaysPage.ToString(),
+                new Uri("../Pages/ChildDaysPage.xaml", UriKind.Relative));
+            
             MainViewModel = new MainViewModel(navigationService, serviceProvider);
         }
 
@@ -41,6 +42,14 @@ namespace TennisClub.WpfDesktop.ViewModel
     public enum ControlType
     {
         ChildCredentials,
-        StartPage
+        StartPage,
+        ChildDaysPage
+    }
+
+    public enum PageType
+    {
+        ChildCredentialsPage,
+        StartPage,
+        ChildDaysPage
     }
 }

@@ -28,7 +28,7 @@ namespace TennisClub.WpfDesktop.ViewModel
 
         private void NavigateToChildCredentials()
         {
-            _mainViewModel.Navigation.NavigateTo(ViewLocator.ChildCredentialsPage);
+            _mainViewModel.Navigation.NavigateTo(PageType.ChildCredentialsPage.ToString());
         }
     }
 }

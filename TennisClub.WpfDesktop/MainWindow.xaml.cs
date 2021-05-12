@@ -29,7 +29,7 @@ namespace TennisClub.WpfDesktop
         private void MainFrame_Loaded(object sender, RoutedEventArgs e)
         {
             (DataContext as MainViewModel)?.Navigation
-                .NavigateTo(ViewLocator.StartPage);
+                .NavigateTo(PageType.ChildCredentialsPage.ToString());
         }
     }
 }

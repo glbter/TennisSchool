@@ -15,17 +15,21 @@ namespace TennisClub.WpfDesktop.ViewModel
 {
     public class ChildAddViewModel : BaseViewModel
     {
-        private MainViewModel _mainViewModel;
-        
+        private readonly MainViewModel _mainViewModel;
+
         private ChildWpf _newChild;
         private ChildWpf _prevChild;
         private GroupWpf _chosenGroup;
         private DayOfWeek _chosenDay;
+        private DayOfWeek _removedDay;
 
         private RelayCommand<ChildWpf> _addChildCommand;
         private RelayCommand<GroupWpf> _chooseGroupCommand;
         private RelayCommand<DayOfWeek> _addDayToListCommand;
-        
+        private RelayCommand<DayOfWeek> _removeDayFromListCommand;
+        private RelayCommand _moveForwardToDaysCommand;
+        private RelayCommand _returnCommand;
+
         public ObservableCollection<ChildWpf> Children { get; }
         public ObservableCollection<DayOfWeek> DaysOfWeek { get; }
         public ObservableCollection<GameLevel> GameLevels { get; }
@@ -59,32 +63,70 @@ namespace TennisClub.WpfDesktop.ViewModel
 
         }
 
-        
+
         public RelayCommand<ChildWpf> AddChildCommand
         {
-            get{
+            get
+            {
                 _addChildCommand ??= new RelayCommand<ChildWpf>(AddChild);
                 return _addChildCommand;
             }
         }
-        
+
         public RelayCommand<GroupWpf> ChooseGroupCommand
         {
-            get{
+            get
+            {
                 _chooseGroupCommand ??= new RelayCommand<GroupWpf>(ChooseGroup);
                 return _chooseGroupCommand;
             }
         }
 
-        public RelayCommand<DayOfWeek> AddDayToListCommand 
+        public RelayCommand<DayOfWeek> AddDayToListCommand
         {
-            get{
+            get
+            {
                 _addDayToListCommand ??= new RelayCommand<DayOfWeek>(AddDayToList);
                 return _addDayToListCommand;
             }
         }
-        
 
+        public RelayCommand<DayOfWeek> RemoveDayFromListCommand
+        {
+            get
+            {
+                _removeDayFromListCommand ??= new RelayCommand<DayOfWeek>(RemoveDayFromList);
+                return _removeDayFromListCommand;
+            }
+        }
+        public RelayCommand MoveForwardToDaysCommand
+        {
+            get
+            {
+                _moveForwardToDaysCommand ??= new RelayCommand(MoveForwardToDays);
+                return _moveForwardToDaysCommand;
+            }
+        }
+
+        public RelayCommand ReturnCommand
+        {
+            get
+            {
+                _returnCommand ??= new RelayCommand(Return);
+                return _returnCommand;
+            }
+        }
+
+        private void MoveForwardToDays()
+        {
+            _mainViewModel.Navigation.NavigateTo(
+                PageType.ChildDaysPage.ToString());
+        }
+
+        private void Return()
+        {
+            _mainViewModel.Navigation.GoBack();
+        }
         private void AddChild(ChildWpf child)
         {
             if (child == null) return;
@@ -121,6 +163,13 @@ namespace TennisClub.WpfDesktop.ViewModel
             ChosenDays.Add(day);
             DaysOfWeek.Remove(day);
             ChosenDay = DaysOfWeek.FirstOrDefault();
+        }
+
+        private void RemoveDayFromList(DayOfWeek day)
+        {
+            ChosenDays.Remove(day);
+            DaysOfWeek.Add(day);
+            RemovedDay = ChosenDays.FirstOrDefault();
         }
         
         public ChildWpf NewChild
@@ -160,6 +209,16 @@ namespace TennisClub.WpfDesktop.ViewModel
             {
                 _chosenDay = value;
                 RaisePropertyChanged(nameof(ChosenDay));
+            }
+        }
+
+        public DayOfWeek RemovedDay
+        {
+            get => _removedDay;
+            set
+            {
+                _removedDay = value;
+                RaisePropertyChanged(nameof(RemovedDay));
             }
         }
         
