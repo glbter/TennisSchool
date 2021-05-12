@@ -25,9 +25,21 @@
 
                 <StackPanel Orientation="Horizontal">
                     <ListBox 
+                        Width="100"
                         x:Name="daysLbx"
                         ItemsSource="{Binding DaysOfWeek}"
-                        SelectedValue="{Binding ChosenDay}"/>
+                        SelectedValue="{Binding ChosenDay}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="80" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding }" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
 
 
                     <StackPanel Orientation="Vertical">
@@ -58,9 +70,21 @@
                     </StackPanel>
 
                     <ListBox 
+                        Width="100"
                         x:Name="chosenDaysLbx"
                         ItemsSource="{Binding ChosenDays}"
-                        SelectedValue="{Binding RemovedDay}"/>
+                        SelectedValue="{Binding RemovedDay}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="80" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding }" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
 
                 </StackPanel>
 
