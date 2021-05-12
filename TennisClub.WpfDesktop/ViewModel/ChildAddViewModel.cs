@@ -30,6 +30,7 @@ namespace TennisClub.WpfDesktop.ViewModel
         private RelayCommand<DayOfWeek> _removeDayFromListCommand;
         private RelayCommand _moveForwardToDaysCommand;
         private RelayCommand _returnCommand;
+        private RelayCommand _returnToMainMenuCommand;
 
 
         public ObservableCollection<DayOfWeek> DaysOfWeek { get; }
@@ -115,6 +116,15 @@ namespace TennisClub.WpfDesktop.ViewModel
             }
         }
 
+        public RelayCommand ReturnToMainMenuCommand
+        {
+            get
+            {
+                _returnToMainMenuCommand ??= new RelayCommand(ReturnToMainMenu);
+                return _returnToMainMenuCommand;
+            }
+        }
+
         private void MoveForwardToDays()
         {
             _mainViewModel.Navigation.NavigateTo(
@@ -124,6 +134,12 @@ namespace TennisClub.WpfDesktop.ViewModel
         private void Return()
         {
             _mainViewModel.Navigation.GoBack();
+        }
+
+        private void ReturnToMainMenu()
+        {
+            _mainViewModel.Navigation.NavigateTo(
+                PageType.StartPage.ToString());
         }
         private void AddChild(ChildWpf child)
         {
@@ -140,8 +156,12 @@ namespace TennisClub.WpfDesktop.ViewModel
                     PageType.ChildAddSuccessPage.ToString());
             }
             else
+            {
                 groups.ForEach(GroupsToChoose.Add);
-            
+                _mainViewModel.Navigation.NavigateTo(
+                    PageType.ChildChooseGroupPage.ToString());
+            }
+
             _prevChild = _newChild;
             RefreshDays();
             NewChild = new ChildWpf("", "", GameLevel.Beginner, DayOfWeek.Sunday, DateTime.Today);
@@ -154,7 +174,13 @@ namespace TennisClub.WpfDesktop.ViewModel
                 _fromUiChildMapper.Map(_prevChild),
                 _fromUiGroupMapper.Map(group));
             
-            //if (added) Children.Add(NewChild);
+            if (added)
+            {
+                SuccessGroupDay = group.LessonsDay;
+                _mainViewModel.Navigation.NavigateTo(
+                    PageType.ChildAddSuccessPage.ToString());
+            }
+            
             _prevChild = _newChild;
             NewChild = new ChildWpf("", "", GameLevel.Beginner, DayOfWeek.Sunday, DateTime.Today);
             GroupsToChoose.Clear();
@@ -193,7 +219,7 @@ namespace TennisClub.WpfDesktop.ViewModel
                 RaisePropertyChanged(nameof(ChosenGroup));
             }
         }
-
+        
         public DayOfWeek ChosenDay
         {
             get => _chosenDay;
@@ -203,7 +229,7 @@ namespace TennisClub.WpfDesktop.ViewModel
                 RaisePropertyChanged(nameof(ChosenDay));
             }
         }
-
+        
         public DayOfWeek RemovedDay
         {
             get => _removedDay;
@@ -213,7 +239,7 @@ namespace TennisClub.WpfDesktop.ViewModel
                 RaisePropertyChanged(nameof(RemovedDay));
             }
         }
-
+        
         public DayOfWeek SuccessGroupDay
         {
             get => _successGroupDay;
@@ -223,7 +249,7 @@ namespace TennisClub.WpfDesktop.ViewModel
                 RaisePropertyChanged(nameof(SuccessGroupDay));
             }
         }
-
+        
         private void RefreshDays()
         {
             ChosenDays?.ToList().ForEach(DaysOfWeek.Add);

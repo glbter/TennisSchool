@@ -1,0 +1,62 @@
+﻿<Page x:Class="TennisClub.WpfDesktop.Pages.ChildChooseGroupPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TennisClub.WpfDesktop.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ChildChooseGroupPage"
+      DataContext="{Binding MainViewModel.ChildAddViewModel, Source={StaticResource ViewLocator}}">
+
+    <Grid>
+        <Border Grid.Row="1">
+
+            <StackPanel 
+                VerticalAlignment="Center" 
+                HorizontalAlignment="Center" 
+                Orientation="Vertical">
+
+
+                <TextBlock Text="Choose group by day" 
+                           FontSize="24" 
+                           FontWeight="Bold" 
+                           Foreground="White"/>
+
+                <StackPanel Orientation="Horizontal">
+                    <ListBox 
+                        x:Name="daysLbx"
+                        ItemsSource="{Binding GroupsToChoose}"
+                        SelectedValue="{Binding ChosenGroup}">
+                        
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="80" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding LessonsDay}" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+                    <Button
+                        HorizontalAlignment="Center"
+                        Height="31"
+                        Content="Add child"
+                        Foreground="White"
+                        Background="#087f23"
+                        Width="97"
+                        Command="{Binding ChooseGroupCommand}"
+                        CommandParameter="{Binding ChosenGroup}"
+                        FontSize="16"/>
+                </StackPanel>
+
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>

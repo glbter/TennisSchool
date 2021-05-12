@@ -23,7 +23,7 @@
                            FontWeight="Bold" 
                            Foreground="White"/>
 
-                <TextBlock Text="{Binding}"     
+                <TextBlock Text="{Binding SuccessGroupDay}"     
                            FontSize="24" 
                            FontWeight="Bold" 
                            Foreground="White"/>
@@ -40,7 +40,7 @@
                         Background="#087f23"
                         Width="97"
                         Margin="50,0,0,0"
-                        Command="{Binding AddChildCommand}"
+                        Command="{Binding ReturnToMainMenuCommand}"
                         FontSize="16">
                     </Button>
                 </StackPanel>
