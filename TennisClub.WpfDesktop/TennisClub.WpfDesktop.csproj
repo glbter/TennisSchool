@@ -5,7 +5,7 @@
         <TargetFramework>netcoreapp3.1-windows</TargetFramework>
         <UseWPF>true</UseWPF>
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-		<ApplicationIcon>tennis.ico</ApplicationIcon>
+		<ApplicationIcon>Images\tennis.ico</ApplicationIcon>
     </PropertyGroup>
 
     <ItemGroup>
@@ -16,5 +16,9 @@
       <ProjectReference Include="..\TennisClub.Infrastructure\TennisClub.Infrastructure.csproj" />
 	  <ProjectReference Include="..\TennisClub.Data\TennisClub.Data.csproj" />
 	  <ProjectReference Include="..\TennisClub.AppCore\TennisClub.AppCore.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Resource Include="Images\tennis.ico" />
     </ItemGroup>
 </Project>
