@@ -1,7 +1,6 @@
 ﻿using System;
-using TennisClub.Data.model;
 
-namespace TennisClub.Data.dao.interfaces
+namespace TennisClub.Data.Repository.interfaces
 {
     public interface IUnitOfWork : IDisposable
     {

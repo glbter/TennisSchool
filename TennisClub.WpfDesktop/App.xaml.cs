@@ -6,13 +6,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.EntityFrameworkCore;
-using TennisClub.Data.dao;
-using TennisClub.Infrastructure.interfaces;
-using TennisClub.Infrastructure.pipelines;
 using Microsoft.Extensions.DependencyInjection;
-using TennisClub.Data.context;
-using TennisClub.Data.dao.interfaces;
-using TennisClub.Infrastructure.services;
+using TennisClub.Data.Context;
+using TennisClub.Data.Repository;
+using TennisClub.Data.Repository.interfaces;
+using TennisClub.Infrastructure.Interfaces;
+using TennisClub.Infrastructure.Pipelines;
+using TennisClub.Infrastructure.Services;
+using TennisClub.WpfDesktop.ViewModel;
 
 namespace TennisClub.WpfDesktop
 {
@@ -22,17 +23,19 @@ namespace TennisClub.WpfDesktop
     public partial class App : Application
     {
         public IServiceProvider ServiceProvider { get; private set; }
-        // private UnitOfWork _unitOfWork;
-        
+
         private void OnStartup(object sender, StartupEventArgs startupEventArgs)
         {
             var connectionString = "Host=localhost;Port=5432;Database=tennis-club;Username=postgres;Password=123";
             var serviceCollection = new ServiceCollection();
             ConfigureServices(serviceCollection, connectionString);
             ServiceProvider = serviceCollection.BuildServiceProvider();
+
+            ViewLocator viewLocator = new ViewLocator(ServiceProvider);
             
-            MainWindowViewModel viewModel = new MainWindowViewModel(this.ServiceProvider);
-            MainWindow window = new MainWindow(viewModel);
+            Application.Current.Resources["ViewLocator"] = viewLocator;
+            
+            MainWindow window = new MainWindow(viewLocator.MainViewModel);
             window.Show();
             
         }

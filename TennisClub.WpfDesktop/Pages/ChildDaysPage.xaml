@@ -1,0 +1,122 @@
+﻿<Page x:Class="TennisClub.WpfDesktop.Pages.ChildDaysPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TennisClub.WpfDesktop.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ChildDaysPage"
+      DataContext="{Binding MainViewModel.ChildAddViewModel, Source={StaticResource ViewLocator}}">
+
+    <Grid>
+        <Border Grid.Row="1">
+
+            <StackPanel 
+                VerticalAlignment="Center" 
+                HorizontalAlignment="Center" 
+                Orientation="Vertical">
+
+
+                <TextBlock Text="Choose suitable days" 
+                           FontSize="24" 
+                           FontWeight="Bold" 
+                           Foreground="White"/>
+
+                <StackPanel Orientation="Horizontal">
+                    <ListBox 
+                        Width="100"
+                        x:Name="daysLbx"
+                        ItemsSource="{Binding DaysOfWeek}"
+                        SelectedValue="{Binding ChosenDay}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="80" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding }" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+
+                    <StackPanel Orientation="Vertical">
+
+                        <Button
+                            HorizontalAlignment="Center"
+                            Height="30"
+                                Margin="0,10,0,30"
+                            Content=">>"
+                            Foreground="White"
+                            Background="#087f23"
+                            Width="50"
+                            Command="{Binding AddDayToListCommand}"
+                            CommandParameter="{Binding ChosenDay}"
+                            FontSize="16"/>
+                        
+                        <Button
+                            HorizontalAlignment="Center"
+                                Margin="0,0,0,10"
+                                Height="30"
+                            Content="&lt;&lt;"
+                            Foreground="White"
+                            Background="#087f23"
+                            Width="50"
+                            Command="{Binding RemoveDayFromListCommand}"
+                            CommandParameter="{Binding RemovedDay}"
+                            FontSize="16"/>
+                    </StackPanel>
+
+                    <ListBox 
+                        Width="100"
+                        x:Name="chosenDaysLbx"
+                        ItemsSource="{Binding ChosenDays}"
+                        SelectedValue="{Binding RemovedDay}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="80" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding }" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    
+                    <Button
+                        HorizontalAlignment="Center"
+                        Height="31"
+                        Content="&lt;&lt; Return"
+                        Foreground="White"
+                        Background="#087f23"
+                        Width="97"
+                        Margin="10,0,40,0"
+                        Command="{Binding ReturnCommand}"
+                        FontSize="16">
+                    </Button>
+                    
+                    <Button
+                        HorizontalAlignment="Center"
+                        Height="31"
+                        Content="Add child"
+                        Foreground="White"
+                        Background="#087f23"
+                        Width="97"
+                        Margin="50,0,0,0"
+                        Command="{Binding AddChildCommand}"
+                        CommandParameter="{Binding NewChild}"
+                        FontSize="16">
+                    </Button>
+                </StackPanel>
+                
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>

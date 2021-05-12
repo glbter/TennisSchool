@@ -1,7 +1,8 @@
-﻿using TennisClub.Data.dao.interfaces;
-using TennisClub.Data.context;
+﻿using System;
+using TennisClub.Data.Context;
+using TennisClub.Data.Repository.interfaces;
 
-namespace TennisClub.Data.dao
+namespace TennisClub.Data.Repository
 {
     public class UnitOfWork : IUnitOfWork
     {
@@ -9,6 +10,7 @@ namespace TennisClub.Data.dao
         private IGroupRepository groupRepository;
         private IChildChosenDaysRepository childChosenDaysRepository;
         private readonly TennisClubContext _dbContext;
+        private bool _disposed;
         
         public IChildRepository ChildRepository
         {
@@ -39,6 +41,7 @@ namespace TennisClub.Data.dao
             ChildRepository = childRepository;
             GroupRepository = groupRepository;
             ChildChosenDaysRepository = childChosenDaysRepository;
+            _disposed = false;
         }
 
         public void SaveChanges()
@@ -48,7 +51,27 @@ namespace TennisClub.Data.dao
         
         public void Dispose()
         {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (_disposed) return;
+            
+            if (disposing)
+            {
+                ChildRepository = null;
+                GroupRepository = null;
+                ChildChosenDaysRepository = null;
+            }
             _dbContext.Dispose();
+            _disposed = true;
+        }
+
+        ~UnitOfWork()
+        {
+            Dispose(false);
         }
     }
 }

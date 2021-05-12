@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Configuration;
-using TennisClub.AppCore.model.impl;
+using TennisClub.AppCore.Model.impl;
 
-namespace TennisClub.AppCore.validators
+namespace TennisClub.AppCore.Validators
 {
     public class ChildAgeRuleChecker
     {

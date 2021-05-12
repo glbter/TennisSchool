@@ -1,4 +1,4 @@
-﻿namespace TennisClub.AppCore.model.impl
+﻿namespace TennisClub.AppCore.Model.impl
 {
     public enum GameLevel
     {

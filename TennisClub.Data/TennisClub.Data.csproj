@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -12,7 +12,7 @@
     <ItemGroup>
       <Compile Remove="repo\**" />
       <Compile Remove="extentions\**" />
-      <Compile Remove="dao\CachedGroupDao.cs" />
+      <Compile Remove="Repository\CachedGroupDao.cs" />
     </ItemGroup>
 
     <ItemGroup>
@@ -31,10 +31,6 @@
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.2" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="mappers" />
     </ItemGroup>
 
 </Project>

@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
-using TennisClub.AppCore.model.impl;
-using TennisClub.Data.dao.interfaces;
-using TennisClub.Data.model;
-using TennisClub.Infrastructure.interfaces;
-using TennisClub.Infrastructure.mappers;
+using TennisClub.AppCore.Model.impl;
+using TennisClub.Data.Model;
+using TennisClub.Data.Repository.interfaces;
+using TennisClub.Infrastructure.Interfaces;
+using TennisClub.Infrastructure.Mappers;
 
-namespace TennisClub.Infrastructure.pipelines
+namespace TennisClub.Infrastructure.Pipelines
 {
     public class ChildFacade : IChildFacade
     {

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using TennisClub.AppCore.model.interfaces;
+using TennisClub.AppCore.Model.interfaces;
 
-namespace TennisClub.AppCore.model.impl
+namespace TennisClub.AppCore.Model.impl
 {
     public class Child : IBaseId<Guid>
     {

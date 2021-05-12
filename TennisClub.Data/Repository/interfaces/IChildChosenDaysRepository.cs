@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using TennisClub.Data.model;
+using TennisClub.Data.Model;
 
-namespace TennisClub.Data.dao.interfaces
+namespace TennisClub.Data.Repository.interfaces
 {
     public interface IChildChosenDaysRepository : IRepository<ChildChosenDaysEntity, ChildChosenDaysEntity, Guid>
     {

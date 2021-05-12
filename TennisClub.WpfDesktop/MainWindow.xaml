@@ -4,171 +4,19 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TennisClub.WpfDesktop"
-        xmlns:localModel="clr-namespace:TennisClub.WpfDesktop.model"
         mc:Ignorable="d"
-        Title="MainWindow" Height="316" Width="571">
-    <Grid Margin="0,0,10,3">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="133*"/>
-            <RowDefinition Height="164*"/>
-        </Grid.RowDefinitions>
-        <Label x:Name="FirstNameLb" 
-                  Content="First name" 
-                  HorizontalAlignment="Left" 
-                  Margin="18,47,0,0"
-                  Width="94" Height="25" 
-                  VerticalAlignment="Top"/>
-
-        <TextBox x:Name="FirstNameTbx"
-                        Text="{Binding NewChild.Name}"
-                      Height="23" 
-                      Margin="20,77,0,0"
-                      TextWrapping="Wrap" 
-                        VerticalAlignment="Top" HorizontalAlignment="Left" Width="120"/>
-
-        <Label x:Name="LastNameLb" 
-                      Content="Last name" 
-                      HorizontalAlignment="Left" 
-                      Margin="167,46,0,0" 
-                      VerticalAlignment="Top" 
-                      Width="94" 
-                      RenderTransformOrigin="0.521,1.731"/>
-
-        <TextBox x:Name="LastNameTbx" 
-                        HorizontalAlignment="Left" 
-                        Height="23" 
-                        Margin="167,77,0,0" 
-                        TextWrapping="Wrap" 
-                        Text="{Binding NewChild.LastName}" 
-                        VerticalAlignment="Top" 
-                        Width="120"/>
-
-        <ComboBox x:Name="DayOfWeekCbx" 
-                         SelectedItem="{Binding Path=ChosenDay }"
-                         ItemsSource="{Binding DaysOfWeek }"
-                         HorizontalAlignment="Left" 
-                         Margin="18,79,0,0" 
-                         VerticalAlignment="Top" 
-                         Width="120" Grid.Row="1"/>
-
-        <Label x:Name="DayOfWeekLb" 
-                      Content="Day of week" 
-                      HorizontalAlignment="Left" 
-                      Margin="20,48,0,0" 
-                      VerticalAlignment="Top" 
-                      Width="94" Grid.Row="1"/>
-
-        <ComboBox x:Name="GameLevelCbx" 
-                         SelectedItem="{Binding NewChild.GameLevel }"
-                         ItemsSource="{Binding GameLevels}"
-                         HorizontalAlignment="Left"
-                         Margin="166,13,0,0"
-                         VerticalAlignment="Top"
-                         Width="120" Grid.Row="1"/>
-
-        <Label x:Name="GameLevelLb" 
-                      Content="Game level" 
-                      HorizontalAlignment="Left" 
-                      Margin="166,115,0,0"
-                      VerticalAlignment="Top"
-                      Width="94" 
-                      RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2"/>
-
-        <Label x:Name="BirthdayLb"
-                      Content="Birthday" 
-                      HorizontalAlignment="Left"
-                      Margin="20,115,0,0" 
-                      VerticalAlignment="Top" 
-                      Width="94" 
-                      RenderTransformOrigin="0.245,4" Grid.RowSpan="2"/>
-
-        <DatePicker x:Name="BirthdayDatePicker" 
-                           SelectedDate="{Binding NewChild.Birthday}"
-                           HorizontalAlignment="Left" 
-                           Margin="20,12,0,0" 
-                           VerticalAlignment="Top"
-                           Width="120" Grid.Row="1"/>
-
-        <Button x:Name ="AddChildBtn" 
-                       Command="{Binding AddCommand}"
-                       CommandParameter="{Binding NewChild}"
-                       Content="Add child" 
-                       HorizontalAlignment="Left" 
-                       Margin="167,73,0,0" 
-                       VerticalAlignment="Top" 
-                       Width="119" Height="23" Grid.Row="1"/>
-
-        <Label x:Name="GroupChoserLb" 
-            Content="Choose day" 
-            HorizontalAlignment="Left" 
-            Margin="423,88,0,0"
-            Width="94" Height="26" 
-            VerticalAlignment="Top"/>
-        
-        <Button x:Name ="ChooseGroupBtn" 
-            Command="{Binding ChooseGroupCommand}"
-            CommandParameter="{Binding ChosenGroup}"
-            Content="Chose group" 
-            HorizontalAlignment="Left" 
-            Margin="423,73,0,0" 
-            VerticalAlignment="Top" 
-            Width="119" Height="23" Grid.Row="1"/>
-        
-        <ComboBox x:Name="GroupsToChooseCbx"
-            SelectedItem="{Binding ChosenGroup}"
-            ItemsSource="{Binding GroupsToChoose}"
-            DisplayMemberPath="LessonsDay"
-            HorizontalAlignment="Left"
-            Margin="423,14,0,0"
-            VerticalAlignment="Top"
-            Width="120" Grid.Row="1"/>
-        
-        <Button x:Name ="AddDayToListBtn" 
-            Command="{Binding AddDayToListCommand}"
-            CommandParameter="{Binding ChosenDay}"
-            Content="Add day" 
-            HorizontalAlignment="Left" 
-            Margin="19,115,0,0" 
-            VerticalAlignment="Top" 
-            Width="119" Height="23" Grid.Row="1"/>
-
-        <ListView x:Name="chosenDaysList"
-                     ItemsSource="{Binding ChosenDays}"
-                     HorizontalAlignment="Left"
-                     Height="111"
-                     Margin="308,5,0,0"
-                     VerticalAlignment="Top"
-                     Width="90" Grid.Row="1">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn
-                                    Header="Days"
-                                    Width="80"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
-
-
-        <!-- <ListView x:Name="childLw"  -->
-        <!--              ItemsSource="{Binding Children}" -->
-        <!--              HorizontalAlignment="Left" -->
-        <!--              Height="241" -->
-        <!--              Margin="342,30,0,0"  -->
-        <!--              VerticalAlignment="Top" -->
-        <!--              Width="206" Grid.RowSpan="2"> -->
-        <!--     <ListView.View> -->
-        <!--         <GridView> -->
-        <!--             <GridViewColumn  -->
-        <!--                             Header="Name"  -->
-        <!--                             DisplayMemberBinding="{Binding Path=Name}" Width="80"/> -->
-        <!-- -->
-        <!--             <GridViewColumn  -->
-        <!--                             Header="Last name"  -->
-        <!--                             DisplayMemberBinding="{Binding Path=LastName}"  -->
-        <!--                             Width="120"/> -->
-        <!--         </GridView> -->
-        <!--     </ListView.View> -->
-        <!-- </ListView> -->
-
+        Icon="Images/tennis.ico"
+        Title="Tennis club" Height="316" Width="459">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0,1" StartPoint="1,1">
+                <GradientStop Color="#4caf50" Offset="0"/>
+                <GradientStop Color="#4caf50" Offset="2"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Frame
+            x:Name="MainFrame"
+            Loaded="MainFrame_Loaded"
+            NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

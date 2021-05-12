@@ -1,8 +1,8 @@
 ﻿using System;
-using TennisClub.AppCore.model.impl;
-using TennisClub.AppCore.model.interfaces;
+using TennisClub.AppCore.Model.impl;
+using TennisClub.AppCore.Model.interfaces;
 
-namespace TennisClub.Infrastructure.model
+namespace TennisClub.Infrastructure.Model
 {
     public class GroupDomain : IBaseId<Guid>
     {

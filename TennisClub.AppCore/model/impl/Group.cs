@@ -1,7 +1,7 @@
 ﻿using System;
-using TennisClub.AppCore.model.interfaces;
+using TennisClub.AppCore.Model.interfaces;
 
-namespace TennisClub.AppCore.model.impl
+namespace TennisClub.AppCore.Model.impl
 {
     public class Group : IBaseId<Guid>
     {

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TennisClub.AppCore.model.impl;
-using TennisClub.AppCore.model.interfaces;
+﻿using System.Collections.Generic;
+using TennisClub.AppCore.Model.impl;
 
-namespace TennisClub.Infrastructure.interfaces
+namespace TennisClub.Infrastructure.Interfaces
 {
     public interface IGroupService
     {

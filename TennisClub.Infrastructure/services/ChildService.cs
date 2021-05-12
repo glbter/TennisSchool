@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Linq;
-using TennisClub.AppCore.model.impl;
-using TennisClub.Data.dao.interfaces;
-using TennisClub.Data.model;
-using TennisClub.Infrastructure.interfaces;
-using TennisClub.Infrastructure.mappers;
+using TennisClub.AppCore.Model.impl;
+using TennisClub.Data.Model;
+using TennisClub.Data.Repository.interfaces;
+using TennisClub.Infrastructure.Interfaces;
+using TennisClub.Infrastructure.Mappers;
 
-
-namespace TennisClub.Infrastructure.services
+namespace TennisClub.Infrastructure.Services
 {
     public class ChildService : IChildService
     {
