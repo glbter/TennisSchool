@@ -24,6 +24,8 @@ namespace TennisClub.WpfDesktop.ViewModel
                 new Uri("../Pages/StartPage.xaml", UriKind.Relative));
             navigationService.Configure(PageType.ChildDaysPage.ToString(),
                 new Uri("../Pages/ChildDaysPage.xaml", UriKind.Relative));
+            navigationService.Configure(PageType.ChildAddSuccessPage.ToString(),
+                new Uri("../Pages/ChildAddSuccessPage.xaml", UriKind.Relative));
             
             MainViewModel = new MainViewModel(navigationService, serviceProvider);
         }
@@ -50,6 +52,7 @@ namespace TennisClub.WpfDesktop.ViewModel
     {
         ChildCredentialsPage,
         StartPage,
-        ChildDaysPage
+        ChildDaysPage,
+        ChildAddSuccessPage
     }
 }

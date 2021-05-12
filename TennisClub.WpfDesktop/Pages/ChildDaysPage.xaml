@@ -81,12 +81,13 @@
                     <Button
                         HorizontalAlignment="Center"
                         Height="31"
-                        Content="Continue >>"
+                        Content="Add child"
                         Foreground="White"
                         Background="#087f23"
                         Width="97"
                         Margin="50,0,0,0"
                         Command="{Binding AddChildCommand}"
+                        CommandParameter="{Binding NewChild}"
                         FontSize="16">
                     </Button>
                 </StackPanel>
