@@ -13,6 +13,7 @@ namespace TennisClub.WpfDesktop.ViewModel
         {
             Navigation = navigation;
             _childAddViewModel = new ChildAddViewModel(this, serviceProvider);
+            _startViewModel = new StartViewModel(this);
         }
         
         public ChildAddViewModel ChildAddViewModel

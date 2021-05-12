@@ -77,8 +77,9 @@ namespace TennisClub.WpfDesktop.ViewModel
         {
             if (_history.Count > 1)
             {
-                _history.Pop();
-                NavigateTo(_history.Last(), null);
+                string current = _history.Pop();
+                string last = _history.Pop();
+                NavigateTo(last, null);
             }
         }
         
