@@ -43,7 +43,7 @@ namespace TennisClub.Infrastructure.Services
                               ?? CreateGroup(child.GameLevel, child.LessonsDay);
                 
                 if (groups.Count == 0) ChooseDay(child, group);
-
+                unitOfWork.SaveChanges();
                 AddChildToGroup(child, group);
                 groups = new List<Group> {group};
             }
@@ -73,8 +73,6 @@ namespace TennisClub.Infrastructure.Services
         private Group CreateGroup(GameLevel gameLevel, DayOfWeek dayOfWeek)
         {
             Group group = new Group(gameLevel, dayOfWeek);
-            unitOfWork.GroupRepository.Create(
-                groupMapperToDb.Map(group));
             return group;
         }
 
@@ -84,6 +82,9 @@ namespace TennisClub.Infrastructure.Services
             var index = rand.Next(child.PreferableDays.Count);
             child.LessonsDay = child.PreferableDays[index];
             group.LessonsDay = child.LessonsDay;
+            
+            unitOfWork.GroupRepository.Create(
+                groupMapperToDb.Map(group));
         }
     }
 }
