@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TennisClub.AppCore.Model.interfaces;
 using TennisClub.Data.Repository.interfaces;
@@ -20,6 +21,11 @@ namespace TennisClub.Data.Repository
         {
             _dbContext.Add(entity);
         }
+        
+        public async Task CreateAsync(TI entity)
+        {
+            await _dbContext.AddAsync(entity);
+        }
 
         public void Update(TI entity)
         {
@@ -38,7 +44,13 @@ namespace TennisClub.Data.Repository
 
         public TO FindById(TK id)
         {
+           
             return _dbContext.Find<TO>(id);
+        }
+        
+        public async ValueTask<TO> FindByIdAsync(TK id)
+        {
+            return await _dbContext.FindAsync<TO>(id);
         }
 
          public abstract IList<TO> FindAll();

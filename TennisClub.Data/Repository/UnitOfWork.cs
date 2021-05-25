@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using TennisClub.Data.Context;
 using TennisClub.Data.Repository.interfaces;
 
@@ -47,6 +48,11 @@ namespace TennisClub.Data.Repository
         public void SaveChanges()
         {
             _dbContext.SaveChanges();
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _dbContext.SaveChangesAsync();
         }
         
         public void Dispose()
