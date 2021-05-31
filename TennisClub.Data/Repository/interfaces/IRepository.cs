@@ -16,5 +16,6 @@ namespace TennisClub.Data.Repository.interfaces
         public TO FindById(TK id);
         public ValueTask<TO> FindByIdAsync(TK id);
         public IList<TO> FindAll();
+        public Task<IList<TO>> FindAllAsync();
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using TennisClub.Data.Context;
 using TennisClub.Data.Model;
 using TennisClub.Data.Repository.interfaces;
@@ -30,7 +31,10 @@ namespace TennisClub.Data.Repository
         {
             return _dbContext.ChildChosenDaysDbSet.ToList();
         }
-
-
+        
+        public override async Task<IList<ChildChosenDaysEntity>> FindAllAsync()
+        {
+            return await _dbContext.ChildChosenDaysDbSet.ToListAsync();
+        }
     }
 }

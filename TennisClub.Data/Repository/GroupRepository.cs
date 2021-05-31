@@ -23,6 +23,11 @@ namespace TennisClub.Data.Repository
             return _dbContext.GroupDbSet.ToList();
         }
 
+        public override async Task<IList<GroupInDb>> FindAllAsync()
+        {
+            return await _dbContext.GroupDbSet.ToListAsync();
+        }
+        
         public List<GroupInDb> FindVacantGroups(
             List<DayOfWeek> days, 
             GameLevel gameLevel, 

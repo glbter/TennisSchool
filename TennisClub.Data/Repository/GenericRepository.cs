@@ -54,5 +54,6 @@ namespace TennisClub.Data.Repository
         }
 
          public abstract IList<TO> FindAll();
+         public abstract Task<IList<TO>> FindAllAsync();
     }
 }
