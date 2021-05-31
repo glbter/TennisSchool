@@ -57,10 +57,17 @@ namespace TennisClub.WpfDesktop
                 new ChildChosenDaysRepository(dbContext))
             );
 
+            services.AddScoped<IChildFacadeAsync, ChildFacadeAsync>(s => new ChildFacadeAsync(s));
+            
             services.AddScoped<IChildFacade, ChildFacade>(s => new ChildFacade(s));
             
             services.AddScoped<IGroupFacade, GroupFacade>(s => new GroupFacade(
                 s.GetRequiredService<IUnitOfWork>()));
+            
+            services.AddTransient<IChildAsyncService, ChildAsyncService>(s => new ChildAsyncService(
+                s.GetRequiredService<IUnitOfWork>()));
+
+            services.AddTransient<IGroupAsyncService, GroupAsyncService>(s => new GroupAsyncService(s));
             
             services.AddTransient<IChildService, ChildService>(s => new ChildService(
                 s.GetRequiredService<IUnitOfWork>()));
