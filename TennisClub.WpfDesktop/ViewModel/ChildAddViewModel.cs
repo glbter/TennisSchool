@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
+using AsyncAwaitBestPractices.MVVM;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Extensions.DependencyInjection;
 using TennisClub.AppCore.Model.impl;
@@ -24,21 +26,20 @@ namespace TennisClub.WpfDesktop.ViewModel
         private DayOfWeek _removedDay;
         private DayOfWeek _successGroupDay;
 
-        private RelayCommand<ChildWpf> _addChildCommand;
-        private RelayCommand<GroupWpf> _chooseGroupCommand;
+        private AsyncCommand<ChildWpf> _addChildCommand;
+        private AsyncCommand<GroupWpf> _chooseGroupCommand;
         private RelayCommand<DayOfWeek> _addDayToListCommand;
         private RelayCommand<DayOfWeek> _removeDayFromListCommand;
         private RelayCommand _moveForwardToDaysCommand;
         private RelayCommand _returnCommand;
         private RelayCommand _returnToMainMenuCommand;
-
-
+        
         public ObservableCollection<DayOfWeek> DaysOfWeek { get; }
         public ObservableCollection<GameLevel> GameLevels { get; }
         public ObservableCollection<GroupWpf> GroupsToChoose { get; }
         public ObservableCollection<DayOfWeek> ChosenDays { get; }
 
-        private readonly IChildFacade _childFacade;
+        private readonly IChildFacadeAsync _childFacade;
         private readonly IMapper<ChildWpf, Child> _fromUiChildMapper;
         private readonly IMapper<GroupWpf, Group> _fromUiGroupMapper;
         private readonly IMapper<Group, GroupWpf> _toUiGroupMapper;
@@ -47,7 +48,7 @@ namespace TennisClub.WpfDesktop.ViewModel
         {
             _mainViewModel = mainViewModel;
             _newChild = new ChildWpf("", "", GameLevel.Beginner, DayOfWeek.Sunday, DateTime.Today);
-            _childFacade = serviceProvider.GetRequiredService<IChildFacade>();
+            _childFacade = serviceProvider.GetRequiredService<IChildFacadeAsync>();
             serviceProvider.GetService<UnitOfWork>();
             _fromUiChildMapper = new FromUiChildMapper();
             _fromUiGroupMapper = new FromUiGroupMapper();
@@ -63,20 +64,20 @@ namespace TennisClub.WpfDesktop.ViewModel
         }
 
 
-        public RelayCommand<ChildWpf> AddChildCommand
+        public AsyncCommand<ChildWpf> AddChildCommand
         {
             get
             {
-                _addChildCommand ??= new RelayCommand<ChildWpf>(AddChild);
+                _addChildCommand ??= new AsyncCommand<ChildWpf>(AddChild);
                 return _addChildCommand;
             }
         }
 
-        public RelayCommand<GroupWpf> ChooseGroupCommand
+        public AsyncCommand<GroupWpf> ChooseGroupCommand
         {
             get
             {
-                _chooseGroupCommand ??= new RelayCommand<GroupWpf>(ChooseGroup);
+                _chooseGroupCommand ??= new AsyncCommand<GroupWpf>(ChooseGroup);
                 return _chooseGroupCommand;
             }
         }
@@ -141,12 +142,13 @@ namespace TennisClub.WpfDesktop.ViewModel
             _mainViewModel.Navigation.NavigateTo(
                 PageType.StartPage.ToString());
         }
-        private void AddChild(ChildWpf child)
+        private async Task AddChild(ChildWpf child)
         {
             if (child == null) return;
             child.PreferableDays = ChosenDays.ToList();
-            List<GroupWpf> groups = _childFacade.AddChild(
-                    _fromUiChildMapper.Map(child))
+            List<Group> unmappedGroups = await _childFacade.AddChildAsync(
+                _fromUiChildMapper.Map(child));
+            List<GroupWpf> groups = unmappedGroups
                 .Select(_toUiGroupMapper.Map)
                 .ToList();
             
@@ -160,11 +162,11 @@ namespace TennisClub.WpfDesktop.ViewModel
             NavigateToChooseGroupPage(groups);
         }
         
-        private void ChooseGroup(GroupWpf group)
+        private async Task ChooseGroup(GroupWpf group)
         {
             if (group == null) return;
             
-            bool added = _childFacade.AddChildWithChosenGroup(
+            bool added = await _childFacade.AddChildWithChosenGroupAsync(
                 _fromUiChildMapper.Map(_prevChild),
                 _fromUiGroupMapper.Map(group));
             

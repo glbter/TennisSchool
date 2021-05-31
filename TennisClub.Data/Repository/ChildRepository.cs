@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using TennisClub.Data.Context;
 using TennisClub.Data.Model;
 using TennisClub.Data.Repository.interfaces;
@@ -19,6 +21,11 @@ namespace TennisClub.Data.Repository
         public override IList<ChildInDb> FindAll()
         {
             return _dbContext.ChildDbSet.ToList();
+        }
+        
+        public override async Task<IList<ChildInDb>> FindAllAsync()
+        {
+            return await _dbContext.ChildDbSet.ToListAsync();
         }
     }
 }
